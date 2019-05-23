@@ -1,0 +1,1 @@
+[05-Jun-2018 09:05:24 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Exceptions\Handler' not found in /home/lapaktek/pamdesatawangsari.com/app/Exceptions/Handler.php on line 9

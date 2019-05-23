@@ -1,0 +1,1 @@
+[04-Jun-2018 08:51:24 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Http\Kernel' not found in /home/lapaktek/pamdesatawangsari.com/app/Http/Kernel.php on line 7

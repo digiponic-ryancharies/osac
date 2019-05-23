@@ -1,0 +1,1 @@
+[21-Jun-2018 09:47:50 UTC] PHP Fatal error:  Class 'Illuminate\Routing\Controller' not found in /home/lapaktek/pamdesatawangsari.com/app/Http/Controllers/Controller.php on line 10

@@ -1,0 +1,1 @@
+[09-Jun-2018 21:20:10 UTC] PHP Fatal error:  Class 'Illuminate\Database\Migrations\Migration' not found in /home/lapaktek/pamdesatawangsari.com/database/migrations/2016_08_07_151210_add_table_cms_logs.php on line 6

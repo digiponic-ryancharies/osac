@@ -1,0 +1,5 @@
+[20-Jun-2018 04:16:17 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/lapaktek/pamdesatawangsari.com/app/Providers/AppServiceProvider.php on line 7
+[20-Jun-2018 04:34:59 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Support\Providers\AuthServiceProvider' not found in /home/lapaktek/pamdesatawangsari.com/app/Providers/AuthServiceProvider.php on line 8
+[20-Jun-2018 05:17:04 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Support\Providers\EventServiceProvider' not found in /home/lapaktek/pamdesatawangsari.com/app/Providers/EventServiceProvider.php on line 8
+[20-Jun-2018 07:27:59 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Support\Providers\RouteServiceProvider' not found in /home/lapaktek/pamdesatawangsari.com/app/Providers/RouteServiceProvider.php on line 8
+[20-Jun-2018 09:47:17 UTC] PHP Fatal error:  Class 'Illuminate\Support\ServiceProvider' not found in /home/lapaktek/pamdesatawangsari.com/app/Providers/BroadcastServiceProvider.php on line 8

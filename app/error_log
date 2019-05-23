@@ -1,0 +1,2 @@
+[21-May-2018 11:06:20 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Auth\User' not found in /home/lapaktek/pamdesatawangsari.com/app/User.php on line 8
+[09-Jun-2018 20:49:13 UTC] PHP Fatal error:  Class 'Illuminate\Foundation\Auth\User' not found in /home/lapaktek/pamdesatawangsari.com/app/User.php on line 8
