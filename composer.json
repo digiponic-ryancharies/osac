@@ -19,6 +19,9 @@
         "symfony/dom-crawler": "3.1.*"
     },
     "autoload": {
+        "files": [
+            "app/Helper.php"
+        ],
         "classmap": [
             "database",
             "vendor/mike42/escpos-php/"
@@ -28,6 +31,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "app/Helper.php"
+        ],
         "classmap": [
             "tests/TestCase.php"
         ]
