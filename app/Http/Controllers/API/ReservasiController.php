@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Validator;
+use CRUDBooster;
 
 class ReservasiController extends Controller
 {
@@ -26,6 +27,46 @@ class ReservasiController extends Controller
         return $randomString;
     }
 
+    function convertDate($data, $format)
+    {
+        if ($data == '-' || $data == null || $data == '') {
+            return "-";
+        }
+
+        if ($format == 'indo') {
+            $dt = explode(" ", $data);
+            $date = explode("-", $dt[0]);
+            $bulan = ['Jan', 'Feb', 'Mrt', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
+//        $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+            if (isset($dt[1])) {
+                $time = explode(":", $dt[1]);
+                $converted = $date[2] . " " . $bulan[(int)($date[1]) - 1] . " " . $date[0] . " - " . $time[0] . ":" . $time[1];
+            } else {
+                $converted = $date[2] . " " . $bulan[(int)($date[1]) - 1] . " " . $date[0];
+            }
+
+        } else if ($format == 'db') {
+            // convert input format to YYYY-mm-dd
+            $date = explode(" ", $data);
+            $bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            $bln = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+            if (strlen($date[1]) == 3) {
+                $month = array_search($date[1], $bln) + 1;
+            } else {
+                $month = array_search($date[1], $bulan) + 1;
+            }
+
+            if ($month < 10) {
+                $converted = $date[2] . '-0' . $month . '-' . $date[0];
+            } else {
+                $converted = $date[2] . '-' . $month . '-' . $date[0];
+            }
+        }
+
+        return $converted;
+    }
+
     public function jenisJasaList()
     {
         $data = DB::table('tbl_jenis_jasa')
@@ -36,14 +77,48 @@ class ReservasiController extends Controller
         return response()->json(['error' => false, 'msg' => 'Daftar Jenis Jasa', 'data' => $data], $this->successStatus);
     }
 
+    public function hargaJasaList()
+    {
+        $data = DB::table('tbl_harga_jasa as hj')
+            ->join('tbl_jasa as j', 'j.ID_JASA', '=', 'hj.ID_JASA')
+            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'hj.ID_JENIS_KENDARAAN')
+            ->select('hj.ID_HARGA_JASA', 'j.NAMA_JASA', 'jk.KETERANGAN_JENIS_KENDARAAN', 'hj.NOMINAL_HARGA_JASA')
+            ->orderBy('hj.ID_HARGA_JASA')
+            ->get();
+
+        return response()->json(['error' => false, 'msg' => 'Daftar Harga Jasa', 'data' => $data], $this->successStatus);
+    }
+
+    public function durasiJasaList()
+    {
+        $data = DB::table('tbl_durasi_jasa as dj')
+            ->join('tbl_jasa as j', 'j.ID_JASA', '=', 'dj.ID_JASA')
+            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'dj.ID_JENIS_KENDARAAN')
+            ->select('dj.ID_DURASI', 'j.NAMA_JASA', 'jk.KETERANGAN_JENIS_KENDARAAN', 'dj.NOMINAL_DURASI')
+            ->orderBy('dj.ID_DURASI')
+            ->get();
+
+        return response()->json(['error' => false, 'msg' => 'Daftar Durasi Jasa', 'data' => $data], $this->successStatus);
+    }
+
     public function jasaList($idJenisJasa)
     {
-        $data = DB::table('tbl_jasa as j')
-            ->join('tbl_jenis_jasa as jj', 'jj.ID_JENIS_JASA', '=', 'j.ID_JENIS_JASA')
-            ->select('j.ID_JASA', 'j.KODE_JASA', 'j.NAMA_JASA', 'jj.ID_JENIS_JASA')
-            ->where('jj.ID_JENIS_JASA', $idJenisJasa)
-            ->orderBy('jj.NAMA_JENIS_JASA')
-            ->get();
+        $path = url('/');
+
+        if ($idJenisJasa == 0) {
+            $data = DB::table('tbl_jasa as j')
+                ->join('tbl_jenis_jasa as jj', 'jj.ID_JENIS_JASA', '=', 'j.ID_JENIS_JASA')
+                ->select('j.ID_JASA', 'j.KODE_JASA', 'j.NAMA_JASA', 'jj.ID_JENIS_JASA', 'j.GAMBAR', 'j.DESKRIPSI')
+                ->orderBy('jj.NAMA_JENIS_JASA')
+                ->get();
+        } else {
+            $data = DB::table('tbl_jasa as j')
+                ->join('tbl_jenis_jasa as jj', 'jj.ID_JENIS_JASA', '=', 'j.ID_JENIS_JASA')
+                ->select('j.ID_JASA', 'j.KODE_JASA', 'j.NAMA_JASA', 'jj.ID_JENIS_JASA', 'j.GAMBAR', 'j.DESKRIPSI')
+                ->where('jj.ID_JENIS_JASA', $idJenisJasa)
+                ->orderBy('jj.NAMA_JENIS_JASA')
+                ->get();
+        }
 
         // grouping array
         /*$result = array();
@@ -51,7 +126,17 @@ class ReservasiController extends Controller
             $result[] = (array)$element;
         }
         $result = collect($result)->groupBy('NAMA_JENIS_JASA');*/
-        return response()->json(['error' => false, 'msg' => 'Daftar Jasa', 'data' => $data], $this->successStatus);
+        $result = [];
+        foreach ($data as $value) {
+            if ($value->GAMBAR == null) {
+                $value->GAMBAR = $path . '/img/logo.png';
+            } else {
+                $value->GAMBAR = $path . '/' . $value->GAMBAR;
+            }
+
+            $result[] = $value;
+        }
+        return response()->json(['error' => false, 'msg' => 'Daftar Jasa', 'data' => $result], $this->successStatus);
     }
 
     public function cabangList()
@@ -95,6 +180,7 @@ class ReservasiController extends Controller
             foreach ($dBooking as $db) {
                 $jasa[] = $db['NAMA_JASA'];
             }
+            $r['TANGGAL_BOOKING'] = $this->convertDate($r['TANGGAL_BOOKING'], 'indo');
             $r['JASA'] = implode(", ", $jasa);
             // add fixed data to final array
             $result[] = $r;

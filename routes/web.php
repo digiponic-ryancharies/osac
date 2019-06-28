@@ -66,9 +66,11 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     Route::group(['prefix' => 'kendaraan'], function () {
+        Route::get('/', 'API\KendaraanController@all');
         Route::get('merk', 'API\KendaraanController@merkList');
         Route::get('jenis', 'API\KendaraanController@vehicleType');
-        Route::get('pelanggan/{id}', 'API\KendaraanController@kendaraanPelanggan');
+        Route::get('pelanggan/{idPelanggan}', 'API\KendaraanController@kendaraanPelanggan');
+        Route::get('detail/{idKendaraan}', 'API\KendaraanController@detail');
         Route::post('tambah', 'API\KendaraanController@tambah');
         Route::post('edit', 'API\KendaraanController@edit');
         Route::delete('hapus/{id}', 'API\KendaraanController@hapus');
@@ -77,6 +79,8 @@ Route::group(['prefix' => 'api'], function () {
     Route::group(['prefix' => 'reservasi'], function () {
         Route::get('jenis-jasa', 'API\ReservasiController@jenisJasaList');
         Route::get('jasa-by-jenis/{id}', 'API\ReservasiController@jasaList');
+        Route::get('harga-jasa', 'API\ReservasiController@hargaJasaList');
+        Route::get('durasi-jasa', 'API\ReservasiController@durasiJasaList');
         Route::get('cabang', 'API\ReservasiController@cabangList');
         Route::get('pelanggan/{email}', 'API\ReservasiController@reservasiPelanggan');
         Route::post('daftar', 'API\ReservasiController@daftar');
