@@ -88,9 +88,9 @@ class UserController extends Controller
             ]
         );
 
-        DB::table('tbl_kendaraan')->insert(
+        DB::table('tbl_kendaraan_pelanggan')->insert(
             [
-                'ID_KENDARAAN'        => DB::table('tbl_kendaraan')->max('ID_KENDARAAN') + 1,
+                'ID_KENDARAAN'        => DB::table('tbl_kendaraan_pelanggan')->max('ID_KENDARAAN') + 1,
                 'ID_PELANGGAN'        => $id,
                 'ID_MERK'             => $input['merk'],
                 'ID_JENIS_KENDARAAN'  => $input['jenis'],

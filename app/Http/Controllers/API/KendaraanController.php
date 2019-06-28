@@ -15,6 +15,28 @@ class KendaraanController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse
      */
+
+    public function all()
+    {
+        $path = url('/');
+        $data = DB::table('tbl_kendaraan as k')
+            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_KENDARAAN')
+            ->join('tbl_merk_kendaraan as mk', 'mk.ID_MERK', '=', 'k.ID_MERK_KENDARAAN')
+            ->select('k.ID_KENDARAAN', 'jk.KETERANGAN_JENIS_KENDARAAN', 'mk.NAMA_MERK', 'k.KODE', 'k.KETERANGAN', 'k.GAMBAR')
+            ->orderBy('k.KODE')
+            ->get();
+
+        foreach ($data as $value) {
+            if ($value->GAMBAR == null) {
+                $value->GAMBAR = $path . '/img/logo.png';
+            } else {
+                $value->GAMBAR = $path . '/' . $value->GAMBAR;
+            }
+        }
+
+        return response()->json(['error' => false, 'msg' => 'Daftar Kendaraan', 'data' => $data], $this->successStatus);
+    }
+
     public function merkList()
     {
         $data = DB::table('tbl_merk_kendaraan')
@@ -31,6 +53,19 @@ class KendaraanController extends Controller
             ->select('ID_JENIS_KENDARAAN', 'KODE_JENIS_KENDARAAN', 'KETERANGAN_JENIS_KENDARAAN')
             ->get();
         return response()->json(['error' => false, 'msg' => 'Daftar Jenis Kendaraan', 'data' => $data], $this->successStatus);
+
+    }
+
+    public function detail($idKendaraan)
+    {
+        $data = DB::table('tbl_kendaraan_pelanggan as k')
+            ->join('tbl_merk_kendaraan as mk', 'mk.ID_MERK', '=', 'k.ID_MERK')
+            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_JENIS_KENDARAAN')
+            ->select('k.ID_KENDARAAN', 'k.ID_PELANGGAN', 'mk.NAMA_MERK', 'jk.KETERANGAN_JENIS_KENDARAAN', 'k.NAMA_KENDARAAN', 'k.WARNA_KENDARAAN', 'k.NOPOL_KENDARAAN', 'k.TAHUN_KENDARAAN', 'k.NO_RANGKA_KENDARAAN', 'k.NO_MESIN_KENDARAAN', 'k.CREATED_AT')
+            ->where('ID_KENDARAAN', $idKendaraan)
+            ->first();
+
+        return response()->json(['error' => false, 'msg' => 'Detail Kendaraan', 'data' => $data], $this->successStatus);
 
     }
 
@@ -58,9 +93,9 @@ class KendaraanController extends Controller
         }
 
         $input = $request->all();
-        DB::table('tbl_kendaraan')->insert(
+        DB::table('tbl_kendaraan_pelanggan')->insert(
             [
-                'ID_KENDARAAN'        => DB::table('tbl_kendaraan')->max('ID_KENDARAAN') + 1,
+                'ID_KENDARAAN'        => DB::table('tbl_kendaraan_pelanggan')->max('ID_KENDARAAN') + 1,
                 'ID_PELANGGAN'        => $input['id_pelanggan'],
                 'ID_JENIS_KENDARAAN'  => $input['jenis'],
                 'ID_MERK'             => $input['merk'],
@@ -116,7 +151,7 @@ class KendaraanController extends Controller
                 'UPDATED_BY'          => 'api'
             ];
 
-        DB::table('tbl_kendaraan')
+        DB::table('tbl_kendaraan_pelanggan')
             ->where('ID_KENDARAAN', $input['id_kendaraan'])
             ->update($data);
 
@@ -125,14 +160,14 @@ class KendaraanController extends Controller
 
     public function hapus($id_kendaraan)
     {
-        DB::table('tbl_kendaraan')->where('ID_KENDARAAN', $id_kendaraan)->delete();
+        DB::table('tbl_kendaraan_pelanggan')->where('ID_KENDARAAN', $id_kendaraan)->delete();
 
         return response()->json(['error' => false, 'msg' => 'Kendaraan Dihapus', 'data' => null], $this->successStatus);
     }
 
     public function kendaraanPelanggan($id_pelanggan)
     {
-        $data = DB::table('tbl_kendaraan as k')
+        $data = DB::table('tbl_kendaraan_pelanggan as k')
             ->join('tbl_merk_kendaraan as mk', 'mk.ID_MERK', '=', 'k.ID_MERK')
             ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_JENIS_KENDARAAN')
             ->select('k.ID_KENDARAAN', 'k.ID_PELANGGAN', 'mk.NAMA_MERK', 'jk.KETERANGAN_JENIS_KENDARAAN', 'k.NAMA_KENDARAAN', 'k.WARNA_KENDARAAN', 'k.NOPOL_KENDARAAN', 'k.TAHUN_KENDARAAN', 'k.NO_RANGKA_KENDARAAN', 'k.NO_MESIN_KENDARAAN', 'k.CREATED_AT')
