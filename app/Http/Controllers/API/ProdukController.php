@@ -41,7 +41,7 @@ class ProdukController extends Controller
     public function category()
     {
         $query = DB::table('tb_general')
-            ->select('keterangan')
+            ->select('id', 'keterangan')
             ->where('id_tipe', 2)
             ->whereNull('deleted_at')
             ->get();
