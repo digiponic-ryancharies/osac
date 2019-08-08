@@ -66,7 +66,7 @@ Route::group(['prefix' => 'api'], function () {
     });
 
     Route::group(['prefix' => 'kendaraan'], function () {
-        Route::get('/', 'API\KendaraanController@all');
+        Route::get('daftar/{merk}', 'API\KendaraanController@allByMerk');
         Route::get('merk', 'API\KendaraanController@merkList');
         Route::get('jenis', 'API\KendaraanController@vehicleType');
         Route::get('pelanggan/{idPelanggan}', 'API\KendaraanController@kendaraanPelanggan');
@@ -83,10 +83,12 @@ Route::group(['prefix' => 'api'], function () {
         Route::get('durasi-jasa', 'API\ReservasiController@durasiJasaList');
         Route::get('cabang', 'API\ReservasiController@cabangList');
         Route::get('pelanggan/{email}', 'API\ReservasiController@reservasiPelanggan');
+        Route::get('slots/{cabang}/{tgl}', 'API\ReservasiController@slotList');
         Route::post('daftar', 'API\ReservasiController@daftar');
+        Route::get('detail/{kodebooking}', 'API\ReservasiController@detail');
     });
 
     Route::group(['prefix' => 'produk'], function () {
-        Route::get('/', 'ApiProdukController@data');
+        Route::get('/', 'API\ProdukController@all');
     });
 });

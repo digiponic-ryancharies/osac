@@ -147,6 +147,57 @@ class ReservasiController extends Controller
         return response()->json(['error' => false, 'msg' => 'Daftar Cabang', 'data' => $data], $this->successStatus);
     }
 
+    public function slotList($cabang, $tgl)
+    {
+        // get time configuration from setting
+        $getTime = DB::table('tb_cabang')
+            ->where('id', $cabang)
+            ->first();
+        /*$getInterval = DB::table('cms_settings')
+            ->where('name', 'interval_jasa')
+            ->first();*/
+
+        // get booked time
+        $getServiceTime = DB::table('tbl_booking_jasa')
+            ->where('TANGGAL_BOOKING', '>', $tgl . " 02:00:00")
+            ->where('TANGGAL_BOOKING', '<', $tgl . " 22:00:00")
+            ->select('TANGGAL_BOOKING', 'TOTAL_SLOT')
+            ->get();
+
+        $slots = [];
+        $time = $getTime->jam_buka;
+//        $time2 = $getInterval->content;
+        $time2 = $getTime->interval_jasa;
+        $secs = strtotime($time2) - strtotime("00:00");
+        $close = $getTime->jam_tutup;
+        $break = ["12:00", "12:30", $close];
+
+        // add booked time to break
+        foreach ($getServiceTime as $gs) {
+            $temp = date("H:i", strtotime($gs->TANGGAL_BOOKING));
+            $break[] = $temp;
+            // if service time more than 1 slot then add finish time break
+            if ($gs->TOTAL_SLOT > 1) {
+                for ($i = 1; $i < $gs->TOTAL_SLOT; $i++) {
+                    $temp = date("H:i", strtotime($temp) + $secs);
+                    $break[] = $temp;
+                }
+            }
+        }
+
+        // populating slot
+        $slots[] = $time;
+        while ($time < $close) {
+            $time = date("H:i", strtotime($time) + $secs);
+            if (!in_array($time, $break)) {
+                $slots[] = $time;
+            }
+        }
+
+        return response()->json(['error' => false, 'msg' => 'Daftar Waktu Booking', 'data' => $slots], $this->successStatus);
+
+    }
+
     public function reservasiPelanggan($emailPelanggan)
     {
         $booking = DB::table('tbl_booking_jasa as bj')
@@ -211,7 +262,6 @@ class ReservasiController extends Controller
         }
 
         $input = $request->all();
-        $kode = $this->randomize();
 
         // selecting customer data
         $customer = DB::table('tbl_pelanggan')
@@ -233,6 +283,8 @@ class ReservasiController extends Controller
         $time = "00:00:00";
         $total = 0;
         $id_booking = DB::table('tbl_booking_jasa')->max('ID_BOOKING') + 1;
+//        $kode =  'POS'.date('dmy').''.str_pad($id_booking,5,0,STR_PAD_LEFT);
+        $kode = $this->randomize(6);
         $id_book_detail = DB::table('tbl_booking_jasa_detail')->max('ID_BOOKING_DETAIL') + 1;
         for ($index = 0; $index < count($kode_jasa); $index++) {
             // selecting data from db
@@ -274,11 +326,11 @@ class ReservasiController extends Controller
                 'JENIS_KENDARAAN'   => $vehicle['KETERANGAN_JENIS_KENDARAAN'],
                 'NAMA_KENDARAAN'    => $vehicle['NAMA_KENDARAAN'],
                 'NOPOL_KENDARAAN'   => $vehicle['NOPOL_KENDARAAN'],
-                'NAMA_PELANGGAN'    => $input['kode_jasa'],
+                'NAMA_PELANGGAN'    => $customer['NAMA_PELANGGAN'],
                 'EMAIL_PELANGGAN'   => $customer['EMAIL_PELANGGAN'],
                 'TELEPON_PELANGGAN' => $customer['TELEPON_PELANGGAN'],
                 'TOTAL'             => $total,
-                'TOTAL_DURASI'      => $time,
+                'TOTAL_SLOT'        => count($kode_jasa),
                 'STATUS_BOOKING'    => 18,
                 'CREATED_AT'        => date("Y-m-d H:i:s"),
                 'CREATED_BY'        => 'api'
@@ -288,5 +340,16 @@ class ReservasiController extends Controller
         DB::table('tbl_booking_jasa_detail')->insert($batch);
 
         return response()->json(['error' => false, 'msg' => 'Reservasi Berhasil', 'data' => null], $this->successStatus);
+    }
+
+    public function detail($bookingcode)
+    {
+        $data = DB::table('tbl_booking_jasa')
+            ->where('KODE_BOOKING', $bookingcode)
+            ->select('KODE_BOOKING', 'TOTAL')
+            ->first();
+
+        return response()->json(['error' => false, 'msg' => 'Detail Booking', 'data' => $data], $this->successStatus);
+
     }
 }
