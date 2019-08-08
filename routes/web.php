@@ -90,5 +90,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'produk'], function () {
         Route::get('/', 'API\ProdukController@all');
+        Route::get('/kategori', 'API\ProdukController@category');
+        Route::get('/by-kategori/{kategori}', 'API\ProdukController@byCategory');
     });
 });
