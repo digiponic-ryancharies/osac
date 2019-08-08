@@ -40,6 +40,7 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->form[] = ['label'=>'Nama','name'=>'name','type'=>'text','validation'=>'required|alpha_spaces|min:3','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Username','name'=>'email','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Privilege','name'=>'id_cms_privileges','type'=>'select','width'=>'col-sm-10','datatable'=>'cms_privileges,name'];
+			$this->form[] = ["label"=>"Cabang","name"=>"id_cabang","type"=>"select","datatable"=>"tb_cabang,nama_cabang",'required'=>true,'width'=>'col-sm-10'];						
 			$this->form[] = ['label'=>'Password','name'=>'password','type'=>'password','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 

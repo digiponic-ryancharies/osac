@@ -2,18 +2,17 @@
 
 	use Session;
 	use Request;
-	use Image;
 	use DB;
 	use CRUDBooster;
 
-	class AdminTbCabang48Controller extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminTbInsentifController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "id";
+			$this->title_field = "nama_karyawan";
 			$this->limit = "20";
-			$this->orderby = "id,desc";
+			$this->orderby = "tanggal,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -22,49 +21,34 @@
 			$this->button_edit = true;
 			$this->button_delete = true;
 			$this->button_detail = true;
-			$this->button_show = true;
+			$this->button_show = false;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tb_cabang";
+			$this->table = "tb_insentif";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
-			$this->col = [];
-			$this->col[] = ["label"=>"Logo","name"=>"logo","image"=>true];
-			$this->col[] = ["label"=>"Kode Cabang","name"=>"kode_cabang"];
-			$this->col[] = ["label"=>"Nama Cabang","name"=>"nama_cabang"];
+			$this->col = [];			
+			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
+			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
+			$this->col[] = ["label"=>"Insentif","name"=>"insentif"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Kode Cabang','name'=>'kode_cabang','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Nama Cabang','name'=>'nama_cabang','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'No Telp','name'=>'telepon','type'=>'text','validation'=>'required|min:1|max:16','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','width'=>'col-sm-10'];
-			// $this->form[] = ['label'=>'Pin','name'=>'pin','type'=>'text','validation'=>'min:3|max:32','width'=>'col-sm-10','help'=>'Default "12345". Minimal 5 karakter. Tinggalkan jika anda tidak mengubahnya','value'=>'12345'];
-			// $this->form[] = ['label'=>'Peta','name'=>'latt','type'=>'googlemaps','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Provinsi','name'=>'id_provinsi','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
-			$this->form[] = ['label'=>'Kota','name'=>'id_kota','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'id_provinsi'];
-			$this->form[] = ['label'=>'Kecamatan','name'=>'id_kecamatan','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'id_kota'];
-			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Logo','name'=>'logo','type'=>'upload','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Karyawan','name'=>'id_karyawan','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'karyawan,id'];
+			$this->form[] = ['label'=>'Nama Karyawan','name'=>'nama_karyawan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Insentif','name'=>'insentif','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ['label'=>'Kode Cabang','name'=>'kode_cabang','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Nama Cabang','name'=>'nama_cabang','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'No Telp','name'=>'telfon','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Logo','name'=>'logo','type'=>'upload','validation'=>'required','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'required|min:1|max:255|email|unique:tb_cabang','width'=>'col-sm-10','placeholder'=>'Mohon input alamat email dengan benar'];
-			//$this->form[] = ['label'=>'Pin','name'=>'pin','type'=>'text','value'=>'12345','validation'=>'min:3|max:32','width'=>'col-sm-10','help'=>'Default "12345". Minimal 5 karakter. Tinggalkan jika anda tidak mengubahnya'];
-			//$this->form[] = ['label'=>'Latitude','name'=>'latt','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Longitude','name'=>'lang','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10'];
-			//$this->form[] = ['label'=>'Provinsi','name'=>'kode_provinsi','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
-			//$this->form[] = ['label'=>'Kota','name'=>'kode_kota','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'kode_provinsi'];
-			//$this->form[] = ['label'=>'Kecamatan','name'=>'kode_kecamatan','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'kode_kota'];
-			//$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			//$this->form[] = ["label"=>"Karyawan","name"=>"id_karyawan","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"karyawan,id"];
+			//$this->form[] = ["label"=>"Nama Karyawan","name"=>"nama_karyawan","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Tanggal","name"=>"tanggal","type"=>"datetime","required"=>TRUE,"validation"=>"required|date_format:Y-m-d H:i:s"];
+			//$this->form[] = ["label"=>"Insentif","name"=>"insentif","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
 			# OLD END FORM
 
 			/* 
@@ -274,21 +258,6 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			$postdata['created_by'] = CRUDBooster::myName();
-			
-			$img = Image::make(storage_path('app/'.$postdata['logo']));
-			$img->greyscale();
-			$img->brightness(35);
-			$img->resize(180, null, function ($constraint) {
-				$constraint->aspectRatio();
-			});
-
-			$filename = basename($postdata['logo']);
-			$file_path = trim(str_replace($filename, '', $postdata['logo']), '/');
-			$filename = 'logo_struk_'.str_slug($postdata['nama_cabang'],'_').'.png';
-			$img->save(storage_path('app/'.$file_path.'/'.$filename), 100);		
-
-			$postdata['logo_struk'] = $file_path.'/'.$filename;	
 
 	    }
 
@@ -314,20 +283,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-			$postdata['updated_by'] = CRUDBooster::myName();
-			$img = Image::make(storage_path('app/'.$postdata['logo']));
-			$img->greyscale();
-			$img->brightness(35);
-			$img->resize(180, null, function ($constraint) {
-				$constraint->aspectRatio();
-			});
 
-			$filename = basename($postdata['logo']);
-			$file_path = trim(str_replace($filename, '', $postdata['logo']), '/');
-			$filename = 'logo_struk_'.str_slug($postdata['nama_cabang'],'_').'.png';
-			$img->save(storage_path('app/'.$file_path.'/'.$filename), 100);		
-
-			$postdata['logo_struk'] = $file_path.'/'.$filename;	
 	    }
 
 	    /* 
@@ -363,9 +319,7 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
-			DB::table('tb_cabang')->where('id', $id)->updated([
-				'deleted_by'	=> CRUDBooster::myName()
-			]);
+
 	    }
 
 

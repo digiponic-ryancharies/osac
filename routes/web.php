@@ -28,6 +28,7 @@ Route::group(['prefix' => 'api'], function () {
     Route::group(['prefix' => 'jasa'], function () {
         Route::get('/', 'ApiJasaController@data');
         Route::get('/harga', 'ApiJasaController@harga');
+        Route::get('/hargaperkendaraan', 'ApiJasaController@hargaPerKendaraan');
         Route::get('/durasi', 'ApiJasaController@durasi');
     });
 

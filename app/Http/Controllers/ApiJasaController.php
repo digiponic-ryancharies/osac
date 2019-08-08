@@ -49,10 +49,24 @@ class ApiJasaController extends Controller
                         ->join('tb_general as jn','jn.id','=','j.id_jenis_kendaraan')
                         ->select('j.id','jn.keterangan as jenis_kendaraan','j.harga')
                         ->where('j.id_jasa', $id_jasa)
-                        ->get();
-        }
+                        ->get();     
 
-        return $query;
+            return $query;
+        }    
+    }
+
+    public function hargaPerKendaraan(Request $request)
+    {
+        $param = $request->all();  
+
+        $kendaraan = CRUDBooster::first('tb_kendaraan', $param['id_jenis_kendaraan']);  
+        $param['id_jenis_kendaraan'] = $kendaraan->id_jenis_kendaraan;
+
+        $query = DB::table('tb_harga_jasa')
+                        ->where($param)
+                        ->first();
+
+        return response()->json($query, 200);
     }
 
     public function durasi(Request $request)

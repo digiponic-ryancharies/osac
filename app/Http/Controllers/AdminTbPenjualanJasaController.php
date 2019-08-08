@@ -2,8 +2,13 @@
 
 	use Session;
 	use Request;
+	use Image;
 	use DB;
 	use CRUDBooster;
+
+	use Mike42\Escpos\Printer;
+	use Mike42\Escpos\EscposImage;
+	use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 	class AdminTbPenjualanJasaController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -30,29 +35,59 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
+			$this->col[] = ["label"=>"Penjualan","name"=>"status_penjualan","join"=>"tb_general,keterangan"];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
-			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
+			$this->col[] = ["label"=>"Tgl Pesan","name"=>"tanggal","callback"=>function($row){
+				return date('d-m-y | H:i',strtotime($row->tanggal));
+			}];
+			$this->col[] = ["label"=>"Tgl Masuk","name"=>"tanggal_masuk","callback"=>function($row){
+				if(empty($row->tanggal_masuk))
+					$tgl = '-';
+				else
+					$tgl = date('d-m-y | H:i',strtotime($row->tanggal_masuk));
+				return $tgl;
+			}];
+			// $this->col[] = ["label"=>"Tanggal","name"=>"tanggal","visible"=>false];
+			// $this->col[] = ["label"=>"Tanggal","name"=>"tanggal_masuk","callback"=>function($row){
+			// 	return "I: &emsp;".date('d F Y H:i',strtotime($row->tanggal))."</br> O: &emsp;".date('d F Y H:i',strtotime($row->tanggal_masuk));
+			// }];
 			$this->col[] = ["label"=>"Pelanggan","name"=>"nama_pelanggan"];
 			$this->col[] = ["label"=>"Merek Kendaraan","name"=>"merek_kendaraan"];
 			$this->col[] = ["label"=>"Kendaraan","name"=>"nama_kendaraan"];
+			$this->col[] = ["label"=>"Pembayaran","name"=>"status_pembayaran","join"=>"tb_general,keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$kode = DB::table('tb_penjualan_jasa')->max('id') + 1;
-			$kode = 'POSJS/'.date('dmy').'/'.str_pad($kode,5,0,STR_PAD_LEFT);
+			$kode = 'POSJS'.date('dmy').''.str_pad($kode,5,0,STR_PAD_LEFT);
 			$date = date('Y-m-d H:i:s');
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'','name'=>'kode','type'=>'hidden','value'=>$kode];			
 			$this->form[] = ['label'=>'','name'=>'tanggal','type'=>'hidden','value'=>$date];			
-			$this->form[] = ['label'=>'Pelanggan','name'=>'id_pelanggan','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_pelanggan,nama','datatable_ajax'=>true];						
-			$this->form[] = ['label'=>'Kendaraan','name'=>'id_kendaraan','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tb_kendaraan,keterangan','datatable_ajax'=>true];			
+			$this->form[] = ['label'=>'','name'=>'tanggal_masuk','type'=>'hidden','value'=>$date];			
 			$this->form[] = ['label'=>'Nomor Polisi','name'=>'nomor_polisi','type'=>'text','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Diskon Tipe','name'=>'diskon_tipe','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Diskon Nominal','name'=>'diskon_nominal','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Total','name'=>'total','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Total Durasi','name'=>'total_durasi','type'=>'time','validation'=>'required|date_format:H:i:s','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Pelanggan','name'=>'id_pelanggan','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_pelanggan,nama'];						
+			// $this->form[] = ['label'=>'Pelanggan','name'=>'id_pelanggan','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_pelanggan,nama','datatable_ajax'=>true];						
+			$this->form[] = ['label'=>'Kendaraan','name'=>'id_kendaraan','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tb_kendaraan,keterangan'];			
+			// $this->form[] = ['label'=>'Kendaraan','name'=>'id_kendaraan','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tb_kendaraan,keterangan','datatable_ajax'=>true];			
+			$columns[] = ['label'=>'Jasa','name'=>'id_jasa','type'=>'datamodal','required'=>true,'datamodal_table'=>'tb_jasa','datamodal_columns'=>'keterangan','datamodal_columns_alias'=>'Jasa','datamodal_size'=>'large'];
+			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','readonly'=>true,'required'=>true];
+			// $columns[] = ['label'=>'Qty','name'=>'quantity','type'=>'number','required'=>true];
+			// $columns[] = ['label'=>'Diskon Tipe','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'0|Nominal;1|Persen'];
+			// $columns[] = ['label'=>'Nominal Diskon','name'=>'diskon_nominal','type'=>'number'];
+			// $columns[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'number','required'=>true,'formula'=>"[quantity] * [harga]","readonly"=>true];
+			$this->form[] = ['label'=>'Detail Jasa','name'=>'penjualan_jasa_detail','type'=>'child','columns'=>$columns,'table'=>'tb_penjualan_jasa_detail','foreign_key'=>'id_penjualan_jasa'];
+			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'number','width'=>'col-sm-10','readonly'=>true,'value'=>0];
+			$this->form[] = ['label'=>'Diskon Tipe','name'=>'diskon_tipe','type'=>'radio','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 14','value'=>35];
+			$this->form[] = ['label'=>'Nominal Diskon','name'=>'diskon_nominal','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Total','name'=>'total','type'=>'number','width'=>'col-sm-10','readonly'=>true,'value'=>0];
+			$this->form[] = ['label'=>'Metode Pembayaran','name'=>'metode_pembayaran','type'=>'radio','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 12'];
+			$this->form[] = ['label'=>'Merchant','name'=>'id_merchant','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 13'];
+			$this->form[] = ['label'=>'No Kartu','name'=>'nomor_kartu','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Kode Trace','name'=>'kode_trace','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Bayar','name'=>'bayar','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Kembalian','name'=>'kembalian','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10','value'=>0,'readonly'=>true];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -103,7 +138,7 @@
 	        | 
 	        */
 	        $this->addaction = array();
-
+			$this->addaction[] = ['title'=>'Print Struk','icon'=>'fa fa-print','color'=>'danger print','url'=>CRUDBooster::mainpath('print-struk').'/[id]'];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -152,7 +187,8 @@
 	        | 
 	        */
 	        $this->table_row_color = array();     	          
-
+			$this->table_row_color[] = ["condition"=>"[status_penjualan] == 28","color"=>"success"];
+			$this->table_row_color[] = ["condition"=>"[status_pembayaran] == 25","color"=>"danger"];
 	        
 	        /*
 	        | ---------------------------------------------------------------------- 
@@ -173,7 +209,100 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+			$this->script_js = "
+
+				$(function(){
+					
+					var _data = {
+						id_jasa: '',
+						id_jenis_kendaraan: ''
+					};
+
+					$('#detailjasaid_jasa button').prop('disabled', true);
+
+					var _id = $('#id_kendaraan').val();					
+					if(_id !== ''){
+						$('#detailjasaid_jasa button').prop('disabled', false);
+						_data.id_jenis_kendaraan = _id;
+					}
+						
+
+					$('#id_kendaraan').change(function(){
+						var id = $(this).val();
+						_data.id_jenis_kendaraan = id;
+
+						if(id === ''){
+							$('#detailjasaid_jasa button').prop('disabled', true);
+						}else{
+							$('#detailjasaid_jasa button').prop('disabled', false);
+						}
+						resetFormdetailjasa();
+					});
+
+					$('input.input-id').change(function(){
+						_data.id_jasa = $(this).val();
+
+						$.ajax({
+							url: '".CRUDBooster::apipath('jasa/hargaperkendaraan')."',
+							method: 'GET',
+							data: _data,
+							success: function(res){
+								console.log('Res: ', res);
+								$('#detailjasaharga').val(res.harga);
+							},
+							error: function(err){
+								console.log('Err: ', err);
+							}
+						});
+					});
+	
+					setInterval(function() {
+					
+						var subtotal = 0;
+						var total = 0;
+						$('#table-detailjasa tbody .harga').each(function() {
+							subtotal += parseInt($(this).text());
+						})
+						$('#subtotal').val(subtotal);
+						
+						var diskon = $('#diskon_nominal').val();
+						// diskon = parseFloat(diskon.replace(/,/g,''));	
+						
+						var diskon_tipe = $('input[name=diskon_tipe]:checked').val();						
+						if(diskon_tipe == 0){
+							total = subtotal - diskon;
+						}else{
+							var diskon_ = (diskon / 100) * subtotal;
+							total = subtotal - diskon_;
+						}
+						
+						$('#total').val(total);
+
+					}, 500);
+					
+					$('input[type=radio][name=metode_pembayaran]').change(function(){
+						var value = $(this).val();
+						if(value == 30){
+							$('#id_merchant').prop('disabled', false);
+							$('#nomor_kartu').prop('readonly', false);
+							$('#kode_trace').prop('readonly', false);
+						}else{
+							$('#id_merchant').prop('disabled', true);
+							$('#nomor_kartu').prop('readonly', true);
+							$('#kode_trace').prop('readonly', true);
+						}
+					});
+
+					$('#bayar').keyup(function(){
+						var bayar = $(this).val();
+						var total = $('#total').val();
+						var kembalian = parseInt(bayar) - parseInt(total);
+						console.log(kembalian);
+						$('#kembalian').val(kembalian);
+					});
+
+				});
+			";
 
 
             /*
@@ -220,7 +349,11 @@
 	        | $this->style_css = ".style{....}";
 	        |
 	        */
-	        $this->style_css = NULL;
+			$this->style_css = "
+				table tbody td {
+					text-align: center;
+				}
+			";
 	        
 	        
 	        
@@ -260,8 +393,11 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
-	            
+			//Your code here
+			if(!CRUDBooster::isSuperadmin()){
+				$id_cabang = CRUDBooster::myCabangId();
+				$query->where('id_cabang', $id_cabang);
+			}
 	    }
 
 	    /*
@@ -283,6 +419,25 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
+			$kendaraan = CRUDBooster::first('tb_kendaraan', $postdata['id_kendaraan']);
+			$merek = CRUDBooster::first('tb_merek_kendaraan', $kendaraan->id_merek_kendaraan);			
+
+			$postdata['status_pembayaran'] = 26;	// 25 | BELUM LUNAS; 26 | LUNAS; TB GENERAL
+			$postdata['status_penjualan'] = 27;	// 27 | REGULER; 28 | BOOKING; TB GENERAL
+			$postdata['created_by'] = CRUDBooster::myName();
+			$postdata['id_cabang'] = CRUDBooster::myCabangId();
+			$postdata['nama_pelanggan'] = (empty($postdata['nama_pelanggan'])) ? 'Walk In Order' : $postdata['nama_pelanggan'];
+			$postdata['id_merek_kendaraan'] = $merek->id;
+			$postdata['merek_kendaraan'] = $merek->keterangan;
+			$postdata['nama_kendaraan'] = $kendaraan->keterangan;
+
+			if($postdata['metode_pembayaran'] == 30){
+				$postdata['status_pembayaran'] = 26;
+			}else{
+				$postdata['id_merchant'] = NULL;
+				$postdata['nomor_kartu'] = NULL;
+				$postdata['kode_trace'] = NULL;
+			}
 
 	    }
 
@@ -295,7 +450,21 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
+			$jasa = CRUDBooster::first('tb_penjualan_jasa', $id);
+			$jasa_detail = DB::table('tb_penjualan_jasa_detail')
+								->where('id_penjualan_jasa', $id)
+								->get();
 
+			foreach($jasa_detail as $jd) {
+				$js = CRUDBooster::first('tb_jasa',$jd->id_jasa);
+				
+				$array = array(
+					'kode_penjualan_jasa'	=> $jasa->kode,
+					'nama_jasa'				=> $js->keterangan
+				);
+
+				DB::table('tb_penjualan_jasa_detail')->where('id',$jd->id)->update($array);
+			}			
 	    }
 
 	    /* 
@@ -308,7 +477,15 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
+			$postdata['updated_by'] = CRUDBooster::myName();	
 
+			if($postdata['metode_pembayaran'] == 30){
+				$postdata['status_pembayaran'] = 26;
+			}else{
+				$postdata['id_merchant'] = NULL;
+				$postdata['nomor_kartu'] = NULL;
+				$postdata['kode_trace'] = NULL;
+			}	
 	    }
 
 	    /* 
@@ -320,7 +497,21 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here 
+			$jasa = CRUDBooster::first('tb_penjualan_jasa', $id);
+			$jasa_detail = DB::table('tb_penjualan_jasa_detail')
+								->where('id_penjualan_jasa', $id)
+								->get();
 
+			foreach($jasa_detail as $jd) {
+				$js = CRUDBooster::first('tb_jasa',$jd->id_jasa);
+				
+				$array = array(
+					'kode_penjualan_jasa'	=> $jasa->kode,
+					'nama_jasa'				=> $js->keterangan
+				);
+
+				DB::table('tb_penjualan_jasa_detail')->where('id',$jd->id)->update($array);
+			}	
 	    }
 
 	    /* 
@@ -344,12 +535,138 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
-
+			DB::table('tb_penjualan_jasa')->where('id',$id)->update([
+				'deleted_by'	=> CRUDBooster::myName()
+			]);
 	    }
 
 
 
 	    //By the way, you can still create your own method in here... :) 
+		// public function getPrintStruk($id = null)
+		// {
+		// 	$cabang = CRUDBooster::myCabang();
+		// 	// dd($cabang);
+		// 	$image = storage_path('app/'.$cabang->logo_struk);
+		// 	// dd($logo_path);
 
+		// 	$logo = EscposImage::load($image, false);
+		// 	$printer_name = CRUDBooster::getSetting('printer');
+
+		// 	$pos = CRUDBooster::first('tb_penjualan_jasa', $id);
+		// 	$posd = DB::table('tb_penjualan_jasa_detail')->where('id_penjualan_jasa', $pos->id)->get();
+
+		// 	try {
+		// 		$connector = new WindowsPrintConnector($printer_name);
+		// 		$printer = new Printer($connector);
+		// 		$printer->setJustification(Printer::JUSTIFY_CENTER);		 		
+		//  		$printer -> bitImage($logo);
+		// 		$printer -> text("\n");
+				
+		// 		$tanggal = date('d F Y', strtotime($pos->tanggal));				
+		// 		$printer -> text(new format("Kode", $pos->kode));
+		// 		$printer -> text(new format("Tanggal", $tanggal));
+		// 		$printer -> text(new format("Pelanggan", $pos->nama_pelanggan));
+		// 		$printer -> text(new format("Kasir", $pos->created_by));
+		// 		$printer -> text("--------------------------------\n");
+		// 		$printer -> feed();
+
+		// 		$printer -> setJustification(Printer::JUSTIFY_LEFT);
+		// 		foreach ($posd as $value) {
+		// 			$printer -> text(new item($value->nama_jasa, $value->harga));
+		// 		}
+		// 		$printer -> feed();
+
+		// 		$printer -> setJustification(Printer::JUSTIFY_CENTER);
+		// 		$printer -> text(new item("Subtotal", $pos->subtotal));
+		// 		if($pos->diskon_tipe === 0){
+		// 			$diskon = $pos->diskon_nominal;
+		// 		}else{
+		// 			$diskon = $pos->subtotal * ($pos->diskon_nominal / 100);
+		// 		}
+		// 		$printer -> text(new item("Diskon", $diskon));
+		// 		$printer -> text(new item("Grand Total", $pos->total));
+		// 		$printer -> feed();
+
+		// 		$printer -> text("Terima kasih\n\n");
+		// 		$printer -> text("Kepuasan anda \n merupakan prestasi kami\n");
+
+		// 		$printer -> feed(3);			
+		
+		// 		$printer -> cut();
+		// 		$printer -> close();
+
+		// 		CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Struk penjualan berhasil di cetak !","info");
+		// 	} catch (Exception $e) {
+		// 		CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Gagal, Printer bermasalah !!!","danger");
+		// 	}			
+					
+		// }
+
+		public function getPrintStruk($id = null)
+		{
+			$logo = EscposImage::load("logo_black.png", false);
+			$printer_name = CRUDBooster::getSetting('printer');
+
+			$pos = CRUDBooster::first('tb_penjualan_jasa', $id);
+			$posd = DB::table('tb_penjualan_jasa_detail')->where('id_penjualan_jasa', $pos->id)->get();
+
+			try {
+				$connector = new WindowsPrintConnector($printer_name);
+				$printer = new Printer($connector);
+				$printer->setJustification(Printer::JUSTIFY_CENTER);
+		 		$printer -> bitImage($logo);
+				$printer -> text("\n");
+				$printer -> setTextSize(2, 2);
+				$printer -> text('REGULER');
+				$printer -> text("\n\n");
+
+				$printer->qrCode("POSJS07081900006",Printer::QR_ECLEVEL_L, 8);
+				$printer -> text("\n\n");
+				$printer -> setTextSize(1,1);
+				$printer -> text("POSJS07081900006");
+				$printer -> text("\n");
+				$tanggal = date('d F Y', strtotime($pos->tanggal));
+				$printer -> text(new format("Tanggal", $tanggal));
+				$printer -> text(new format("Kendaraan", "DAIHATSU | AYLA"));				
+				$printer -> text("--------------------------------\n");
+
+				$printer -> setJustification(Printer::JUSTIFY_LEFT);
+				foreach ($posd as $value) {
+					$printer -> text(new format("1 x ", $value->nama_jasa));
+				}
+				foreach ($posd as $value) {
+					$printer -> text(new format("1 x ", $value->nama_jasa));
+				}
+				foreach ($posd as $value) {
+					$printer -> text(new format("1 x ", $value->nama_jasa));
+				}
+				$printer -> feed();
+
+				// $printer -> setJustification(Printer::JUSTIFY_CENTER);
+				// $printer -> text(new item("Subtotal", $pos->subtotal));
+				// if($pos->diskon_tipe === 0){
+				// 	$diskon = $pos->diskon_nominal;
+				// }else{
+				// 	$diskon = $pos->subtotal * ($pos->diskon_nominal / 100);
+				// }
+				// $printer -> text(new item("Diskon", $diskon));
+				// $printer -> text(new item("Grand Total", $pos->total));
+				// $printer -> feed();
+
+				// $printer -> text("Terima kasih\n\n");
+				// $printer -> text("Kepuasan anda \n merupakan prestasi kami\n");
+
+				$printer -> feed();			
+		
+				$printer -> cut();
+				$printer -> close();
+
+				CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Struk penjualan berhasil di cetak !","info");
+			} catch (Exception $e) {
+				CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Gagal, Printer bermasalah !!!","danger");
+			}			
+					
+		}
 
 	}

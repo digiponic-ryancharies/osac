@@ -1,9 +1,10 @@
 <?php namespace App\Http\Controllers;
 
 	use Session;
-	use Request;
+	use Illuminate\Http\Request;
 	use DB;
 	use CRUDBooster;
+	use Yajra\Datatables\Facades\Datatables;
 
 	class AdminTbKaryawanController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -32,9 +33,10 @@
 			$this->col = [];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
 			$this->col[] = ["label"=>"Jabatan","name"=>"jabatan",'join'=>'tb_general,keterangan'];		
-			$this->col[] = ["label"=>"Cabang","name"=>"cabang_id",'join'=>'tb_general,keterangan'];			
+			// $this->col[] = ["label"=>"Cabang","name"=>"cabang_id",'join'=>'tb_general,keterangan'];			
 			$this->col[] = ["label"=>"Nama","name"=>"nama"];
 			$this->col[] = ["label"=>"Jenis Kelamin","name"=>"jenis_kelamin"];
+			$this->col[] = ["label"=>"Telepon","name"=>"telepon"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$kode = DB::table('tb_karyawan')->max('id') + 1;
@@ -43,19 +45,23 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
-			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
-			$this->form[] = ['label'=>'Tempat Lahir','name'=>'tempat_lahir','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Cth: Deni Handoko'];
+			$this->form[] = ['label'=>'Tempat Lahir','name'=>'tempat_lahir','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','placeholder'=>'Cth: Sidoarjo'];
 			$this->form[] = ['label'=>'Tanggal Lahir','name'=>'tanggal_lahir','type'=>'date','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Jenis Kelamin','name'=>'jenis_kelamin','value'=>'L','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'L|Laki-laki;P|Perempuan'];
 			$this->form[] = ['label'=>'Agama','name'=>'agama','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Islam;Kristen;Katholik;Buddha;Hindu;Lainnya','value'=>'Islam'];
 			$this->form[] = ['label'=>'Status Perkawinan','name'=>'status_perkawinan','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Belum Kawin;Kawin;Duda;Janda;Lainnya','value'=>'Belum Kawin'];
-			$this->form[] = ['label'=>'Jabatan','name'=>'jabatan','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 1'];
-			$this->form[] = ['label'=>'Cabang','name'=>'cabang_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 2'];
-			$this->form[] = ['label'=>'Gaji Pokok','name'=>'gaji_pokok','type'=>'number','validation'=>'required','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Tambah Akun','name'=>'buat_akun','value'=>'0','type'=>'radio','dataenum'=>'0|Tidak;1|Ya','validation'=>'required','width'=>'col-sm-10'];			
-			$this->form[] = ['label'=>'Pin','name'=>'pin','type'=>'password','validation'=>'max:6|min:6','width'=>'col-sm-10', 'disabled'=>'true'];			
-			$this->form[] = ['label'=>'Hak Akses','name'=>'privileges_id','type'=>'select','validation'=>'required','width'=>'col-sm-10', 'datatable'=>'cms_privileges,name', 'disabled'=>'true'];			
+			// $this->form[] = ['label'=>'Cabang','name'=>'cabang_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 2'];
+			$this->form[] = ['label'=>'Telepon','name'=>'telepon','type'=>'text','validation'=>'required|max:15','width'=>'col-sm-10','value'=>'+62'];
+			$this->form[] = ['label'=>'Jabatan','name'=>'jabatan','type'=>'select2','validation'=>'min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 9'];
+			$this->form[] = ['label'=>'Gaji Pokok','name'=>'gaji_pokok','type'=>'number','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Provinsi','name'=>'id_provinsi','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
+			$this->form[] = ['label'=>'Kota','name'=>'id_kota','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'id_provinsi'];
+			$this->form[] = ['label'=>'Kecamatan','name'=>'id_kecamatan','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'id_kota'];
+			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
+			// $this->form[] = ['label'=>'Tambah Akun','name'=>'buat_akun','value'=>'0','type'=>'radio','dataenum'=>'0|Tidak;1|Ya','validation'=>'required','width'=>'col-sm-10'];			
+			// $this->form[] = ['label'=>'Pin','name'=>'pin','type'=>'password','validation'=>'max:6|min:6','width'=>'col-sm-10', 'disabled'=>'true'];			
+			// $this->form[] = ['label'=>'Hak Akses','name'=>'privileges_id','type'=>'select','validation'=>'required','width'=>'col-sm-10', 'datatable'=>'cms_privileges,name', 'disabled'=>'true'];			
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -84,7 +90,8 @@
 	        |
 	        */
 	        $this->sub_module = array();
-			$this->sub_module[] = ['label'=>'','path'=>'tb_absensi','parent_columns'=>'kode,nama','foreign_key'=>'kode_karyawan','button_color'=>'info','button_icon'=>'fa fa-clock-o'];
+			// $this->sub_module[] = ['label'=>'','path'=>'tb_absensi','parent_columns'=>'kode,nama','foreign_key'=>'kode_karyawan','button_color'=>'info','button_icon'=>'fa fa-clock-o'];
+			// $this->sub_module[] = ['label'=>'','path'=>'tb_insentif','parent_columns'=>'kode,nama','foreign_key'=>'id_karyawan','button_color'=>'danger','button_icon'=>'fa fa-money'];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -138,7 +145,7 @@
 	        |
 	        */
 	        $this->index_button = array();
-
+			$this->index_button[] = ['label'=>'Insentif','url'=>CRUDBooster::mainpath("insentif"),"icon"=>"fa fa-money","color"=>"danger"];
 
 
 	        /*
@@ -344,14 +351,14 @@
 	    */
 	    public function hook_after_edit($id) {
 	    //    Your code here
-			$karyawan = DB::table('tb_karyawan')->where('id',$id)->first();
-			$data = array(
-				'name' 				=> $karyawan->nama,
-				'email' 			=> $karyawan->kode,
-				'password'			=> $karyawan->pin,
-				'id_cms_privileges'	=> $karyawan->privileges_id
-			);
-			DB::table('cms_users')->insert($data);
+			// $karyawan = DB::table('tb_karyawan')->where('id',$id)->first();
+			// $data = array(
+			// 	'name' 				=> $karyawan->nama,
+			// 	'email' 			=> $karyawan->kode,
+			// 	'password'			=> $karyawan->pin,
+			// 	'id_cms_privileges'	=> $karyawan->privileges_id
+			// );
+			// DB::table('cms_users')->insert($data);
 	    }
 
 	    /*
@@ -378,9 +385,35 @@
 
 	    }
 
-
-
 	    //By the way, you can still create your own method in here... :)
+		public function getInsentif()
+		{
+			$data = [];
+			$data['url'] = CRUDBooster::apiPath();
+			$data['page_title'] = 'Insentif';
+			$data['table'] = Datatables::of(DB::table('tb_insentif')->whereNull('deleted_at'))->make(true);
+			$this->cbView('insentif.view', $data);
+		}
 
+		public function getInsentifDatatable(Request $request)
+		{				
+			$month = (empty($request->month)) ? date('m') : $request->month;
+			$year = (empty($request->year)) ? date('Y') : $request->year;
+
+			$builder = DB::table('tb_insentif')
+							->selectRaw('*, SUM(insentif) as _insentif, MONTHNAME(tanggal) as _bulan')
+							->groupBy('id_karyawan')
+							->whereYear('tanggal','=', $year)
+							->whereMonth('tanggal','=', $month)
+							->whereNull('deleted_at')
+							->get();
+
+			return Datatables::of($builder)
+								->addIndexColumn()
+								->editColumn('_insentif', function($builder){
+									return 'Rp '.number_format($builder->_insentif,0,',','.');
+								})
+								->make(true);
+		}
 
 	}

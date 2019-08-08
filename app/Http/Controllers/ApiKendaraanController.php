@@ -18,7 +18,7 @@ class ApiKendaraanController extends Controller
         $query = DB::table('tb_kendaraan as k')
                     ->join('tb_general as jk','jk.id','=','k.id_jenis_kendaraan')
                     ->join('tb_merek_kendaraan as mk','mk.id','=','k.id_merek_kendaraan')
-                    ->select('k.id','k.kode','k.keterangan','k.gambar','jk.keterangan as jenis_kendaraan','mk.keterangan as merek_kendaraan')
+                    ->select('k.id','k.kode','k.keterangan','k.gambar','k.id_jenis_kendaraan','jk.keterangan as jenis_kendaraan','mk.keterangan as merek_kendaraan')
                     ->whereNull('k.deleted_at');
 
         if(!empty($param)){
