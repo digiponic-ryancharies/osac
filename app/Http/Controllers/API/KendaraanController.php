@@ -16,13 +16,14 @@ class KendaraanController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function all()
+    public function allByMerk($merkid)
     {
         $path = url('/');
         $data = DB::table('tbl_kendaraan as k')
-            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_KENDARAAN')
+            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_JENIS_KENDARAAN')
             ->join('tbl_merk_kendaraan as mk', 'mk.ID_MERK', '=', 'k.ID_MERK_KENDARAAN')
             ->select('k.ID_KENDARAAN', 'jk.KETERANGAN_JENIS_KENDARAAN', 'mk.NAMA_MERK', 'k.KODE', 'k.KETERANGAN', 'k.GAMBAR')
+            ->where('k.ID_MERK_KENDARAAN', $merkid)
             ->orderBy('k.KODE')
             ->get();
 
@@ -39,10 +40,19 @@ class KendaraanController extends Controller
 
     public function merkList()
     {
+        $path = url('/');
         $data = DB::table('tbl_merk_kendaraan')
-            ->select('ID_MERK', 'KODE_MERK', 'NAMA_MERK')
+            ->select('ID_MERK', 'KODE_MERK', 'NAMA_MERK', 'GAMBAR')
             ->get();
-//        $data = (array) $data;
+
+        foreach ($data as $value) {
+            if ($value->GAMBAR == null) {
+                $value->GAMBAR = $path . '/img/logo.png';
+            } else {
+                $value->GAMBAR = $path . '/' . $value->GAMBAR;
+            }
+        }
+
         return response()->json(['error' => false, 'msg' => 'Daftar Merk Kendaraan', 'data' => $data], $this->successStatus);
 
     }
@@ -155,7 +165,7 @@ class KendaraanController extends Controller
             ->where('ID_KENDARAAN', $input['id_kendaraan'])
             ->update($data);
 
-        return response()->json(['error' => false, 'msg' => 'Data Berhasil Ditambahkan', 'data' => null], $this->successStatus);
+        return response()->json(['error' => false, 'msg' => 'Data Berhasil Diubah', 'data' => null], $this->successStatus);
     }
 
     public function hapus($id_kendaraan)
