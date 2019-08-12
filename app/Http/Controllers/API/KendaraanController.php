@@ -19,19 +19,19 @@ class KendaraanController extends Controller
     public function allByMerk($merkid)
     {
         $path = url('/');
-        $data = DB::table('tbl_kendaraan as k')
-            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_JENIS_KENDARAAN')
-            ->join('tbl_merk_kendaraan as mk', 'mk.ID_MERK', '=', 'k.ID_MERK_KENDARAAN')
-            ->select('k.ID_KENDARAAN', 'jk.KETERANGAN_JENIS_KENDARAAN', 'mk.NAMA_MERK', 'k.KODE', 'k.KETERANGAN', 'k.GAMBAR')
-            ->where('k.ID_MERK_KENDARAAN', $merkid)
-            ->orderBy('k.KODE')
+        $data = DB::table('tb_kendaraan as k')
+            ->join('tb_merek_kendaraan as mk', 'mk.id', '=', 'k.id_merek_kendaraan')
+            ->join('tb_general as jk', 'jk.id', '=', 'k.id_jenis_kendaraan')
+            ->select('k.id', 'k.kode', 'mk.keterangan as merk', 'jk.keterangan as jenis', 'k.keterangan', 'k.gambar')
+            ->where('k.id_merek_kendaraan', $merkid)
+            ->orderBy('k.kode')
             ->get();
 
         foreach ($data as $value) {
-            if ($value->GAMBAR == null) {
-                $value->GAMBAR = $path . '/img/logo.png';
+            if ($value->gambar == null) {
+                $value->gambar = $path . '/img/logo.png';
             } else {
-                $value->GAMBAR = $path . '/' . $value->GAMBAR;
+                $value->gambar = $path . '/' . $value->gambar;
             }
         }
 
@@ -41,15 +41,15 @@ class KendaraanController extends Controller
     public function merkList()
     {
         $path = url('/');
-        $data = DB::table('tbl_merk_kendaraan')
-            ->select('ID_MERK', 'KODE_MERK', 'NAMA_MERK', 'GAMBAR')
+        $data = DB::table('tb_merek_kendaraan')
+            ->select('id', 'kode', 'keterangan', 'gambar')
             ->get();
 
         foreach ($data as $value) {
-            if ($value->GAMBAR == null) {
-                $value->GAMBAR = $path . '/img/logo.png';
+            if ($value->gambar == null) {
+                $value->gambar = $path . '/img/logo.png';
             } else {
-                $value->GAMBAR = $path . '/' . $value->GAMBAR;
+                $value->gambar = $path . '/' . $value->gambar;
             }
         }
 
@@ -59,37 +59,25 @@ class KendaraanController extends Controller
 
     public function vehicleType()
     {
-        $data = DB::table('tbl_jenis_kendaraan')
-            ->select('ID_JENIS_KENDARAAN', 'KODE_JENIS_KENDARAAN', 'KETERANGAN_JENIS_KENDARAAN')
+        $data = DB::table('tb_general')
+            ->select('id', 'keterangan')
+            ->where('id_tipe', 8)
             ->get();
         return response()->json(['error' => false, 'msg' => 'Daftar Jenis Kendaraan', 'data' => $data], $this->successStatus);
-
-    }
-
-    public function detail($idKendaraan)
-    {
-        $data = DB::table('tbl_kendaraan_pelanggan as k')
-            ->join('tbl_merk_kendaraan as mk', 'mk.ID_MERK', '=', 'k.ID_MERK')
-            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_JENIS_KENDARAAN')
-            ->select('k.ID_KENDARAAN', 'k.ID_PELANGGAN', 'mk.NAMA_MERK', 'jk.KETERANGAN_JENIS_KENDARAAN', 'k.NAMA_KENDARAAN', 'k.WARNA_KENDARAAN', 'k.NOPOL_KENDARAAN', 'k.TAHUN_KENDARAAN', 'k.NO_RANGKA_KENDARAAN', 'k.NO_MESIN_KENDARAAN', 'k.CREATED_AT')
-            ->where('ID_KENDARAAN', $idKendaraan)
-            ->first();
-
-        return response()->json(['error' => false, 'msg' => 'Detail Kendaraan', 'data' => $data], $this->successStatus);
 
     }
 
     public function tambah(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'jenis'           => 'required',
             'merk'            => 'required',
-            'nama_kendaraan'  => 'required|min:4',
+            'jenis'           => 'required',
             'warna'           => 'required',
             'no_polisi'       => 'required|regex:/^([A-Za-z]{1,3})+(\s)+([0-9]{1,4})+(\s)+([A-Za-z]{0,3})$/i',
             'no_rangka'       => 'max:17',
             'no_mesin'        => 'max:20',
             'tahun_kendaraan' => 'required|numeric',
+            'id_pelanggan'    => 'required|numeric',
         ], [
             'required'       => ':attribute harus diisi.',
             'unique'         => ':attribute harus unique.',
@@ -103,20 +91,19 @@ class KendaraanController extends Controller
         }
 
         $input = $request->all();
-        DB::table('tbl_kendaraan_pelanggan')->insert(
+        DB::table('tb_pelanggan_kendaraan')->insert(
             [
-                'ID_KENDARAAN'        => DB::table('tbl_kendaraan_pelanggan')->max('ID_KENDARAAN') + 1,
-                'ID_PELANGGAN'        => $input['id_pelanggan'],
-                'ID_JENIS_KENDARAAN'  => $input['jenis'],
-                'ID_MERK'             => $input['merk'],
-                'NAMA_KENDARAAN'      => $input['nama_kendaraan'],
-                'WARNA_KENDARAAN'     => $input['warna'],
-                'TAHUN_KENDARAAN'     => $input['tahun_kendaraan'],
-                'NOPOL_KENDARAAN'     => strtoupper($input['no_polisi']),
-                'NO_RANGKA_KENDARAAN' => $input['no_rangka'],
-                'NO_MESIN_KENDARAAN'  => $input['no_mesin'],
-                'CREATED_AT'          => date("Y-m-d H:i:s"),
-                'CREATED_BY'          => 'api'
+                'id'                 => DB::table('tb_pelanggan_kendaraan')->max('id') + 1,
+                'id_pelanggan'       => $input['id_pelanggan'],
+                'id_merek_kendaraan' => $input['merk'],
+                'id_kendaraan'       => $input['jenis'],
+                'warna'              => $input['warna'],
+                'tahun'              => $input['tahun_kendaraan'],
+                'nomor_polisi'       => strtoupper($input['no_polisi']),
+                'nomor_rangka'       => $input['no_rangka'],
+                'nomor_mesin'        => $input['no_mesin'],
+                'created_at'         => date("Y-m-d H:i:s"),
+                'created_by'         => 'api'
             ]
         );
 
@@ -126,14 +113,14 @@ class KendaraanController extends Controller
     public function edit(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'jenis'           => 'required',
             'merk'            => 'required',
-            'nama_kendaraan'  => 'required|min:4',
+            'jenis'           => 'required',
             'warna'           => 'required',
             'no_polisi'       => 'required|regex:/^([A-Za-z]{1,3})+(\s)+([0-9]{1,4})+(\s)+([A-Za-z]{0,3})$/i',
             'no_rangka'       => 'max:17',
             'no_mesin'        => 'max:20',
             'tahun_kendaraan' => 'required|numeric',
+            'id_kendaraan'    => 'required|numeric',
         ], [
             'required'       => ':attribute harus diisi.',
             'unique'         => ':attribute harus unique.',
@@ -149,20 +136,19 @@ class KendaraanController extends Controller
         $input = $request->all();
         $data =
             [
-                'ID_JENIS_KENDARAAN'  => $input['jenis'],
-                'ID_MERK'             => $input['merk'],
-                'NAMA_KENDARAAN'      => $input['nama_kendaraan'],
-                'WARNA_KENDARAAN'     => $input['warna'],
-                'TAHUN_KENDARAAN'     => $input['tahun_kendaraan'],
-                'NOPOL_KENDARAAN'     => strtoupper($input['no_polisi']),
-                'NO_RANGKA_KENDARAAN' => $input['no_rangka'],
-                'NO_MESIN_KENDARAAN'  => $input['no_mesin'],
-                'UPDATED_AT'          => date("Y-m-d H:i:s"),
-                'UPDATED_BY'          => 'api'
+                'id_merek_kendaraan' => $input['merk'],
+                'id_kendaraan'       => $input['jenis'],
+                'warna'              => $input['warna'],
+                'tahun'              => $input['tahun_kendaraan'],
+                'nomor_polisi'       => strtoupper($input['no_polisi']),
+                'nomor_rangka'       => $input['no_rangka'],
+                'nomor_mesin'        => $input['no_mesin'],
+                'updated_at'         => date("Y-m-d H:i:s"),
+                'updated_by'         => 'api'
             ];
 
-        DB::table('tbl_kendaraan_pelanggan')
-            ->where('ID_KENDARAAN', $input['id_kendaraan'])
+        DB::table('tb_pelanggan_kendaraan')
+            ->where('id', $input['id_kendaraan'])
             ->update($data);
 
         return response()->json(['error' => false, 'msg' => 'Data Berhasil Diubah', 'data' => null], $this->successStatus);
@@ -170,20 +156,32 @@ class KendaraanController extends Controller
 
     public function hapus($id_kendaraan)
     {
-        DB::table('tbl_kendaraan_pelanggan')->where('ID_KENDARAAN', $id_kendaraan)->delete();
+        DB::table('tb_pelanggan_kendaraan')->where('id', $id_kendaraan)->delete();
 
         return response()->json(['error' => false, 'msg' => 'Kendaraan Dihapus', 'data' => null], $this->successStatus);
     }
 
     public function kendaraanPelanggan($id_pelanggan)
     {
-        $data = DB::table('tbl_kendaraan_pelanggan as k')
-            ->join('tbl_merk_kendaraan as mk', 'mk.ID_MERK', '=', 'k.ID_MERK')
-            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_JENIS_KENDARAAN')
-            ->select('k.ID_KENDARAAN', 'k.ID_PELANGGAN', 'mk.NAMA_MERK', 'jk.KETERANGAN_JENIS_KENDARAAN', 'k.NAMA_KENDARAAN', 'k.WARNA_KENDARAAN', 'k.NOPOL_KENDARAAN', 'k.TAHUN_KENDARAAN', 'k.NO_RANGKA_KENDARAAN', 'k.NO_MESIN_KENDARAAN', 'k.CREATED_AT')
-            ->where('ID_PELANGGAN', $id_pelanggan)
+        $data = DB::table('tb_pelanggan_kendaraan as k')
+            ->join('tb_merek_kendaraan as mk', 'mk.id', '=', 'k.id_merek_kendaraan')
+            ->join('tb_kendaraan as jk', 'jk.id', '=', 'k.id_kendaraan')
+            ->select('k.id', 'k.id_pelanggan', 'mk.keterangan as merk', 'jk.keterangan as tipe', 'k.warna', 'k.nomor_polisi', 'k.tahun', 'k.nomor_rangka', 'k.nomor_mesin', 'k.created_at')
+            ->where('id_pelanggan', $id_pelanggan)
             ->get();
         return response()->json(['error' => false, 'msg' => 'Daftar Kendaraan Pelanggan', 'data' => $data], $this->successStatus);
 
+    }
+
+    public function detail($idKendaraan)
+    {
+        $data = DB::table('tb_pelanggan_kendaraan as k')
+            ->join('tb_merek_kendaraan as mk', 'mk.id', '=', 'k.id_merek_kendaraan')
+            ->join('tb_kendaraan as kd', 'kd.id', '=', 'k.id_kendaraan')
+            ->select('k.id', 'k.id_pelanggan', 'mk.keterangan as merk', 'kd.keterangan as tipe', 'k.warna', 'k.nomor_polisi', 'k.tahun', 'k.nomor_rangka', 'k.nomor_mesin', 'k.created_at')
+            ->where('k.id', $idKendaraan)
+            ->first();
+
+        return response()->json(['error' => false, 'msg' => 'Detail Kendaraan', 'data' => $data], $this->successStatus);
     }
 }
