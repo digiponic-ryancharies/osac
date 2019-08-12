@@ -82,8 +82,8 @@ class JasaController extends Controller
     public function durasiJasaList()
     {
         $data = DB::table('tb_durasi_jasa as dj')
-            ->join('tb_jasa as j', 'j.id', '=', 'hj.id_jasa')
-            ->join('tb_general as jk', 'jk.id', '=', 'hj.id_jenis_kendaraan')
+            ->join('tb_jasa as j', 'j.id', '=', 'dj.id_jasa')
+            ->join('tb_general as jk', 'jk.id', '=', 'dj.id_jenis_kendaraan')
             ->select('dj.id', 'j.keterangan as nama', 'jk.keterangan as jenis_kendaraan', 'dj.durasi')
             ->orderBy('j.id')
             ->orderBy('jk.id')

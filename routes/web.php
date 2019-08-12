@@ -85,9 +85,9 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'reservasi'], function () {
         Route::get('cabang', 'API\ReservasiController@cabangList');
-        Route::get('pelanggan/{email}', 'API\ReservasiController@reservasiPelanggan');
         Route::get('slots/{cabang}/{tgl}', 'API\ReservasiController@slotList');
-        Route::post('daftar', 'API\ReservasiController@daftar');
+        Route::post('tambah', 'API\ReservasiController@daftar');
+        Route::get('pelanggan/{id}', 'API\ReservasiController@reservasiPelanggan');
         Route::get('detail/{kodebooking}', 'API\ReservasiController@detail');
     });
 

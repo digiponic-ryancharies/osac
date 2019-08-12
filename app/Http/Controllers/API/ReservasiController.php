@@ -17,16 +17,6 @@ class ReservasiController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    function randomize($length = 6)
-    {
-        $characters = '123456789ABCDEFGHIJKLMNPQRSTUVWXYZ';
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, strlen($characters) - 1)];
-        }
-        return $randomString;
-    }
-
     function convertDate($data, $format)
     {
         if ($data == '-' || $data == null || $data == '') {
@@ -67,106 +57,34 @@ class ReservasiController extends Controller
         return $converted;
     }
 
-    public function jenisJasaList()
-    {
-        $data = DB::table('tbl_jenis_jasa')
-            ->select('ID_JENIS_JASA', 'NAMA_JENIS_JASA')
-            ->orderBy('ID_JENIS_JASA')
-            ->get();
-
-        return response()->json(['error' => false, 'msg' => 'Daftar Jenis Jasa', 'data' => $data], $this->successStatus);
-    }
-
-    public function hargaJasaList()
-    {
-        $data = DB::table('tbl_harga_jasa as hj')
-            ->join('tbl_jasa as j', 'j.ID_JASA', '=', 'hj.ID_JASA')
-            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'hj.ID_JENIS_KENDARAAN')
-            ->select('hj.ID_HARGA_JASA', 'j.NAMA_JASA', 'jk.KETERANGAN_JENIS_KENDARAAN', 'hj.NOMINAL_HARGA_JASA')
-            ->orderBy('hj.ID_HARGA_JASA')
-            ->get();
-
-        return response()->json(['error' => false, 'msg' => 'Daftar Harga Jasa', 'data' => $data], $this->successStatus);
-    }
-
-    public function durasiJasaList()
-    {
-        $data = DB::table('tbl_durasi_jasa as dj')
-            ->join('tbl_jasa as j', 'j.ID_JASA', '=', 'dj.ID_JASA')
-            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'dj.ID_JENIS_KENDARAAN')
-            ->select('dj.ID_DURASI', 'j.NAMA_JASA', 'jk.KETERANGAN_JENIS_KENDARAAN', 'dj.NOMINAL_DURASI')
-            ->orderBy('dj.ID_DURASI')
-            ->get();
-
-        return response()->json(['error' => false, 'msg' => 'Daftar Durasi Jasa', 'data' => $data], $this->successStatus);
-    }
-
-    public function jasaList($idJenisJasa)
-    {
-        $path = url('/');
-
-        if ($idJenisJasa == 0) {
-            $data = DB::table('tbl_jasa as j')
-                ->join('tbl_jenis_jasa as jj', 'jj.ID_JENIS_JASA', '=', 'j.ID_JENIS_JASA')
-                ->select('j.ID_JASA', 'j.KODE_JASA', 'j.NAMA_JASA', 'jj.ID_JENIS_JASA', 'j.GAMBAR', 'j.DESKRIPSI')
-                ->orderBy('jj.NAMA_JENIS_JASA')
-                ->get();
-        } else {
-            $data = DB::table('tbl_jasa as j')
-                ->join('tbl_jenis_jasa as jj', 'jj.ID_JENIS_JASA', '=', 'j.ID_JENIS_JASA')
-                ->select('j.ID_JASA', 'j.KODE_JASA', 'j.NAMA_JASA', 'jj.ID_JENIS_JASA', 'j.GAMBAR', 'j.DESKRIPSI')
-                ->where('jj.ID_JENIS_JASA', $idJenisJasa)
-                ->orderBy('jj.NAMA_JENIS_JASA')
-                ->get();
-        }
-
-        // grouping array
-        /*$result = array();
-        foreach ($data as $element) {
-            $result[] = (array)$element;
-        }
-        $result = collect($result)->groupBy('NAMA_JENIS_JASA');*/
-        $result = [];
-        foreach ($data as $value) {
-            if ($value->GAMBAR == null) {
-                $value->GAMBAR = $path . '/img/logo.png';
-            } else {
-                $value->GAMBAR = $path . '/' . $value->GAMBAR;
-            }
-
-            $result[] = $value;
-        }
-        return response()->json(['error' => false, 'msg' => 'Daftar Jasa', 'data' => $result], $this->successStatus);
-    }
-
     public function cabangList()
     {
         $data = DB::table('tb_cabang')
-            ->select('id', 'kode_cabang', 'nama_cabang', 'alamat', 'telfon')
+            ->select('id', 'kode_cabang', 'nama_cabang', 'alamat', 'telepon')
             ->get();
         return response()->json(['error' => false, 'msg' => 'Daftar Cabang', 'data' => $data], $this->successStatus);
     }
 
     public function slotList($cabang, $tgl)
     {
+        /*if ($tgl < date("Y-m-d")){
+            return response()->json(['error' => false, 'msg' => 'Daftar Waktu Booking', 'data' => null], $this->successStatus);
+        }*/
+
         // get time configuration from setting
         $getTime = DB::table('tb_cabang')
             ->where('id', $cabang)
             ->first();
-        /*$getInterval = DB::table('cms_settings')
-            ->where('name', 'interval_jasa')
-            ->first();*/
 
         // get booked time
-        $getServiceTime = DB::table('tbl_booking_jasa')
-            ->where('TANGGAL_BOOKING', '>', $tgl . " 02:00:00")
-            ->where('TANGGAL_BOOKING', '<', $tgl . " 22:00:00")
-            ->select('TANGGAL_BOOKING', 'TOTAL_SLOT')
+        $getServiceTime = DB::table('tb_penjualan_jasa')
+            ->where('tanggal', '>', $tgl . " 02:00:00")
+            ->where('tanggal', '<', $tgl . " 22:00:00")
+            ->select('tanggal', 'total_slot')
             ->get();
 
         $slots = [];
         $time = $getTime->jam_buka;
-//        $time2 = $getInterval->content;
         $time2 = $getTime->interval_jasa;
         $secs = strtotime($time2) - strtotime("00:00");
         $close = $getTime->jam_tutup;
@@ -174,11 +92,11 @@ class ReservasiController extends Controller
 
         // add booked time to break
         foreach ($getServiceTime as $gs) {
-            $temp = date("H:i", strtotime($gs->TANGGAL_BOOKING));
+            $temp = date("H:i", strtotime($gs->tanggal));
             $break[] = $temp;
             // if service time more than 1 slot then add finish time break
-            if ($gs->TOTAL_SLOT > 1) {
-                for ($i = 1; $i < $gs->TOTAL_SLOT; $i++) {
+            if ($gs->total_slot > 1) {
+                for ($i = 1; $i < $gs->total_slot; $i++) {
                     $temp = date("H:i", strtotime($temp) + $secs);
                     $break[] = $temp;
                 }
@@ -186,11 +104,19 @@ class ReservasiController extends Controller
         }
 
         // populating slot
-        $slots[] = $time;
+        if ($getTime->jam_buka > date("H:i") || $tgl > date("Y-m-d")) {
+            $slots[] = $time;
+        }
         while ($time < $close) {
             $time = date("H:i", strtotime($time) + $secs);
-            if (!in_array($time, $break)) {
-                $slots[] = $time;
+            if ($tgl > date("Y-m-d")) {
+                if (!in_array($time, $break)) {
+                    $slots[] = $time;
+                }
+            } else {
+                if (!in_array($time, $break) && $time > date("H:i")) {
+                    $slots[] = $time;
+                }
             }
         }
 
@@ -198,43 +124,25 @@ class ReservasiController extends Controller
 
     }
 
-    public function reservasiPelanggan($emailPelanggan)
+    public function reservasiPelanggan($idPelanggan)
     {
-        $booking = DB::table('tbl_booking_jasa as bj')
-            ->join('tb_cabang as c', 'c.id', '=', 'bj.ID_CABANG')
-            ->join('tb_general as g', 'g.id', '=', 'bj.STATUS_BOOKING')
-            ->select('bj.ID_BOOKING', 'bj.KODE_BOOKING', 'c.nama_cabang', 'bj.TANGGAL_BOOKING', 'bj.CATATAN_BOOKING', 'bj.NOPOL_KENDARAAN', 'bj.NAMA_KENDARAAN', 'bj.TOTAL_DURASI', 'bj.TOTAL', 'g.keterangan')
-            ->where('EMAIL_PELANGGAN', $emailPelanggan)
-            ->orderBy('TANGGAL_BOOKING', 'desc')
+        $booking = DB::table('tb_penjualan_jasa as pj')
+            ->join('tb_cabang as cb', 'cb.id', '=', 'pj.id_cabang')
+            ->join('tb_general as gn', 'gn.id', '=', 'pj.status_penjualan')
+            ->where('id_pelanggan', $idPelanggan)
+            ->select('pj.id', 'cb.nama_cabang', 'pj.kode', 'pj.tanggal', 'pj.nama_pelanggan', 'pj.merek_kendaraan', 'pj.nama_kendaraan', 'pj.nomor_polisi', 'pj.total', 'gn.keterangan as status')
             ->get();
 
-        // looping query result to array
-        $bookingArray = [];
-        foreach ($booking as $v) {
-            $bookingArray[] = (array)$v;
-        }
-
         $result = [];
-        // get booking detail for each data
-        foreach ($bookingArray as $r) {
-            $detailBooking = DB::table('tbl_booking_jasa_detail')
-                ->where('ID_BOOKING', $r['ID_BOOKING'])
+        foreach ($booking as $data) {
+            $detailBooking = DB::table('tb_penjualan_jasa_detail')
+                ->select('nama_jasa', 'harga')
+                ->where('id_penjualan_jasa', $data->id)
                 ->get();
-            $dBooking = [];
-            $jasa = [];
-            // make query result to array
-            foreach ($detailBooking as $db) {
-                $dBooking[] = (array)$db;
-            }
 
-            // add nama jasa to array
-            foreach ($dBooking as $db) {
-                $jasa[] = $db['NAMA_JASA'];
-            }
-            $r['TANGGAL_BOOKING'] = $this->convertDate($r['TANGGAL_BOOKING'], 'indo');
-            $r['JASA'] = implode(", ", $jasa);
-            // add fixed data to final array
-            $result[] = $r;
+            $data->tanggal = $this->convertDate($data->tanggal, 'indo');
+            $data->detail_jasa = $detailBooking;
+            $result[] = $data;
         }
 
         return response()->json(['error' => false, 'msg' => 'Daftar Booking Pelanggan', 'data' => $result], $this->successStatus);
@@ -244,12 +152,11 @@ class ReservasiController extends Controller
     {
         // validation setup
         $validator = Validator::make($request->all(), [
-            'id_kendaraan' => 'required',
-            'kode_jasa'    => 'required',
-            'catatan'      => '',
             'id_cabang'    => 'required',
             'tgl_booking'  => 'required',
             'jam_booking'  => 'required',
+            'id_kendaraan' => 'required',
+            'kode_jasa'    => 'required',
             'id_pelanggan' => 'required',
         ], [
             /*'required'       => 'The :attribute field is required.',
@@ -264,90 +171,113 @@ class ReservasiController extends Controller
         $input = $request->all();
 
         // selecting customer data
-        $customer = DB::table('tbl_pelanggan')
-            ->where('ID_PELANGGAN', $input['id_pelanggan'])
+        $customer = DB::table('tb_pelanggan')
+            ->where('id', $input['id_pelanggan'])
             ->first();
         $customer = (array)$customer;
         // selecting customer vehicle
-        $vehicle = DB::table('tbl_kendaraan as k')
-            ->join('tbl_jenis_kendaraan as jk', 'jk.ID_JENIS_KENDARAAN', '=', 'k.ID_JENIS_KENDARAAN')
-            ->select('k.NAMA_KENDARAAN', 'k.NOPOL_KENDARAAN', 'jk.KETERANGAN_JENIS_KENDARAAN')
-            ->where('ID_PELANGGAN', $input['id_pelanggan'])
-            ->where('ID_KENDARAAN', $input['id_kendaraan'])
+        $vehicle = DB::table('tb_pelanggan_kendaraan as k')
+            ->join('tb_merek_kendaraan as mk', 'mk.id', '=', 'k.id_merek_kendaraan')
+            ->join('tb_kendaraan as kd', 'kd.id', '=', 'k.id_kendaraan')
+            ->select('kd.id_jenis_kendaraan', 'k.id_merek_kendaraan', 'mk.keterangan as merk', 'k.id_kendaraan', 'kd.keterangan as tipe', 'k.nomor_polisi')
+            ->where('k.id_pelanggan', $input['id_pelanggan'])
+            ->where('k.id', $input['id_kendaraan'])
             ->first();
         $vehicle = (array)$vehicle;
 
         // looping data foreach jasa
+        $id_booking = DB::table('tb_penjualan_jasa')->max('id') + 1;
+        $kode = 'POSJS' . date('dmy') . '' . str_pad($id_booking, 5, 0, STR_PAD_LEFT);
+        $id_book_detail = DB::table('tb_penjualan_jasa_detail')->max('id') + 1;
         $kode_jasa = explode("&", $input['kode_jasa']);
         $batch = [];
-        $time = "00:00:00";
+        $durasi = "00:00:00";
         $total = 0;
-        $id_booking = DB::table('tbl_booking_jasa')->max('ID_BOOKING') + 1;
-//        $kode =  'POS'.date('dmy').''.str_pad($id_booking,5,0,STR_PAD_LEFT);
-        $kode = $this->randomize(6);
-        $id_book_detail = DB::table('tbl_booking_jasa_detail')->max('ID_BOOKING_DETAIL') + 1;
         for ($index = 0; $index < count($kode_jasa); $index++) {
             // selecting data from db
-            $jenisJasa = DB::table('tbl_jasa as j')
-                ->join('tbl_durasi_jasa as dj', 'dj.ID_JASA', '=', 'j.ID_JASA')
-                ->join('tbl_harga_jasa as hj', 'hj.ID_JASA', '=', 'j.ID_JASA')
-                ->select('j.KODE_JASA', 'j.NAMA_JASA', 'dj.NOMINAL_DURASI', 'hj.NOMINAL_HARGA_JASA')
-                ->where('j.KODE_JASA', $kode_jasa[$index])
+            $jasa = DB::table('tb_jasa as j')
+                ->join('tb_durasi_jasa as dj', 'dj.id_jasa', '=', 'j.id')
+                ->join('tb_harga_jasa as hj', 'hj.id_jasa', '=', 'j.id')
+                ->select('j.id', 'j.kode', 'j.keterangan', 'dj.durasi', 'hj.harga')
+                ->where('j.kode', $kode_jasa[$index])
+                ->where('dj.id_jenis_kendaraan', $vehicle['id_jenis_kendaraan'])
+                ->where('hj.id_jenis_kendaraan', $vehicle['id_jenis_kendaraan'])
                 ->first();
-            $jenisJasa = (array)$jenisJasa;
+            $jasa = (array)$jasa;
 
             // adding durasi
-            $time2 = $jenisJasa['NOMINAL_DURASI'];
+            $time2 = "00:" . $jasa['durasi'];
             $secs = strtotime($time2) - strtotime("00:00:00");
-            $time = date("H:i:s", strtotime($time) + $secs);
+            $durasi = date("H:i", strtotime($durasi) + $secs);
 
             // adding price
-            $total += $jenisJasa['NOMINAL_HARGA_JASA'];
+            $total += $jasa['harga'];
 
             // put into array for batch
             $batch[] = [
-                'ID_BOOKING_DETAIL' => $id_book_detail + $index,
-                'ID_BOOKING'        => $id_booking,
-                'KODE_JASA'         => $kode_jasa[$index],
-                'NAMA_JASA'         => $jenisJasa['NAMA_JASA'],
-                'HARGA_JASA'        => $jenisJasa['NOMINAL_HARGA_JASA'],
-                'DURASI_JASA'       => $jenisJasa['NOMINAL_DURASI'],
-
+                'id'                  => $id_book_detail + $index,
+                'id_penjualan_jasa'   => $id_booking,
+                'kode_penjualan_jasa' => $kode,
+                'id_jasa'             => $jasa['id'],
+                'nama_jasa'           => $jasa['keterangan'],
+                'harga'               => $jasa['harga'],
+                'durasi'              => $jasa['durasi'],
             ];
         }
 
-        DB::table('tbl_booking_jasa')->insert(
+        // hitung total slot
+        $getTime = DB::table('tb_cabang')
+            ->where('id', $input['id_cabang'])
+            ->first();
+
+        $pengerjaan = date("i", strtotime($durasi));
+        $interval = date("i", strtotime($getTime->interval_jasa));
+
+        DB::table('tb_penjualan_jasa')->insert(
             [
-                'ID_BOOKING'        => $id_booking,
-                'KODE_BOOKING'      => $kode,
-                'ID_CABANG'         => $input['id_cabang'],
-                'TANGGAL_BOOKING'   => $input['tgl_booking'] . ' ' . $input['jam_booking'],
-                'CATATAN_BOOKING'   => $input['catatan'],
-                'JENIS_KENDARAAN'   => $vehicle['KETERANGAN_JENIS_KENDARAAN'],
-                'NAMA_KENDARAAN'    => $vehicle['NAMA_KENDARAAN'],
-                'NOPOL_KENDARAAN'   => $vehicle['NOPOL_KENDARAAN'],
-                'NAMA_PELANGGAN'    => $customer['NAMA_PELANGGAN'],
-                'EMAIL_PELANGGAN'   => $customer['EMAIL_PELANGGAN'],
-                'TELEPON_PELANGGAN' => $customer['TELEPON_PELANGGAN'],
-                'TOTAL'             => $total,
-                'TOTAL_SLOT'        => count($kode_jasa),
-                'STATUS_BOOKING'    => 18,
-                'CREATED_AT'        => date("Y-m-d H:i:s"),
-                'CREATED_BY'        => 'api'
+                'id'                 => $id_booking,
+                'id_cabang'          => $input['id_cabang'],
+                'kode'               => $kode,
+                'tanggal'            => $input['tgl_booking'] . ' ' . $input['jam_booking'],
+                //                'CATATAN_BOOKING'   => $input['catatan'],
+                'id_pelanggan'       => $customer['id'],
+                'nama_pelanggan'     => $customer['nama'],
+                'id_merek_kendaraan' => $vehicle['id_merek_kendaraan'],
+                'merek_kendaraan'    => $vehicle['merk'],
+                'id_kendaraan'       => $vehicle['id_kendaraan'],
+                'nama_kendaraan'     => $vehicle['tipe'],
+                'nomor_polisi'       => $vehicle['nomor_polisi'],
+                'subtotal'           => $total,
+                'total'              => $total,
+                'total_slot'         => ceil($pengerjaan / $interval),
+                'status_penjualan'   => 28,
+                'created_at'         => date("Y-m-d H:i:s"),
+                'created_by'         => 'api'
             ]
         );
 
-        DB::table('tbl_booking_jasa_detail')->insert($batch);
+        DB::table('tb_penjualan_jasa_detail')->insert($batch);
 
         return response()->json(['error' => false, 'msg' => 'Reservasi Berhasil', 'data' => null], $this->successStatus);
     }
 
     public function detail($bookingcode)
     {
-        $data = DB::table('tbl_booking_jasa')
-            ->where('KODE_BOOKING', $bookingcode)
-            ->select('KODE_BOOKING', 'TOTAL')
+        $data = DB::table('tb_penjualan_jasa as pj')
+            ->join('tb_cabang as cb', 'cb.id', '=', 'pj.id_cabang')
+            ->join('tb_general as gn', 'gn.id', '=', 'pj.status_penjualan')
+            ->where('pj.kode', $bookingcode)
+            ->select('pj.id', 'cb.nama_cabang', 'pj.kode', 'pj.tanggal', 'pj.tanggal_masuk', 'pj.nama_pelanggan', 'pj.merek_kendaraan', 'pj.nama_kendaraan', 'pj.nomor_polisi', 'pj.total', 'gn.keterangan as status')
             ->first();
+
+        $detailBooking = DB::table('tb_penjualan_jasa_detail')
+            ->select('nama_jasa', 'harga')
+            ->where('id_penjualan_jasa', $data->id)
+            ->get();
+
+        $data->tanggal = $this->convertDate($data->tanggal, 'indo');
+        $data->tanggal_masuk = $this->convertDate($data->tanggal_masuk, 'indo');
+        $data->detail_jasa = $detailBooking;
 
         return response()->json(['error' => false, 'msg' => 'Detail Booking', 'data' => $data], $this->successStatus);
 
