@@ -30,13 +30,13 @@ class UserController extends Controller
      */
     public function login()
     {
-        $customer = DB::table('tbl_pelanggan')
-            ->select('ID_PELANGGAN', 'KODE_PELANGGAN', 'NAMA_PELANGGAN', 'EMAIL_PELANGGAN', 'PASSWORD_PELANGGAN', 'TELEPON_PELANGGAN', 'CREATED_AT')
-            ->where('EMAIL_PELANGGAN', request('email'))
+        $customer = DB::table('tb_pelanggan')
+            ->select('id', 'kode', 'nama', 'email', 'password', 'telepon', 'created_at')
+            ->where('email', request('email'))
             ->first();
         $customer = (array)$customer;
-        if (password_verify(request('password'), $customer['PASSWORD_PELANGGAN'])) {
-            session()->put('id_pelanggan', $customer['ID_PELANGGAN']);
+        if (password_verify(request('password'), $customer['password'])) {
+            session()->put('id_pelanggan', $customer['id']);
             return response()->json(['error' => false, 'msg' => 'Login berhasil', 'data' => $customer], $this->successStatus);
         } else {
             return response()->json(['error' => true, 'msg' => 'Username / Password salah', 'data' => 0], 401);
@@ -48,9 +48,9 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama'                  => 'required|min:4',
-            'email'                 => 'required|email|unique:tbl_pelanggan,EMAIL_PELANGGAN',
+            'email'                 => 'required|email|unique:tb_pelanggan,email',
             'telepon'               => 'required|digits_between:10,12',
-            'nama_kendaraan'        => 'required',
+            'jenis'        => 'required',
             'warna'                 => 'required',
             'no_polisi'             => 'required|regex:/^([A-Za-z]{1,3})+(\s)+([0-9]{1,4})+(\s)+([A-Za-z]{0,3})$/i',
             'no_rangka'             => 'max:17',
@@ -73,35 +73,34 @@ class UserController extends Controller
 
         $input = $request->all();
 
-        $id = DB::table('tbl_pelanggan')->max('ID_PELANGGAN') + 1;
-        $kode = $this->randomize();
-        DB::table('tbl_pelanggan')->insert(
+        $id = DB::table('tb_pelanggan')->max('id') + 1;
+        $kode = 'PLNGN/' . str_pad($id, 4, 0, STR_PAD_LEFT);
+        DB::table('tb_pelanggan')->insert(
             [
-                'ID_PELANGGAN'       => $id,
-                'KODE_PELANGGAN'     => $kode,
-                'NAMA_PELANGGAN'     => $input['nama'],
-                'EMAIL_PELANGGAN'    => $input['email'],
-                'PASSWORD_PELANGGAN' => bcrypt($input['password']),
-                'TELEPON_PELANGGAN'  => $input['telepon'],
-                'CREATED_AT'         => date("Y-m-d H:i:s"),
-                'CREATED_BY'         => 'api'
+                'id'         => $id,
+                'kode'       => $kode,
+                'nama'       => $input['nama'],
+                'email'      => $input['email'],
+                'password'   => bcrypt($input['password']),
+                'telepon'    => $input['telepon'],
+                'created_at' => date("Y-m-d H:i:s"),
+                'created_by' => 'api'
             ]
         );
 
-        DB::table('tbl_kendaraan_pelanggan')->insert(
+        DB::table('tb_pelanggan_kendaraan')->insert(
             [
-                'ID_KENDARAAN'        => DB::table('tbl_kendaraan_pelanggan')->max('ID_KENDARAAN') + 1,
-                'ID_PELANGGAN'        => $id,
-                'ID_MERK'             => $input['merk'],
-                'ID_JENIS_KENDARAAN'  => $input['jenis'],
-                'NAMA_KENDARAAN'      => $input['nama_kendaraan'],
-                'WARNA_KENDARAAN'     => $input['warna'],
-                'NOPOL_KENDARAAN'     => strtoupper($input['no_polisi']),
-                'TAHUN_KENDARAAN'     => $input['tahun_kendaraan'],
-                'NO_RANGKA_KENDARAAN' => $input['no_rangka'],
-                'NO_MESIN_KENDARAAN'  => $input['no_mesin'],
-                'CREATED_AT'          => date("Y-m-d H:i:s"),
-                'CREATED_BY'          => 'api'
+                'id'                 => DB::table('tb_pelanggan_kendaraan')->max('id') + 1,
+                'id_pelanggan'       => $id,
+                'id_merek_kendaraan' => $input['merk'],
+                'id_kendaraan'       => $input['jenis'],
+                'warna'              => $input['warna'],
+                'nomor_polisi'       => strtoupper($input['no_polisi']),
+                'tahun'              => $input['tahun_kendaraan'],
+                'nomor_rangka'       => $input['no_rangka'],
+                'nomor_mesin'        => $input['no_mesin'],
+                'created_at'         => date("Y-m-d H:i:s"),
+                'created_by'         => 'api'
             ]
         );
         return response()->json(['error' => false, 'msg' => 'Pendaftaran Berhasil', 'data' => 0], $this->successStatus);
@@ -126,22 +125,22 @@ class UserController extends Controller
         }
 
         $input = $request->all();
-        $customer = DB::table('tbl_pelanggan')
-            ->where('ID_PELANGGAN', $input['id_pelanggan'])
+        $customer = DB::table('tb_pelanggan')
+            ->where('id', $input['id_pelanggan'])
             ->first();
         $customer = (array)$customer;
 
-        if (password_verify($input['password_lama'], $customer['PASSWORD_PELANGGAN'])) {
+        if (password_verify($input['password_lama'], $customer['password'])) {
             $data = [
-                'NAMA_PELANGGAN'     => $input['nama'],
-                'PASSWORD_PELANGGAN' => bcrypt($input['password']),
-                'TELEPON_PELANGGAN'  => $input['telepon'],
-                'UPDATED_AT'         => date("Y-m-d H:i:s"),
-                'UPDATED_BY'         => 'api'
+                'nama'       => $input['nama'],
+                'password'   => bcrypt($input['password']),
+                'telepon'    => $input['telepon'],
+                'updated_at' => date("Y-m-d H:i:s"),
+                'updated_by' => 'api'
             ];
 
-            DB::table('tbl_pelanggan')
-                ->where('ID_PELANGGAN', $input['id_pelanggan'])
+            DB::table('tb_pelanggan')
+                ->where('id', $input['id_pelanggan'])
                 ->update($data);
 
             return response()->json(['error' => false, 'msg' => 'Profile Berhasil Diubah', 'data' => null], $this->successStatus);
@@ -152,8 +151,8 @@ class UserController extends Controller
 
     public function detail($id_pelanggan)
     {
-        $data = DB::table('tbl_pelanggan')
-            ->where('ID_PELANGGAN', $id_pelanggan)
+        $data = DB::table('tb_pelanggan')
+            ->where('id', $id_pelanggan)
             ->first();
         if ($data) {
             return response()->json(['error' => false, 'msg' => null, 'data' => $data], $this->successStatus);
