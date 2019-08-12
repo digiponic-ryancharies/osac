@@ -76,11 +76,14 @@ Route::group(['prefix' => 'api'], function () {
         Route::delete('hapus/{id}', 'API\KendaraanController@hapus');
     });
 
+    Route::group(['prefix' => 'jasa'], function () {
+        Route::get('jenis', 'API\JasaController@jenisJasaList');
+        Route::get('daftar/{id_jenis}', 'API\JasaController@jasaList');
+        Route::get('harga', 'API\JasaController@hargaJasaList');
+        Route::get('durasi', 'API\JasaController@durasiJasaList');
+    });
+
     Route::group(['prefix' => 'reservasi'], function () {
-        Route::get('jenis-jasa', 'API\ReservasiController@jenisJasaList');
-        Route::get('jasa-by-jenis/{id}', 'API\ReservasiController@jasaList');
-        Route::get('harga-jasa', 'API\ReservasiController@hargaJasaList');
-        Route::get('durasi-jasa', 'API\ReservasiController@durasiJasaList');
         Route::get('cabang', 'API\ReservasiController@cabangList');
         Route::get('pelanggan/{email}', 'API\ReservasiController@reservasiPelanggan');
         Route::get('slots/{cabang}/{tgl}', 'API\ReservasiController@slotList');
