@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 23/05/2019 13:36:39
+ Date: 08/08/2019 15:11:03
 */
 
 SET NAMES utf8mb4;
@@ -146,7 +146,7 @@ CREATE TABLE `cms_logs`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2950 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3066 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_logs
@@ -3100,6 +3100,122 @@ INSERT INTO `cms_logs` VALUES (2946, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64
 INSERT INTO `cms_logs` VALUES (2947, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/add-save', 'Tambah data baru  pada Penjualan POS', '', 1, '2019-05-22 11:27:34', NULL);
 INSERT INTO `cms_logs` VALUES (2948, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-05-22 15:00:37', NULL);
 INSERT INTO `cms_logs` VALUES (2949, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-05-23 08:30:19', NULL);
+INSERT INTO `cms_logs` VALUES (2950, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-08-01 09:44:35', NULL);
+INSERT INTO `cms_logs` VALUES (2951, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/menu_management/edit-save/90', 'Memperbaharui data POS Produk pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>name</td><td>Penjualan POS</td><td>POS Produk</td></tr><tr><td>color</td><td></td><td>normal</td></tr><tr><td>sorting</td><td>23</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-01 09:45:53', NULL);
+INSERT INTO `cms_logs` VALUES (2952, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_tipe/add-save', 'Tambah data baru  pada Tipe', '', 1, '2019-08-01 13:38:33', NULL);
+INSERT INTO `cms_logs` VALUES (2953, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-01 13:38:57', NULL);
+INSERT INTO `cms_logs` VALUES (2954, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-01 13:39:03', NULL);
+INSERT INTO `cms_logs` VALUES (2955, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-01 13:39:12', NULL);
+INSERT INTO `cms_logs` VALUES (2956, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-01 13:39:18', NULL);
+INSERT INTO `cms_logs` VALUES (2957, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-01 13:39:34', NULL);
+INSERT INTO `cms_logs` VALUES (2958, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-01 13:39:39', NULL);
+INSERT INTO `cms_logs` VALUES (2959, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-01 13:39:48', NULL);
+INSERT INTO `cms_logs` VALUES (2960, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Andi Soraya pada Karyawan', '', 1, '2019-08-01 13:55:35', NULL);
+INSERT INTO `cms_logs` VALUES (2961, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Andi Soraya pada Karyawan', '', 1, '2019-08-01 13:56:34', NULL);
+INSERT INTO `cms_logs` VALUES (2962, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Andi Soraya pada Karyawan', '', 1, '2019-08-01 13:56:47', NULL);
+INSERT INTO `cms_logs` VALUES (2963, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Andi Soraya pada Karyawan', '', 1, '2019-08-01 13:57:05', NULL);
+INSERT INTO `cms_logs` VALUES (2964, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/action-selected', 'Menghapus data 1,2,3,4 pada Karyawan', '', 1, '2019-08-01 13:57:14', NULL);
+INSERT INTO `cms_logs` VALUES (2965, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Andi Soraya pada Karyawan', '', 1, '2019-08-01 13:58:18', NULL);
+INSERT INTO `cms_logs` VALUES (2966, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Sabari pada Karyawan', '', 1, '2019-08-01 13:59:10', NULL);
+INSERT INTO `cms_logs` VALUES (2967, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Rohman pada Karyawan', '', 1, '2019-08-01 14:00:12', NULL);
+INSERT INTO `cms_logs` VALUES (2968, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/tb_karyawan/add-save', 'Tambah data baru Sari pada Karyawan', '', 1, '2019-08-01 14:01:56', NULL);
+INSERT INTO `cms_logs` VALUES (2969, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/menu_management/edit-save/92', 'Memperbaharui data Insentif pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>color</td><td></td><td>normal</td></tr><tr><td>sorting</td><td>25</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-01 14:22:16', NULL);
+INSERT INTO `cms_logs` VALUES (2970, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/menu_management/edit-save/82', 'Memperbaharui data Cabang pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>sorting</td><td>3</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-01 14:22:26', NULL);
+INSERT INTO `cms_logs` VALUES (2971, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-08-06 08:15:34', NULL);
+INSERT INTO `cms_logs` VALUES (2972, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/menu_management/edit-save/84', 'Memperbaharui data Jasa pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>color</td><td></td><td>normal</td></tr><tr><td>icon</td><td>fa fa-heart</td><td>fa fa-qrcode</td></tr><tr><td>parent_id</td><td>42</td><td></td></tr><tr><td>sorting</td><td>5</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 11:35:06', NULL);
+INSERT INTO `cms_logs` VALUES (2973, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/menu_management/edit-save/40', 'Memperbaharui data Produk pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>icon</td><td>fa fa-th-large</td><td>fa fa-barcode</td></tr><tr><td>parent_id</td><td>42</td><td></td></tr><tr><td>sorting</td><td>4</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 11:35:16', NULL);
+INSERT INTO `cms_logs` VALUES (2974, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>subtotal</td><td>367000</td><td>73400</td></tr><tr><td>total</td><td>357000</td><td>63400</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>updated_by</td><td></td><td>Super Admin</td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 13:25:16', NULL);
+INSERT INTO `cms_logs` VALUES (2975, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>subtotal</td><td>73400</td><td>110100</td></tr><tr><td>total</td><td>63400</td><td>100100</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 13:26:20', NULL);
+INSERT INTO `cms_logs` VALUES (2976, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>subtotal</td><td>110100</td><td>36700</td></tr><tr><td>total</td><td>100100</td><td>26700</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 13:29:46', NULL);
+INSERT INTO `cms_logs` VALUES (2977, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>subtotal</td><td>36700</td><td>386700</td></tr><tr><td>total</td><td>26700</td><td>376700</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 13:30:14', NULL);
+INSERT INTO `cms_logs` VALUES (2978, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>subtotal</td><td>386700</td><td>350000</td></tr><tr><td>total</td><td>376700</td><td>340000</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 13:30:29', NULL);
+INSERT INTO `cms_logs` VALUES (2979, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 13:37:06', NULL);
+INSERT INTO `cms_logs` VALUES (2980, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>subtotal</td><td>350000</td><td>700000</td></tr><tr><td>total</td><td>340000</td><td>690000</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 13:37:23', NULL);
+INSERT INTO `cms_logs` VALUES (2981, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 14:00:19', NULL);
+INSERT INTO `cms_logs` VALUES (2982, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>subtotal</td><td>700000</td><td>350000</td></tr><tr><td>total</td><td>690000</td><td>340000</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 14:05:35', NULL);
+INSERT INTO `cms_logs` VALUES (2983, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/2', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-05-22 11:28:01</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>by Sistem POS</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 14:13:14', NULL);
+INSERT INTO `cms_logs` VALUES (2984, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/add-save', 'Tambah data baru  pada POS Produk', '', 1, '2019-08-06 14:14:28', NULL);
+INSERT INTO `cms_logs` VALUES (2985, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/1', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-08-06 14:14:28</td><td></td></tr><tr><td>subtotal</td><td>367000</td><td>734000</td></tr><tr><td>total</td><td>367000</td><td>734000</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>updated_by</td><td></td><td>Super Admin</td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 14:14:59', NULL);
+INSERT INTO `cms_logs` VALUES (2986, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/1', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-08-06 14:14:28</td><td></td></tr><tr><td>subtotal</td><td>734000</td><td>367000</td></tr><tr><td>total</td><td>734000</td><td>367000</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 14:15:48', NULL);
+INSERT INTO `cms_logs` VALUES (2987, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/edit-save/1', 'Memperbaharui data  pada POS Produk', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>tanggal</td><td>2019-08-06 14:14:28</td><td></td></tr><tr><td>subtotal</td><td>367000</td><td>682000</td></tr><tr><td>total</td><td>367000</td><td>682000</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-06 14:19:10', NULL);
+INSERT INTO `cms_logs` VALUES (2988, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/settings/add-save', 'Tambah data baru printer pada Settings', '', 1, '2019-08-06 15:12:29', NULL);
+INSERT INTO `cms_logs` VALUES (2989, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_pos/add-save', 'Tambah data baru  pada POS Produk', '', 1, '2019-08-06 16:37:24', NULL);
+INSERT INTO `cms_logs` VALUES (2990, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/settings/add-save', 'Tambah data baru printer pada Settings', '', 1, '2019-08-06 16:49:59', NULL);
+INSERT INTO `cms_logs` VALUES (2991, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-08-07 08:11:06', NULL);
+INSERT INTO `cms_logs` VALUES (2992, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101 Firefox/68.0', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-08-07 09:14:35', NULL);
+INSERT INTO `cms_logs` VALUES (2993, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-08-07 10:40:25', NULL);
+INSERT INTO `cms_logs` VALUES (2994, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/logout', 'super keluar', '', 1, '2019-08-07 11:25:22', NULL);
+INSERT INTO `cms_logs` VALUES (2995, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-08-07 11:25:23', NULL);
+INSERT INTO `cms_logs` VALUES (2996, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'super login dengan IP Address ::1', '', 1, '2019-08-07 11:27:25', NULL);
+INSERT INTO `cms_logs` VALUES (2997, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 1, '2019-08-07 11:36:27', NULL);
+INSERT INTO `cms_logs` VALUES (2998, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 1, '2019-08-07 11:37:36', NULL);
+INSERT INTO `cms_logs` VALUES (2999, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 1, '2019-08-07 11:47:33', NULL);
+INSERT INTO `cms_logs` VALUES (3000, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 1, '2019-08-07 11:57:49', NULL);
+INSERT INTO `cms_logs` VALUES (3001, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/edit-save/5', 'Memperbaharui data  pada POS Jasa', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>id_pelanggan</td><td></td><td></td></tr><tr><td>nama_pelanggan</td><td>Walk In Order</td><td></td></tr><tr><td>merek_kendaraan</td><td>DAIHATSU</td><td></td></tr><tr><td>nama_kendaraan</td><td>AYLA</td><td></td></tr><tr><td>nomor_polisi</td><td></td><td></td></tr><tr><td>total_durasi</td><td></td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>updated_by</td><td></td><td>Super Admin</td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-07 12:21:27', NULL);
+INSERT INTO `cms_logs` VALUES (3002, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/edit-save/5', 'Memperbaharui data  pada POS Jasa', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>id_pelanggan</td><td></td><td></td></tr><tr><td>nama_pelanggan</td><td>Walk In Order</td><td></td></tr><tr><td>merek_kendaraan</td><td>DAIHATSU</td><td></td></tr><tr><td>nama_kendaraan</td><td>AYLA</td><td></td></tr><tr><td>nomor_polisi</td><td></td><td></td></tr><tr><td>total_durasi</td><td></td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-07 12:25:17', NULL);
+INSERT INTO `cms_logs` VALUES (3003, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/edit-save/5', 'Memperbaharui data  pada POS Jasa', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>id_pelanggan</td><td></td><td></td></tr><tr><td>nama_pelanggan</td><td>Walk In Order</td><td></td></tr><tr><td>merek_kendaraan</td><td>DAIHATSU</td><td></td></tr><tr><td>nama_kendaraan</td><td>AYLA</td><td></td></tr><tr><td>nomor_polisi</td><td></td><td></td></tr><tr><td>subtotal</td><td>50000</td><td>100000</td></tr><tr><td>total</td><td>50000</td><td>100000</td></tr><tr><td>total_durasi</td><td></td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-07 12:25:41', NULL);
+INSERT INTO `cms_logs` VALUES (3004, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 1, '2019-08-07 12:27:05', NULL);
+INSERT INTO `cms_logs` VALUES (3005, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_tipe/add-save', 'Tambah data baru  pada Tipe', '', 1, '2019-08-07 14:00:50', NULL);
+INSERT INTO `cms_logs` VALUES (3006, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-07 14:01:11', NULL);
+INSERT INTO `cms_logs` VALUES (3007, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-07 14:01:14', NULL);
+INSERT INTO `cms_logs` VALUES (3008, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-07 14:01:21', NULL);
+INSERT INTO `cms_logs` VALUES (3009, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 1, '2019-08-07 14:01:26', NULL);
+INSERT INTO `cms_logs` VALUES (3010, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/edit-save/28', 'Memperbaharui data  pada General', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>keterangan</td><td>BOOKINF</td><td>BOOKING</td></tr></tbody></table>', 1, '2019-08-07 14:01:32', NULL);
+INSERT INTO `cms_logs` VALUES (3011, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/menu_management/edit-save/82', 'Memperbaharui data Cabang pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>sorting</td><td>3</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-07 14:19:27', NULL);
+INSERT INTO `cms_logs` VALUES (3012, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/add-save', 'Tambah data baru Cabang 1 pada Cabang', '', 1, '2019-08-07 14:37:41', NULL);
+INSERT INTO `cms_logs` VALUES (3013, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/0', 'Memperbaharui data Cabang 1 pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>telepon</td><td></td><td>12345678</td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-07 14:39:59', NULL);
+INSERT INTO `cms_logs` VALUES (3014, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/users/edit-save/1', 'Memperbaharui data Super Admin pada Users', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>photo</td><td></td><td></td></tr><tr><td>password</td><td>$2y$10$bONenf1lQ/FA7xHbPqSJg.7m5k/5v/T2vSlQ5Zua6CJITosbNCoeC</td><td>$2y$10$BeqbujOf/AvcUZ5uME2vduKi0GZAYMAmGtgh1.vRij4bzv3F6tToa</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>status</td><td>Active</td><td></td></tr><tr><td>id_cabang</td><td></td><td>0</td></tr></tbody></table>', 1, '2019-08-07 14:44:02', NULL);
+INSERT INTO `cms_logs` VALUES (3015, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/users/edit-save/1', 'Memperbaharui data Super Admin pada Users', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>photo</td><td></td><td></td></tr><tr><td>password</td><td>$2y$10$BeqbujOf/AvcUZ5uME2vduKi0GZAYMAmGtgh1.vRij4bzv3F6tToa</td><td>$2y$10$8GWFc8rOhP2PxwfJ47EVW.AvHNuvVZHGDSXaaaOTX0MS/AyM5p0h2</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>status</td><td>Active</td><td></td></tr></tbody></table>', 1, '2019-08-07 14:44:35', NULL);
+INSERT INTO `cms_logs` VALUES (3016, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/menu_management/edit-save/82', 'Memperbaharui data Cabang pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>icon</td><td>fa fa-home</td><td>fa fa-folder-o</td></tr><tr><td>parent_id</td><td>42</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-08-07 14:46:46', NULL);
+INSERT INTO `cms_logs` VALUES (3017, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/add-save', 'Tambah data baru  pada Cabang', '', 1, '2019-08-07 14:50:11', NULL);
+INSERT INTO `cms_logs` VALUES (3018, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/users/add-save', 'Tambah data baru Administrator pada Users', '', 1, '2019-08-07 14:51:07', NULL);
+INSERT INTO `cms_logs` VALUES (3019, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/logout', 'super keluar', '', 1, '2019-08-07 14:51:31', NULL);
+INSERT INTO `cms_logs` VALUES (3020, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'admin login dengan IP Address ::1', '', 12, '2019-08-07 14:51:33', NULL);
+INSERT INTO `cms_logs` VALUES (3021, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/2', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>alamat</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/bmw.png</td></tr><tr><td>logo_struk</td><td></td><td></td></tr><tr><td>email</td><td></td><td></td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>id_provinsi</td><td></td><td></td></tr><tr><td>id_kota</td><td></td><td></td></tr><tr><td>id_kecamatan</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>updated_by</td><td></td><td>Administrator</td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:09:42', NULL);
+INSERT INTO `cms_logs` VALUES (3022, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 2 pada Cabang', '', 12, '2019-08-07 15:10:47', NULL);
+INSERT INTO `cms_logs` VALUES (3023, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/2', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>alamat</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/bmw.png</td></tr><tr><td>logo_struk</td><td></td><td></td></tr><tr><td>email</td><td></td><td></td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>id_provinsi</td><td></td><td></td></tr><tr><td>id_kota</td><td></td><td></td></tr><tr><td>id_kecamatan</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:15:28', NULL);
+INSERT INTO `cms_logs` VALUES (3024, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 2 pada Cabang', '', 12, '2019-08-07 15:28:45', NULL);
+INSERT INTO `cms_logs` VALUES (3025, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/2', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>alamat</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/bmw.png</td></tr><tr><td>logo_struk</td><td></td><td>uploads/12/2019-08/logo_struk.png</td></tr><tr><td>email</td><td></td><td></td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>id_provinsi</td><td></td><td></td></tr><tr><td>id_kota</td><td></td><td></td></tr><tr><td>id_kecamatan</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:28:50', NULL);
+INSERT INTO `cms_logs` VALUES (3026, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 2 pada Cabang', '', 12, '2019-08-07 15:30:14', NULL);
+INSERT INTO `cms_logs` VALUES (3027, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/2', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>alamat</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/bmw.png</td></tr><tr><td>logo_struk</td><td>uploads/12/2019-08/logo_struk.png</td><td>uploads/12/2019-08/logo_struk_uploads122019_08bmwpng.png</td></tr><tr><td>email</td><td></td><td></td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>id_provinsi</td><td></td><td></td></tr><tr><td>id_kota</td><td></td><td></td></tr><tr><td>id_kecamatan</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:30:31', NULL);
+INSERT INTO `cms_logs` VALUES (3028, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 2 pada Cabang', '', 12, '2019-08-07 15:30:52', NULL);
+INSERT INTO `cms_logs` VALUES (3029, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/2', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>alamat</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/bmw.png</td></tr><tr><td>logo_struk</td><td></td><td>uploads/12/2019-08/logo_struk_uploads122019_08bmwpng.png</td></tr><tr><td>email</td><td></td><td></td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>id_provinsi</td><td></td><td></td></tr><tr><td>id_kota</td><td></td><td></td></tr><tr><td>id_kecamatan</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:30:57', NULL);
+INSERT INTO `cms_logs` VALUES (3030, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 2 pada Cabang', '', 12, '2019-08-07 15:31:14', NULL);
+INSERT INTO `cms_logs` VALUES (3031, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/2', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>alamat</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/bmw.png</td></tr><tr><td>logo_struk</td><td>uploads/12/2019-08/logo_struk_uploads122019_08bmwpng.png</td><td>uploads/12/2019-08/logo_struk_cabang_2.png</td></tr><tr><td>email</td><td></td><td></td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>id_provinsi</td><td></td><td></td></tr><tr><td>id_kota</td><td></td><td></td></tr><tr><td>id_kecamatan</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:31:18', NULL);
+INSERT INTO `cms_logs` VALUES (3032, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 1 pada Cabang', '', 12, '2019-08-07 15:32:16', NULL);
+INSERT INTO `cms_logs` VALUES (3033, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/1', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/logo.png</td></tr><tr><td>logo_struk</td><td></td><td>uploads/12/2019-08/logo_struk_cabang_1.png</td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>created_by</td><td></td><td></td></tr><tr><td>updated_by</td><td></td><td>Administrator</td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:32:23', NULL);
+INSERT INTO `cms_logs` VALUES (3034, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 1 pada Cabang', '', 12, '2019-08-07 15:36:01', NULL);
+INSERT INTO `cms_logs` VALUES (3035, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/1', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/logo.png</td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>created_by</td><td></td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:36:07', NULL);
+INSERT INTO `cms_logs` VALUES (3036, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/delete-image', 'Menghapus gambar 2 pada Cabang', '', 12, '2019-08-07 15:36:31', NULL);
+INSERT INTO `cms_logs` VALUES (3037, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_cabang48/edit-save/2', 'Memperbaharui data  pada Cabang', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>alamat</td><td></td><td></td></tr><tr><td>logo</td><td></td><td>uploads/12/2019-08/mercedes_benz.png</td></tr><tr><td>email</td><td></td><td></td></tr><tr><td>pin</td><td></td><td></td></tr><tr><td>lang</td><td></td><td></td></tr><tr><td>latt</td><td></td><td></td></tr><tr><td>id_provinsi</td><td></td><td></td></tr><tr><td>id_kota</td><td></td><td></td></tr><tr><td>id_kecamatan</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-07 15:36:39', NULL);
+INSERT INTO `cms_logs` VALUES (3038, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/users/add-save', 'Tambah data baru Administrator CB Dua pada Users', '', 12, '2019-08-07 15:37:36', NULL);
+INSERT INTO `cms_logs` VALUES (3039, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/logout', 'admin keluar', '', 12, '2019-08-07 15:37:50', NULL);
+INSERT INTO `cms_logs` VALUES (3040, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'admin2 login dengan IP Address ::1', '', 13, '2019-08-07 15:37:52', NULL);
+INSERT INTO `cms_logs` VALUES (3041, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/logout', 'admin2 keluar', '', 13, '2019-08-07 15:38:29', NULL);
+INSERT INTO `cms_logs` VALUES (3042, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'admin login dengan IP Address ::1', '', 12, '2019-08-07 15:38:32', NULL);
+INSERT INTO `cms_logs` VALUES (3043, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 12, '2019-08-07 15:42:01', NULL);
+INSERT INTO `cms_logs` VALUES (3044, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 12, '2019-08-07 15:44:40', NULL);
+INSERT INTO `cms_logs` VALUES (3045, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 12, '2019-08-07 16:13:40', NULL);
+INSERT INTO `cms_logs` VALUES (3046, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'admin login dengan IP Address ::1', '', 12, '2019-08-08 09:18:01', NULL);
+INSERT INTO `cms_logs` VALUES (3047, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_tipe/edit-save/10', 'Memperbaharui data  pada Tipe', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>keterangan</td><td>Status</td><td>Status Penjualan</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>created_by</td><td>Super Admin</td><td></td></tr><tr><td>updated_by</td><td></td><td>Administrator</td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-08 10:45:07', NULL);
+INSERT INTO `cms_logs` VALUES (3048, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_tipe/add-save', 'Tambah data baru  pada Tipe', '', 12, '2019-08-08 10:45:19', NULL);
+INSERT INTO `cms_logs` VALUES (3049, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_tipe/add-save', 'Tambah data baru  pada Tipe', '', 12, '2019-08-08 10:45:28', NULL);
+INSERT INTO `cms_logs` VALUES (3050, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 10:45:38', NULL);
+INSERT INTO `cms_logs` VALUES (3051, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 10:45:44', NULL);
+INSERT INTO `cms_logs` VALUES (3052, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_tipe/add-save', 'Tambah data baru  pada Tipe', '', 12, '2019-08-08 11:16:12', NULL);
+INSERT INTO `cms_logs` VALUES (3053, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 11:16:22', NULL);
+INSERT INTO `cms_logs` VALUES (3054, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 11:16:29', NULL);
+INSERT INTO `cms_logs` VALUES (3055, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 11:16:32', NULL);
+INSERT INTO `cms_logs` VALUES (3056, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 11:16:34', NULL);
+INSERT INTO `cms_logs` VALUES (3057, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_tipe/edit-save/13', 'Memperbaharui data  pada Tipe', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>keterangan</td><td>Daftar Bank</td><td>Merchant Pembayaran</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>updated_by</td><td></td><td>Administrator</td></tr><tr><td>deleted_by</td><td></td><td></td></tr></tbody></table>', 12, '2019-08-08 11:16:52', NULL);
+INSERT INTO `cms_logs` VALUES (3058, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 12, '2019-08-08 11:40:22', NULL);
+INSERT INTO `cms_logs` VALUES (3059, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/add-save', 'Tambah data baru  pada POS Jasa', '', 12, '2019-08-08 11:40:50', NULL);
+INSERT INTO `cms_logs` VALUES (3060, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_tipe/add-save', 'Tambah data baru  pada Tipe', '', 12, '2019-08-08 11:41:43', NULL);
+INSERT INTO `cms_logs` VALUES (3061, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 11:42:05', NULL);
+INSERT INTO `cms_logs` VALUES (3062, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_general/add-save', 'Tambah data baru  pada General', '', 12, '2019-08-08 11:42:09', NULL);
+INSERT INTO `cms_logs` VALUES (3063, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/edit-save/11', 'Memperbaharui data  pada POS Jasa', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>id_cabang</td><td>1</td><td></td></tr><tr><td>id_pelanggan</td><td></td><td></td></tr><tr><td>nama_pelanggan</td><td>Walk In Order</td><td></td></tr><tr><td>merek_kendaraan</td><td>SUZUKI</td><td></td></tr><tr><td>nama_kendaraan</td><td>ERTIGA</td><td></td></tr><tr><td>nomor_polisi</td><td></td><td></td></tr><tr><td>total_durasi</td><td></td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>updated_by</td><td></td><td>Administrator</td></tr><tr><td>deleted_by</td><td></td><td></td></tr><tr><td>status_penjualan</td><td>27</td><td></td></tr></tbody></table>', 12, '2019-08-08 11:44:47', NULL);
+INSERT INTO `cms_logs` VALUES (3064, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/tb_penjualan_jasa/edit-save/10', 'Memperbaharui data  pada POS Jasa', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>id_cabang</td><td>1</td><td></td></tr><tr><td>nama_pelanggan</td><td>Walk In Order</td><td></td></tr><tr><td>merek_kendaraan</td><td>DAIHATSU</td><td></td></tr><tr><td>nama_kendaraan</td><td>AYLA</td><td></td></tr><tr><td>status_penjualan</td><td>27</td><td></td></tr><tr><td>status_pembayaran</td><td>25</td><td></td></tr></tbody></table>', 12, '2019-08-08 11:49:20', NULL);
+INSERT INTO `cms_logs` VALUES (3065, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36', 'http://localhost/digiponic/osac/public/admin/login', 'admin login dengan IP Address ::1', '', 12, '2019-08-08 13:55:30', NULL);
 
 -- ----------------------------
 -- Table structure for cms_menus
@@ -3121,40 +3237,41 @@ CREATE TABLE `cms_menus`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 92 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 93 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_menus
 -- ----------------------------
-INSERT INTO `cms_menus` VALUES (36, 'Karyawan', 'Route', 'AdminTbKaryawanControllerGetIndex', 'normal', 'fa fa-users', 42, 1, 0, 1, 5, '2019-02-09 12:47:43', '2019-03-21 09:54:27', NULL);
-INSERT INTO `cms_menus` VALUES (37, 'Tipe', 'Route', 'AdminTbTipeControllerGetIndex', 'normal', 'fa fa-gear', 42, 1, 0, 1, 1, '2019-02-09 13:05:59', '2019-03-21 09:54:11', NULL);
+INSERT INTO `cms_menus` VALUES (36, 'Karyawan', 'Route', 'AdminTbKaryawanControllerGetIndex', 'normal', 'fa fa-users', 42, 1, 0, 1, 7, '2019-02-09 12:47:43', '2019-03-21 09:54:27', NULL);
+INSERT INTO `cms_menus` VALUES (37, 'Tipe', 'Route', 'AdminTbTipeControllerGetIndex', 'normal', 'fa fa-gear', 42, 1, 0, 1, 3, '2019-02-09 13:05:59', '2019-03-21 09:54:11', NULL);
 INSERT INTO `cms_menus` VALUES (38, 'General', 'Route', 'AdminTbGeneralControllerGetIndex', 'normal', 'fa fa-users', 42, 0, 0, 1, 2, '2019-02-09 13:06:27', '2019-02-10 16:45:59', NULL);
 INSERT INTO `cms_menus` VALUES (39, 'absensi', 'Route', 'AdminTbAbsensiControllerGetIndex', 'normal', 'fa fa-users', 0, 0, 0, 1, 9, '2019-02-09 13:21:47', '2019-02-10 02:57:44', NULL);
-INSERT INTO `cms_menus` VALUES (40, 'Produk', 'Route', 'AdminTbProdukControllerGetIndex', 'normal', 'fa fa-th-large', 42, 1, 0, 1, 2, '2019-02-09 13:59:05', '2019-03-21 09:54:22', NULL);
+INSERT INTO `cms_menus` VALUES (40, 'Produk', 'Route', 'AdminTbProdukControllerGetIndex', 'normal', 'fa fa-barcode', 42, 1, 0, 1, 5, '2019-02-09 13:59:05', '2019-08-06 11:35:16', NULL);
 INSERT INTO `cms_menus` VALUES (41, 'Produk Detail', 'Route', 'AdminTbProdukDetailControllerGetIndex', 'normal', 'fa fa-users', 0, 0, 0, 1, 10, '2019-02-10 02:22:07', '2019-02-10 02:57:28', '2019-02-10 02:57:13');
-INSERT INTO `cms_menus` VALUES (42, 'Master', 'URL', '#', 'normal', 'fa fa-th', 0, 1, 0, 1, 5, '2019-02-10 02:59:30', '2019-03-21 09:54:06', NULL);
+INSERT INTO `cms_menus` VALUES (42, 'Master', 'URL', '#', 'normal', 'fa fa-th', 0, 1, 0, 1, 6, '2019-02-10 02:59:30', '2019-03-21 09:54:06', NULL);
 INSERT INTO `cms_menus` VALUES (43, 'Produk Stok', 'Route', 'AdminTbProdukStokControllerGetIndex', 'normal', 'fa fa-list', 0, 0, 0, 1, 11, '2019-02-10 03:30:39', '2019-02-10 11:00:14', NULL);
 INSERT INTO `cms_menus` VALUES (44, 'Pembelian', 'Route', 'AdminTbPembelianControllerGetIndex', 'normal', 'fa fa-money', 46, 1, 0, 1, 2, '2019-02-10 11:17:50', '2019-03-21 09:54:57', NULL);
 INSERT INTO `cms_menus` VALUES (45, 'Penjualan', 'Module', 'tb_penjualan', 'normal', 'fa fa-shopping-cart', 46, 1, 0, 1, 1, '2019-02-10 16:28:18', '2019-03-22 18:04:13', '2019-03-22 18:03:39');
-INSERT INTO `cms_menus` VALUES (46, 'Transaksi', 'URL', '#', 'normal', 'fa fa-tags', 0, 1, 0, 1, 4, '2019-02-10 16:38:47', '2019-03-21 09:54:45', NULL);
-INSERT INTO `cms_menus` VALUES (47, 'Area', 'Route', 'AdminTbProvinsiControllerGetIndex', 'normal', 'fa fa-flag', 42, 1, 0, 1, 6, '2019-02-10 16:59:53', '2019-03-21 09:54:33', NULL);
+INSERT INTO `cms_menus` VALUES (46, 'Transaksi', 'URL', '#', 'normal', 'fa fa-tags', 0, 1, 0, 1, 5, '2019-02-10 16:38:47', '2019-03-21 09:54:45', NULL);
+INSERT INTO `cms_menus` VALUES (47, 'Area', 'Route', 'AdminTbProvinsiControllerGetIndex', 'normal', 'fa fa-flag', 42, 1, 0, 1, 2, '2019-02-10 16:59:53', '2019-03-21 09:54:33', NULL);
 INSERT INTO `cms_menus` VALUES (48, 'Sub Area Satu', 'Route', 'AdminTbKotaControllerGetIndex', 'normal', 'fa fa-flag-o', 0, 0, 0, 1, 12, '2019-02-10 17:04:38', '2019-02-10 17:13:48', NULL);
 INSERT INTO `cms_menus` VALUES (49, 'Sub Area Dua', 'Route', 'AdminTbKecamatanControllerGetIndex', 'normal', 'fa fa-flag-o', 0, 0, 0, 1, 13, '2019-02-10 17:05:33', '2019-02-10 17:13:40', NULL);
 INSERT INTO `cms_menus` VALUES (51, 'General Detail', 'Route', 'AdminTbGeneralDetailControllerGetIndex', 'normal', 'fa fa-users', 0, 0, 0, 1, 14, '2019-02-10 20:22:13', '2019-02-10 20:43:14', NULL);
 INSERT INTO `cms_menus` VALUES (53, 'Proses', 'Module', 'tb_penjualan', 'normal', 'fa fa-envelope-o', 0, 0, 0, 1, 3, '2019-02-12 12:37:03', '2019-02-12 13:13:53', '2019-02-12 13:13:25');
 INSERT INTO `cms_menus` VALUES (55, 'Laporan', 'Module', 'tb_pembayaran', 'normal', 'fa fa-info', 0, 0, 0, 1, 7, '2019-02-12 15:58:30', '2019-02-15 08:50:04', NULL);
 INSERT INTO `cms_menus` VALUES (54, 'Halaman Utama', 'Statistic', 'statistic_builder/show/halaman-awal', 'normal', 'fa fa-home', 0, 1, 1, 1, 1, '2019-02-12 13:50:00', '2019-02-13 09:34:19', NULL);
-INSERT INTO `cms_menus` VALUES (87, 'Pelanggan', 'Route', 'AdminTbPelangganControllerGetIndex', NULL, 'fa fa-users', 0, 1, 0, 1, 20, '2019-05-21 08:28:11', NULL, NULL);
+INSERT INTO `cms_menus` VALUES (87, 'Pelanggan', 'Route', 'AdminTbPelangganControllerGetIndex', NULL, 'fa fa-users', 0, 1, 0, 1, 4, '2019-05-21 08:28:11', NULL, NULL);
 INSERT INTO `cms_menus` VALUES (88, 'Alamat Pelanggan', 'Route', 'AdminTbPelangganAlamatControllerGetIndex', 'normal', 'fa fa-home', 0, 0, 0, 1, 21, '2019-05-21 08:44:09', '2019-05-21 08:49:59', NULL);
 INSERT INTO `cms_menus` VALUES (81, 'Kendaraan', 'Route', 'AdminTbKendaraanControllerGetIndex', 'normal', 'fa fa-gear', 0, 0, 0, 1, 15, '2019-03-04 17:14:07', '2019-03-06 08:53:44', NULL);
-INSERT INTO `cms_menus` VALUES (82, 'Cabang', 'Route', 'AdminTbCabang48ControllerGetIndex', 'normal', 'fa fa-home', 0, 1, 0, 1, 3, '2019-04-08 15:05:21', '2019-04-10 09:06:19', NULL);
-INSERT INTO `cms_menus` VALUES (83, 'Merek Kendaraan', 'Route', 'AdminTbMerekKendaraanControllerGetIndex', NULL, 'fa fa-car', 42, 1, 0, 1, 3, '2019-05-20 17:43:17', NULL, NULL);
-INSERT INTO `cms_menus` VALUES (84, 'Jasa', 'Route', 'AdminTbJasaControllerGetIndex', NULL, 'fa fa-heart', 42, 1, 0, 1, 4, '2019-05-20 18:36:41', NULL, NULL);
+INSERT INTO `cms_menus` VALUES (82, 'Cabang', 'Route', 'AdminTbCabang48ControllerGetIndex', 'normal', 'fa fa-folder-o', 42, 1, 0, 1, 1, '2019-04-08 15:05:21', '2019-08-07 14:46:46', NULL);
+INSERT INTO `cms_menus` VALUES (83, 'Merek Kendaraan', 'Route', 'AdminTbMerekKendaraanControllerGetIndex', NULL, 'fa fa-car', 42, 1, 0, 1, 4, '2019-05-20 17:43:17', NULL, NULL);
+INSERT INTO `cms_menus` VALUES (84, 'Jasa', 'Route', 'AdminTbJasaControllerGetIndex', 'normal', 'fa fa-qrcode', 42, 1, 0, 1, 6, '2019-05-20 18:36:41', '2019-08-06 11:35:06', NULL);
 INSERT INTO `cms_menus` VALUES (85, 'Harga Jasa', 'Route', 'AdminTbHargaJasaControllerGetIndex', 'normal', 'fa fa-money', 0, 0, 0, 1, 18, '2019-05-20 18:49:49', '2019-05-20 19:22:48', '2019-05-20 19:22:28');
 INSERT INTO `cms_menus` VALUES (86, 'Durasi Jasa', 'Route', 'AdminTbDurasiJasaControllerGetIndex', 'normal', 'fa fa-clock-o', 0, 0, 0, 1, 19, '2019-05-20 19:14:36', '2019-05-20 19:22:39', NULL);
 INSERT INTO `cms_menus` VALUES (89, 'Kendaraan Pelanggan', 'Route', 'AdminTbPelangganKendaraanControllerGetIndex', 'normal', 'fa fa-car', 0, 0, 0, 1, 22, '2019-05-21 09:14:27', '2019-05-21 09:17:30', NULL);
-INSERT INTO `cms_menus` VALUES (90, 'Penjualan POS', 'Route', 'AdminTbPenjualanPosControllerGetIndex', NULL, 'fa fa-barcode', 0, 1, 0, 1, 23, '2019-05-21 12:42:43', NULL, NULL);
-INSERT INTO `cms_menus` VALUES (91, 'POS Jasa', 'Route', 'AdminTbPenjualanJasaControllerGetIndex', NULL, 'fa fa-qrcode', 0, 1, 0, 1, 24, '2019-05-23 08:31:49', NULL, NULL);
+INSERT INTO `cms_menus` VALUES (90, 'POS Produk', 'Route', 'AdminTbPenjualanPosControllerGetIndex', 'normal', 'fa fa-barcode', 0, 1, 0, 1, 2, '2019-05-21 12:42:43', '2019-08-01 09:45:53', NULL);
+INSERT INTO `cms_menus` VALUES (91, 'POS Jasa', 'Route', 'AdminTbPenjualanJasaControllerGetIndex', NULL, 'fa fa-qrcode', 0, 1, 0, 1, 3, '2019-05-23 08:31:49', NULL, NULL);
+INSERT INTO `cms_menus` VALUES (92, 'Insentif', 'Route', 'AdminTbInsentifControllerGetIndex', 'normal', 'fa fa-money', 0, 0, 0, 1, 25, '2019-08-01 14:06:14', '2019-08-01 14:22:16', NULL);
 
 -- ----------------------------
 -- Table structure for cms_menus_privileges
@@ -3165,7 +3282,7 @@ CREATE TABLE `cms_menus_privileges`  (
   `id_cms_menus` int(11) NULL DEFAULT NULL,
   `id_cms_privileges` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of cms_menus_privileges
@@ -3173,23 +3290,24 @@ CREATE TABLE `cms_menus_privileges`  (
 INSERT INTO `cms_menus_privileges` VALUES (1, 42, 1);
 INSERT INTO `cms_menus_privileges` VALUES (2, 37, 1);
 INSERT INTO `cms_menus_privileges` VALUES (19, 80, 1);
-INSERT INTO `cms_menus_privileges` VALUES (4, 40, 1);
+INSERT INTO `cms_menus_privileges` VALUES (32, 40, 1);
 INSERT INTO `cms_menus_privileges` VALUES (5, 36, 1);
 INSERT INTO `cms_menus_privileges` VALUES (6, 47, 1);
 INSERT INTO `cms_menus_privileges` VALUES (7, 56, 1);
 INSERT INTO `cms_menus_privileges` VALUES (8, 46, 1);
 INSERT INTO `cms_menus_privileges` VALUES (11, 45, 1);
 INSERT INTO `cms_menus_privileges` VALUES (10, 44, 1);
-INSERT INTO `cms_menus_privileges` VALUES (12, 82, 1);
+INSERT INTO `cms_menus_privileges` VALUES (34, 82, 1);
 INSERT INTO `cms_menus_privileges` VALUES (13, 83, 1);
-INSERT INTO `cms_menus_privileges` VALUES (14, 84, 1);
+INSERT INTO `cms_menus_privileges` VALUES (31, 84, 1);
 INSERT INTO `cms_menus_privileges` VALUES (18, 85, 1);
 INSERT INTO `cms_menus_privileges` VALUES (17, 86, 1);
 INSERT INTO `cms_menus_privileges` VALUES (20, 87, 1);
 INSERT INTO `cms_menus_privileges` VALUES (22, 88, 1);
 INSERT INTO `cms_menus_privileges` VALUES (24, 89, 1);
-INSERT INTO `cms_menus_privileges` VALUES (25, 90, 1);
+INSERT INTO `cms_menus_privileges` VALUES (27, 90, 1);
 INSERT INTO `cms_menus_privileges` VALUES (26, 91, 1);
+INSERT INTO `cms_menus_privileges` VALUES (29, 92, 1);
 
 -- ----------------------------
 -- Table structure for cms_moduls
@@ -3208,7 +3326,7 @@ CREATE TABLE `cms_moduls`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 58 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_moduls
@@ -3258,7 +3376,7 @@ INSERT INTO `cms_moduls` VALUES (44, 'Pembangun Statistik', 'fa fa-dashboard', '
 INSERT INTO `cms_moduls` VALUES (45, 'Pembangun Otomatis API', 'fa fa-cloud-download', 'api_generator', '', 'ApiCustomController', 1, 1, '2019-03-21 09:53:42', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (46, 'Catatan Akses Pengguna', 'fa fa-flag-o', 'logs', 'cms_logs', 'LogsController', 1, 1, '2019-03-21 09:53:42', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (47, 'Cabang', 'fa fa-glass', 'tb_cabang', 'tb_cabang', 'AdminTbCabangController', 0, 0, '2019-04-08 14:55:00', NULL, '2019-04-08 15:05:06');
-INSERT INTO `cms_moduls` VALUES (48, 'Cabang', 'fa fa-home', 'tb_cabang48', 'tb_cabang', 'AdminTbCabang48Controller', 0, 0, '2019-04-08 15:05:21', NULL, NULL);
+INSERT INTO `cms_moduls` VALUES (48, 'Cabang', 'fa fa-flag', 'tb_cabang48', 'tb_cabang', 'AdminTbCabang48Controller', 0, 0, '2019-04-08 15:05:21', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (49, 'Merek Kendaraan', 'fa fa-car', 'tb_merek_kendaraan', 'tb_merek_kendaraan', 'AdminTbMerekKendaraanController', 0, 0, '2019-05-20 17:43:17', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (50, 'Jasa', 'fa fa-heart', 'tb_jasa', 'tb_jasa', 'AdminTbJasaController', 0, 0, '2019-05-20 18:36:41', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (51, 'Harga Jasa', 'fa fa-money', 'tb_harga_jasa', 'tb_harga_jasa', 'AdminTbHargaJasaController', 0, 0, '2019-05-20 18:49:49', NULL, NULL);
@@ -3266,8 +3384,9 @@ INSERT INTO `cms_moduls` VALUES (52, 'Durasi Jasa', 'fa fa-clock-o', 'tb_durasi_
 INSERT INTO `cms_moduls` VALUES (53, 'Pelanggan', 'fa fa-users', 'tb_pelanggan', 'tb_pelanggan', 'AdminTbPelangganController', 0, 0, '2019-05-21 08:28:11', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (54, 'Alamat Pelanggan', 'fa fa-home', 'tb_pelanggan_alamat', 'tb_pelanggan_alamat', 'AdminTbPelangganAlamatController', 0, 0, '2019-05-21 08:44:09', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (55, 'Kendaraan Pelanggan', 'fa fa-car', 'tb_pelanggan_kendaraan', 'tb_pelanggan_kendaraan', 'AdminTbPelangganKendaraanController', 0, 0, '2019-05-21 09:14:27', NULL, NULL);
-INSERT INTO `cms_moduls` VALUES (56, 'Penjualan POS', 'fa fa-barcode', 'tb_penjualan_pos', 'tb_penjualan_pos', 'AdminTbPenjualanPosController', 0, 0, '2019-05-21 12:42:43', NULL, NULL);
+INSERT INTO `cms_moduls` VALUES (56, 'POS Produk', 'fa fa-barcode', 'tb_penjualan_pos', 'tb_penjualan_pos', 'AdminTbPenjualanPosController', 0, 0, '2019-05-21 12:42:43', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (57, 'POS Jasa', 'fa fa-qrcode', 'tb_penjualan_jasa', 'tb_penjualan_jasa', 'AdminTbPenjualanJasaController', 0, 0, '2019-05-23 08:31:49', NULL, NULL);
+INSERT INTO `cms_moduls` VALUES (58, 'Insentif', 'fa fa-money', 'tb_insentif', 'tb_insentif', 'AdminTbInsentifController', 0, 0, '2019-08-01 14:06:14', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for cms_notifications
@@ -3320,7 +3439,7 @@ CREATE TABLE `cms_privileges_roles`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 96 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 97 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of cms_privileges_roles
@@ -3383,6 +3502,7 @@ INSERT INTO `cms_privileges_roles` VALUES (92, 1, 1, 1, 1, 1, 1, 54, NULL, NULL)
 INSERT INTO `cms_privileges_roles` VALUES (93, 1, 1, 1, 1, 1, 1, 55, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (94, 1, 1, 1, 1, 1, 1, 56, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (95, 1, 1, 1, 1, 1, 1, 57, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (96, 1, 1, 1, 1, 1, 1, 58, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for cms_settings
@@ -3401,7 +3521,7 @@ CREATE TABLE `cms_settings`  (
   `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_settings
@@ -3420,10 +3540,12 @@ INSERT INTO `cms_settings` VALUES (11, 'default_paper_size', 'A4', 'text', NULL,
 INSERT INTO `cms_settings` VALUES (12, 'logo', 'uploads/2019-04/22b64d4b7c634e387f1b404770052eca.png', 'upload_image', NULL, NULL, '2018-04-02 02:02:34', NULL, 'Application Setting', 'Logo', NULL);
 INSERT INTO `cms_settings` VALUES (13, 'favicon', 'uploads/2019-04/00dbf286174002b121894d7bdf692e5d.png', 'upload_image', NULL, NULL, '2018-04-02 02:02:34', NULL, 'Application Setting', 'Favicon', NULL);
 INSERT INTO `cms_settings` VALUES (14, 'api_debug_mode', 'true', 'select', 'true,false', NULL, '2018-04-02 02:02:34', NULL, 'Application Setting', 'API Debug Mode', NULL);
-INSERT INTO `cms_settings` VALUES (15, 'google_api_key', '', 'text', NULL, NULL, '2018-04-02 02:02:34', NULL, 'Application Setting', 'Google API Key', NULL);
+INSERT INTO `cms_settings` VALUES (15, 'google_api_key', 'AIzaSyCvDIdsn5RdvVD-PKg3E2DldFb66seb4Lg', 'text', NULL, NULL, '2018-04-02 02:02:34', NULL, 'Application Setting', 'Google API Key', NULL);
 INSERT INTO `cms_settings` VALUES (16, 'google_fcm_key', '', 'text', NULL, NULL, '2018-04-02 02:02:34', NULL, 'Application Setting', 'Google FCM Key', NULL);
 INSERT INTO `cms_settings` VALUES (17, 'developer', 'DIGIPONIC', 'text', 'Mitra Digital Teknologi', '', '2018-04-03 09:51:07', NULL, 'Application Setting', 'Developer', '2018-04-03 09:55:16');
 INSERT INTO `cms_settings` VALUES (18, 'lokasi_penyimpanan', 'http://app.digiponic.co.id/osac/public', 'text', '', 'lokasi penyimpanan gambar', '2019-03-06 08:47:39', NULL, 'Application Setting', 'Lokasi Penyimpanan', NULL);
+INSERT INTO `cms_settings` VALUES (19, 'printer', 'GP-5830', 'text', NULL, 'Nama printer thermal', '2019-08-06 15:12:29', NULL, 'Application Setting', 'Printer', NULL);
+INSERT INTO `cms_settings` VALUES (20, 'printer_', NULL, 'text', NULL, 'Nama Printer Thermal', '2019-08-06 16:49:59', NULL, 'Printer Setting', 'Printer', NULL);
 
 -- ----------------------------
 -- Table structure for cms_statistic_components
@@ -3483,25 +3605,28 @@ CREATE TABLE `cms_users`  (
   `id_cms_privileges` int(11) NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `status` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `status` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `id_cabang` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_users
 -- ----------------------------
-INSERT INTO `cms_users` VALUES (1, 'Super Admin', NULL, 'super', '$2y$10$bONenf1lQ/FA7xHbPqSJg.7m5k/5v/T2vSlQ5Zua6CJITosbNCoeC', 1, '2018-04-02 02:02:34', '2019-05-21 08:05:01', 'Active', NULL);
-INSERT INTO `cms_users` VALUES (2, 'Manager', NULL, 'manager', '$2y$10$PKOkfLVVZAIA7CdwRL.TyOBeIKN/ImVdXuC83M1hwLIiyZd7q57B.', 2, '2018-04-02 02:05:39', '2018-04-03 00:33:20', 'Active', '2019-03-06 08:55:30');
-INSERT INTO `cms_users` VALUES (3, 'Admin Survey', NULL, 'survey', '$2y$10$jYfEb3BU4NDoKc2cL.THl.jSKGWC2QTmKDDTmu4EUZYtgYF2wtTLW', 3, '2018-04-02 18:20:52', NULL, NULL, '2019-03-06 08:55:30');
-INSERT INTO `cms_users` VALUES (4, 'Admin Kasir', NULL, 'kasir', '$2y$10$PMUKUH3z7Tsfmbpp2uhMYup8aG99U6VZTl4txpcpunLwZed.34WEO', 6, '2018-04-02 22:30:48', '2018-04-03 00:52:09', NULL, '2019-03-06 08:55:30');
-INSERT INTO `cms_users` VALUES (5, 'Admin Eksekutif', NULL, 'eksekutif', '$2y$10$Q9UycDrHpdyQje/tPYrrcOMl3K0irpiz3cmazegwCPL9g1tVvi55S', 5, '2018-04-05 12:41:45', '2018-04-15 12:12:33', NULL, '2019-03-06 08:55:30');
-INSERT INTO `cms_users` VALUES (6, 'Rohim', NULL, 'survey', '$2y$10$/eoSeu3MYjOEUxvqQOdgKe8ObKPeQ96Xl.dqrLKJ59iOM2DLeBs3q', 3, '2018-04-12 09:44:05', '2018-06-10 07:15:30', NULL, '2019-03-06 08:55:30');
-INSERT INTO `cms_users` VALUES (7, 'Rohim', NULL, 'Rohim', '$2y$10$5xSg1zvhcI4ecE0SZV6xyu7c3aOSYcBRMK36JTpg7g0ct.tbQLL7u', 3, '2018-04-12 09:45:14', NULL, NULL, '2018-04-12 09:45:24');
-INSERT INTO `cms_users` VALUES (8, 'Muji', NULL, 'Kasir ', '$2y$10$m2TVWWZYobiwiz7RDUTvIOHTFOmOpyobjBAcc9bN/RXIyF4yrfN3a', 6, '2018-04-15 12:13:44', '2018-06-10 07:15:09', NULL, '2019-03-06 08:55:30');
-INSERT INTO `cms_users` VALUES (9, 'Eksekutif', NULL, 'mdteksekutif', '$2y$10$l8Y76ZVmj6PehSVUEpJGdumgELC54eysP2OQ/BcGM5mpOFcekEbuW', 5, '2018-04-15 14:20:58', NULL, NULL, '2019-03-06 08:55:30');
-INSERT INTO `cms_users` VALUES (10, 'Coba', NULL, 'coba', '$2y$10$WZmUTU401ITD/eiEKv.8dOkpsomFd2XKfaU/1yckllpLcfEX//Jna', 6, '2018-04-15 14:22:09', NULL, NULL, '2018-04-15 14:22:18');
-INSERT INTO `cms_users` VALUES (11, 'Renaldy Sabdo', NULL, 'KYW/002', '$2y$10$ukDS5pioim7LpRGNkiD4ZukB/1xEU/A5OpvmUarweqTs3MZl8efz.', 2, NULL, NULL, NULL, '2019-03-06 08:55:30');
+INSERT INTO `cms_users` VALUES (1, 'Super Admin', NULL, 'super', '$2y$10$8GWFc8rOhP2PxwfJ47EVW.AvHNuvVZHGDSXaaaOTX0MS/AyM5p0h2', 1, '2018-04-02 02:02:34', '2019-08-07 14:44:35', NULL, 'Active', 0);
+INSERT INTO `cms_users` VALUES (2, 'Manager', NULL, 'manager', '$2y$10$PKOkfLVVZAIA7CdwRL.TyOBeIKN/ImVdXuC83M1hwLIiyZd7q57B.', 2, '2018-04-02 02:05:39', '2018-04-03 00:33:20', '2019-03-06 08:55:30', 'Active', NULL);
+INSERT INTO `cms_users` VALUES (3, 'Admin Survey', NULL, 'survey', '$2y$10$jYfEb3BU4NDoKc2cL.THl.jSKGWC2QTmKDDTmu4EUZYtgYF2wtTLW', 3, '2018-04-02 18:20:52', NULL, '2019-03-06 08:55:30', NULL, NULL);
+INSERT INTO `cms_users` VALUES (4, 'Admin Kasir', NULL, 'kasir', '$2y$10$PMUKUH3z7Tsfmbpp2uhMYup8aG99U6VZTl4txpcpunLwZed.34WEO', 6, '2018-04-02 22:30:48', '2018-04-03 00:52:09', '2019-03-06 08:55:30', NULL, NULL);
+INSERT INTO `cms_users` VALUES (5, 'Admin Eksekutif', NULL, 'eksekutif', '$2y$10$Q9UycDrHpdyQje/tPYrrcOMl3K0irpiz3cmazegwCPL9g1tVvi55S', 5, '2018-04-05 12:41:45', '2018-04-15 12:12:33', '2019-03-06 08:55:30', NULL, NULL);
+INSERT INTO `cms_users` VALUES (6, 'Rohim', NULL, 'survey', '$2y$10$/eoSeu3MYjOEUxvqQOdgKe8ObKPeQ96Xl.dqrLKJ59iOM2DLeBs3q', 3, '2018-04-12 09:44:05', '2018-06-10 07:15:30', '2019-03-06 08:55:30', NULL, NULL);
+INSERT INTO `cms_users` VALUES (7, 'Rohim', NULL, 'Rohim', '$2y$10$5xSg1zvhcI4ecE0SZV6xyu7c3aOSYcBRMK36JTpg7g0ct.tbQLL7u', 3, '2018-04-12 09:45:14', NULL, '2018-04-12 09:45:24', NULL, NULL);
+INSERT INTO `cms_users` VALUES (8, 'Muji', NULL, 'Kasir ', '$2y$10$m2TVWWZYobiwiz7RDUTvIOHTFOmOpyobjBAcc9bN/RXIyF4yrfN3a', 6, '2018-04-15 12:13:44', '2018-06-10 07:15:09', '2019-03-06 08:55:30', NULL, NULL);
+INSERT INTO `cms_users` VALUES (9, 'Eksekutif', NULL, 'mdteksekutif', '$2y$10$l8Y76ZVmj6PehSVUEpJGdumgELC54eysP2OQ/BcGM5mpOFcekEbuW', 5, '2018-04-15 14:20:58', NULL, '2019-03-06 08:55:30', NULL, NULL);
+INSERT INTO `cms_users` VALUES (10, 'Coba', NULL, 'coba', '$2y$10$WZmUTU401ITD/eiEKv.8dOkpsomFd2XKfaU/1yckllpLcfEX//Jna', 6, '2018-04-15 14:22:09', NULL, '2018-04-15 14:22:18', NULL, NULL);
+INSERT INTO `cms_users` VALUES (11, 'Renaldy Sabdo', NULL, 'KYW/002', '$2y$10$ukDS5pioim7LpRGNkiD4ZukB/1xEU/A5OpvmUarweqTs3MZl8efz.', 2, NULL, NULL, '2019-03-06 08:55:30', NULL, NULL);
+INSERT INTO `cms_users` VALUES (12, 'Administrator', NULL, 'admin', '$2y$10$Tb3gO86ibLxaXnilbfSjyOTAba1ZNCk47dhf64uQ/wiqua0m8kTum', 1, '2019-08-07 14:51:07', NULL, NULL, NULL, 1);
+INSERT INTO `cms_users` VALUES (13, 'Administrator CB Dua', NULL, 'admin2', '$2y$10$3Or0XprO3KZcAhtE9/DoRO.oYSyDHLiqssqL3raIgyFae.cID94Na', 1, '2019-08-07 15:37:36', NULL, NULL, NULL, 2);
 
 -- ----------------------------
 -- Table structure for migrations
@@ -3637,22 +3762,37 @@ CREATE TABLE `tb_absensi`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_cabang`;
 CREATE TABLE `tb_cabang`  (
-  `id` int(11) NOT NULL,
-  `kode_cabang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `nama_cabang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `alamat` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `telfon` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `kode_cabang` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nama_cabang` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `alamat` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `telepon` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `logo` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `logo_struk` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `pin` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
-  `lang` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `latt` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
-  `kode_provinsi` int(11) NULL DEFAULT NULL,
-  `kode_kota` int(11) NULL DEFAULT NULL,
-  `kode_kecamatan` int(11) NULL DEFAULT NULL,
+  `lang` double NULL DEFAULT NULL,
+  `latt` double NULL DEFAULT NULL,
+  `id_provinsi` int(11) NULL DEFAULT NULL,
+  `id_kota` int(11) NULL DEFAULT NULL,
+  `id_kecamatan` int(11) NULL DEFAULT NULL,
+  `created_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `jam_buka` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `jam_tutup` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `interval_jasa` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_cabang
+-- ----------------------------
+INSERT INTO `tb_cabang` VALUES (1, '2019-08-07 14:37:41', '2019-08-07 15:36:07', NULL, 'CB1', 'Cabang 1', 'Malang', '12345678', 'uploads/12/2019-08/logo.png', 'uploads/12/2019-08/logo_struk_cabang_1.png', 'cabang1@osac.com', NULL, NULL, NULL, 12, 161, 2526, NULL, 'Administrator', NULL, NULL, NULL, NULL);
+INSERT INTO `tb_cabang` VALUES (2, '2019-08-07 14:50:11', '2019-08-07 15:36:39', NULL, 'CB2', 'Cabang 2', NULL, '12345678', 'uploads/12/2019-08/mercedes_benz.png', 'uploads/12/2019-08/logo_struk_cabang_2.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Super Admin', 'Administrator', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_durasi_jasa
@@ -3696,7 +3836,7 @@ CREATE TABLE `tb_general`  (
   `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 18 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_general
@@ -3718,6 +3858,25 @@ INSERT INTO `tb_general` VALUES (14, 7, 'GN/00014', NULL, 'DAIHATSU', '2019-05-2
 INSERT INTO `tb_general` VALUES (15, 8, 'GN/00015', NULL, 'Kecil', '2019-05-20 17:17:31', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_general` VALUES (16, 8, 'GN/00016', NULL, 'Sedang', '2019-05-20 17:17:34', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_general` VALUES (17, 8, 'GN/00017', NULL, 'Besar', '2019-05-20 17:17:38', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (18, 9, 'GN/00018', NULL, 'Direktur', '2019-08-01 13:38:57', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (19, 9, 'GN/00019', NULL, 'Manager', '2019-08-01 13:39:03', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (20, 9, 'GN/00020', NULL, 'Kepala Bengkel', '2019-08-01 13:39:12', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (21, 9, 'GN/00021', NULL, 'Supervisor', '2019-08-01 13:39:18', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (22, 9, 'GN/00022', NULL, 'Sales', '2019-08-01 13:39:34', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (23, 9, 'GN/00023', NULL, 'Staff', '2019-08-01 13:39:39', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (24, 9, 'GN/00024', NULL, 'Teknisi', '2019-08-01 13:39:48', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (25, 11, 'GN/00025', NULL, 'BELUM LUNAS', '2019-08-07 14:01:11', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (26, 11, 'GN/00026', NULL, 'LUNAS', '2019-08-07 14:01:14', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (27, 10, 'GN/00027', NULL, 'REGULER', '2019-08-07 14:01:21', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_general` VALUES (28, 10, 'GN/00028', NULL, 'BOOKING', '2019-08-07 14:01:26', '2019-08-07 14:01:32', NULL, 'Super Admin', 'Super Admin', NULL);
+INSERT INTO `tb_general` VALUES (29, 12, 'GN/00029', NULL, 'TUNAI', '2019-08-08 10:45:38', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_general` VALUES (30, 12, 'GN/00030', NULL, 'DEBIT', '2019-08-08 10:45:44', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_general` VALUES (31, 13, 'GN/00031', NULL, 'BCA', '2019-08-08 11:16:22', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_general` VALUES (32, 13, 'GN/00032', NULL, 'Mandiri', '2019-08-08 11:16:29', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_general` VALUES (33, 13, 'GN/00033', NULL, 'BRI', '2019-08-08 11:16:32', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_general` VALUES (34, 13, 'GN/00034', NULL, 'BNI', '2019-08-08 11:16:34', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_general` VALUES (35, 14, 'GN/00035', NULL, 'Nominal', '2019-08-08 11:42:05', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_general` VALUES (36, 14, 'GN/00036', NULL, 'Persen', '2019-08-08 11:42:09', NULL, NULL, 'Administrator', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_general_detail
@@ -3768,6 +3927,30 @@ INSERT INTO `tb_harga_jasa` VALUES (6, 17, 3, 125000, '2019-05-20 19:10:53', NUL
 INSERT INTO `tb_harga_jasa` VALUES (7, 16, 3, 75000, '2019-05-20 19:10:59', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
+-- Table structure for tb_insentif
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_insentif`;
+CREATE TABLE `tb_insentif`  (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_karyawan` int(3) NULL DEFAULT NULL,
+  `nama_karyawan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `tanggal` timestamp(0) NULL DEFAULT NULL,
+  `keterangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `insentif` int(11) NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_insentif
+-- ----------------------------
+INSERT INTO `tb_insentif` VALUES (1, 1, 'Andi Soraya', '2019-08-01 15:52:46', 'Testing', 2000, '2019-08-01 15:52:56', NULL, NULL);
+INSERT INTO `tb_insentif` VALUES (2, 1, 'Andi Soraya', '2019-08-02 15:53:05', 'Testing', 5000, '2019-08-01 15:53:35', NULL, NULL);
+INSERT INTO `tb_insentif` VALUES (3, 2, 'Sabari', '2019-08-01 15:53:51', 'Coba', 10000, '2019-08-01 15:54:00', NULL, NULL);
+
+-- ----------------------------
 -- Table structure for tb_jasa
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_jasa`;
@@ -3776,8 +3959,10 @@ CREATE TABLE `tb_jasa`  (
   `id_jenis_jasa` int(3) NULL DEFAULT NULL,
   `kode` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `keterangan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `harga` int(11) NULL DEFAULT NULL,
   `gambar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `deskripsi` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `insentif` int(11) NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
@@ -3790,9 +3975,9 @@ CREATE TABLE `tb_jasa`  (
 -- ----------------------------
 -- Records of tb_jasa
 -- ----------------------------
-INSERT INTO `tb_jasa` VALUES (1, 7, 'JS/00001', 'EVAPORATOR CLEANING', 'uploads/1/2019-05/99f502332f5ca144a4acfeeae8768085.jpg', 'MEMBERSIHKAN EVAPORATOR', '2019-05-20 18:39:58', '2019-05-20 18:44:52', NULL, 'Super Admin', 'Super Admin', NULL);
-INSERT INTO `tb_jasa` VALUES (2, 6, 'JS/00002', 'QUICK CAR WASH', 'uploads/1/2019-05/5f85e21c534e0f681d9c898b40231dc8.png', 'CUCI CEPAT HANYA 10 MENIT', '2019-05-20 18:47:25', NULL, NULL, 'Super Admin', NULL, NULL);
-INSERT INTO `tb_jasa` VALUES (3, 7, 'JS/00003', 'GLASS CLEANING', 'uploads/1/2019-05/f0ac5357b01b5b1f8e2deb4796f8c945.png', 'PEMBERSIHAN KACA MOBIL AGAR KINCLONG', '2019-05-20 19:10:29', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_jasa` VALUES (1, 7, 'JS/00001', 'EVAPORATOR CLEANING', NULL, 'uploads/1/2019-05/99f502332f5ca144a4acfeeae8768085.jpg', 'MEMBERSIHKAN EVAPORATOR', NULL, '2019-05-20 18:39:58', '2019-05-20 18:44:52', NULL, 'Super Admin', 'Super Admin', NULL);
+INSERT INTO `tb_jasa` VALUES (2, 6, 'JS/00002', 'QUICK CAR WASH', NULL, 'uploads/1/2019-05/5f85e21c534e0f681d9c898b40231dc8.png', 'CUCI CEPAT HANYA 10 MENIT', NULL, '2019-05-20 18:47:25', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_jasa` VALUES (3, 7, 'JS/00003', 'GLASS CLEANING', NULL, 'uploads/1/2019-05/f0ac5357b01b5b1f8e2deb4796f8c945.png', 'PEMBERSIHAN KACA MOBIL AGAR KINCLONG', NULL, '2019-05-20 19:10:29', NULL, NULL, 'Super Admin', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_karyawan
@@ -3807,18 +3992,33 @@ CREATE TABLE `tb_karyawan`  (
   `jenis_kelamin` enum('L','P') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `agama` enum('Islam','Kristen','Katholik','Buddha','Hindu','Lainnya') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status_perkawinan` enum('Belum Kawin','Kawin','Duda','Janda','Lainnya') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `telepon` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `jabatan` int(1) NULL DEFAULT NULL,
   `gaji_pokok` int(11) NULL DEFAULT NULL,
+  `id_cabang` int(11) NULL DEFAULT NULL,
+  `buat_akun` enum('1','0') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `pin` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `privileges_id` int(11) NULL DEFAULT NULL,
+  `id_provinsi` int(11) NULL DEFAULT NULL,
+  `id_kota` int(11) NULL DEFAULT NULL,
+  `id_kecamatan` int(11) NULL DEFAULT NULL,
   `alamat` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
-  `cabang_id` int(11) NULL DEFAULT NULL,
-  `buat_akun` enum('1','0') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `pin` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `privileges_id` int(11) NULL DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `updated_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `deleted_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_karyawan
+-- ----------------------------
+INSERT INTO `tb_karyawan` VALUES (1, 'KYW/001', 'Andi Soraya', 'Jakarta', '1989-01-01', 'L', 'Islam', 'Belum Kawin', '+621234567890', 24, 0, NULL, NULL, NULL, NULL, 7, 63, 753, 'Alamat', '2019-08-01 13:58:18', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_karyawan` VALUES (2, 'KYW/002', 'Sabari', 'Jakarta', '1999-02-03', 'L', 'Islam', 'Belum Kawin', '+621234567890', 24, 0, NULL, NULL, NULL, NULL, 7, 64, 755, 'Alamat', '2019-08-01 13:59:10', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_karyawan` VALUES (3, 'KYW/003', 'Rohman', 'Bandung', '1991-03-13', 'L', 'Islam', 'Belum Kawin', '+621234567890', 21, 0, NULL, NULL, NULL, NULL, 7, 66, 779, 'Alamat', '2019-08-01 14:00:12', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_karyawan` VALUES (4, 'KYW/004', 'Sari', 'Bogor', '1999-06-16', 'L', 'Islam', 'Belum Kawin', '+621234567890', 23, 0, NULL, NULL, NULL, NULL, 7, 68, 792, 'Alamat', '2019-08-01 14:01:56', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_kecamatan
@@ -11560,7 +11760,7 @@ CREATE TABLE `tb_pelanggan`  (
   `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_pelanggan
@@ -11580,19 +11780,23 @@ CREATE TABLE `tb_pelanggan_alamat`  (
   `id_kota` int(11) NULL DEFAULT NULL,
   `id_kecamatan` int(11) NULL DEFAULT NULL,
   `alamat_lengkap` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `kodepos` int(5) NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   `created_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `longitude` double NULL DEFAULT NULL,
+  `latitude` double NULL DEFAULT NULL,
+  `status` int(1) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_pelanggan_alamat
 -- ----------------------------
-INSERT INTO `tb_pelanggan_alamat` VALUES (1, 1, 'ALMT/0001', 'Rumah', 12, 161, 2526, 'Jln Raya Randu Gembolo No 183, RT 04 RW 04 Ardimulyo', '2019-05-21 09:06:03', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_pelanggan_alamat` VALUES (1, 1, 'ALMT/0001', 'Rumah', 12, 161, 2526, 'Jln Raya Randu Gembolo No 183, RT 04 RW 04 Ardimulyo', NULL, '2019-05-21 09:06:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_pelanggan_kendaraan
@@ -11605,8 +11809,9 @@ CREATE TABLE `tb_pelanggan_kendaraan`  (
   `id_kendaraan` int(5) NULL DEFAULT NULL,
   `nomor_polisi` varchar(12) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `nomor_rangka` varchar(17) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `nomor_mesin` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tahun` int(4) NULL DEFAULT NULL,
-  `warna` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
+  `warna` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
@@ -11619,8 +11824,8 @@ CREATE TABLE `tb_pelanggan_kendaraan`  (
 -- ----------------------------
 -- Records of tb_pelanggan_kendaraan
 -- ----------------------------
-INSERT INTO `tb_pelanggan_kendaraan` VALUES (1, 1, 4, 4, 'N 4759 GH', NULL, 2012, 'Silver Metalik', '2019-05-21 09:22:15', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `tb_pelanggan_kendaraan` VALUES (2, 1, 4, 4, 'N 5206 IS', NULL, 2014, 'White Silver', '2019-05-21 10:45:16', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_pelanggan_kendaraan` VALUES (1, 1, 4, 4, 'N 4759 GH', NULL, NULL, 2012, 'Silver Metalik', '2019-05-21 09:22:15', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_pelanggan_kendaraan` VALUES (2, 1, 4, 4, 'N 5206 IS', NULL, NULL, 2014, 'White Silver', '2019-05-21 10:45:16', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_pembayaran
@@ -11776,9 +11981,11 @@ CREATE TABLE `tb_penjualan_detail`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_penjualan_jasa`;
 CREATE TABLE `tb_penjualan_jasa`  (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_cabang` int(3) NULL DEFAULT NULL,
   `kode` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `tanggal` datetime(0) NULL DEFAULT NULL,
+  `tanggal_masuk` datetime(0) NULL DEFAULT NULL,
   `id_pelanggan` int(5) NULL DEFAULT NULL,
   `nama_pelanggan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `id_merek_kendaraan` int(3) NULL DEFAULT NULL,
@@ -11790,20 +11997,38 @@ CREATE TABLE `tb_penjualan_jasa`  (
   `diskon_tipe` int(1) NULL DEFAULT NULL,
   `diskon_nominal` double NULL DEFAULT NULL,
   `total` double NULL DEFAULT NULL,
-  `total_durasi` time(0) NULL DEFAULT NULL,
+  `total_slot` int(3) NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   `created_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_penjualan` int(3) NULL DEFAULT NULL,
+  `status_pembayaran` int(3) NULL DEFAULT NULL,
+  `metode_pembayaran` int(3) NULL DEFAULT NULL,
+  `id_merchant` int(3) NULL DEFAULT NULL,
+  `nomor_kartu` varchar(16) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `kode_trace` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `bayar` double NULL DEFAULT NULL,
+  `kembalian` double NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 12 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_penjualan_jasa
 -- ----------------------------
-INSERT INTO `tb_penjualan_jasa` VALUES (1, 'POS/230519/00001', '2019-05-23 09:07:01', NULL, NULL, 1, 'HONDA', 1, 'BRIO', 'N 4759 GH', 50000, 0, 0, 50000, NULL, '2019-05-23 09:07:01', NULL, NULL, 'by Sistem POSJS', NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (1, NULL, 'POS/230519/00001', '2019-05-23 09:07:01', NULL, NULL, NULL, 1, 'HONDA', 1, 'BRIO', 'N 4759 GH', 50000, 0, 0, 50000, NULL, '2019-05-23 09:07:01', NULL, NULL, 'by Sistem POSJS', NULL, NULL, 27, 26, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (2, NULL, 'POSJS/070819/00002', '2019-08-07 11:35:50', NULL, NULL, NULL, NULL, NULL, 4, NULL, NULL, 50000, 0, 0, 50000, NULL, '2019-08-07 11:36:27', NULL, NULL, NULL, NULL, NULL, 27, 26, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (3, NULL, 'POSJS07081900003', '2019-08-07 11:37:27', NULL, NULL, NULL, NULL, NULL, 2, NULL, NULL, 75000, 0, 0, 75000, NULL, '2019-08-07 11:37:36', NULL, NULL, NULL, NULL, NULL, 27, 26, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (4, NULL, 'POSJS07081900004', '2019-08-07 11:47:21', NULL, NULL, 'Walk In Order', 2, 'SUZUKI', 2, 'ERTIGA', NULL, 75000, 0, 0, 75000, NULL, '2019-08-07 11:47:33', NULL, NULL, 'Super Admin', NULL, NULL, 27, 26, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (5, NULL, 'POSJS07081900005', '2019-08-07 11:57:39', NULL, NULL, 'Walk In Order', 3, 'DAIHATSU', 3, 'AYLA', NULL, 100000, 0, 0, 100000, NULL, '2019-08-07 11:57:49', '2019-08-07 12:25:41', NULL, 'Super Admin', 'Super Admin', NULL, 28, 25, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (6, NULL, 'POSJS07081900006', '2019-08-07 12:26:45', NULL, NULL, 'Walk In Order', 2, 'SUZUKI', 2, 'ERTIGA', NULL, 150000, 1, 10, 135000, NULL, '2019-08-07 12:27:05', NULL, NULL, 'Super Admin', NULL, NULL, 28, 26, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (7, 1, 'POSJS07081900007', '2019-08-07 15:41:51', NULL, NULL, 'Walk In Order', 1, 'HONDA', 1, 'BRIO', NULL, 50000, 0, 0, 50000, NULL, '2019-08-07 15:42:01', NULL, NULL, 'Administrator', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (8, 1, 'POSJS07081900008', '2019-08-07 15:44:31', NULL, NULL, 'Walk In Order', 1, 'HONDA', 1, 'BRIO', NULL, 50000, 0, 0, 50000, NULL, '2019-08-07 15:44:40', NULL, NULL, 'Administrator', NULL, NULL, 27, 25, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (9, 1, 'POSJS07081900009', '2019-08-07 16:13:32', '2019-08-07 16:13:32', NULL, 'Walk In Order', 2, 'SUZUKI', 2, 'ERTIGA', NULL, 75000, 0, 0, 75000, NULL, '2019-08-07 16:13:40', NULL, NULL, 'Administrator', NULL, NULL, 27, 25, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa` VALUES (10, 1, 'POSJS08081900010', '2019-08-08 11:37:39', '2019-08-08 11:37:39', NULL, 'Walk In Order', 3, 'DAIHATSU', 3, 'AYLA', NULL, 50000, 35, 0, 50000, NULL, '2019-08-08 11:40:22', '2019-08-08 11:49:20', NULL, 'Administrator', 'Administrator', NULL, 27, 25, 29, NULL, NULL, NULL, 50000, 0);
+INSERT INTO `tb_penjualan_jasa` VALUES (11, 1, 'POSJS08081900011', '2019-08-08 11:40:22', '2019-08-08 11:45:22', NULL, 'Walk In Order', 2, 'SUZUKI', 2, 'ERTIGA', NULL, 75000, 35, 0, 75000, NULL, '2019-08-08 11:40:50', '2019-08-08 11:44:47', NULL, 'Administrator', 'Administrator', NULL, 27, 26, 30, 31, '123489098737', '123847', 75000, 0);
 
 -- ----------------------------
 -- Table structure for tb_penjualan_jasa_detail
@@ -11816,20 +12041,32 @@ CREATE TABLE `tb_penjualan_jasa_detail`  (
   `id_jasa` int(5) NULL DEFAULT NULL,
   `nama_jasa` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `harga` double NULL DEFAULT NULL,
-  `durasi` double NULL DEFAULT NULL,
+  `durasi` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `diskon_tipe` int(1) NULL DEFAULT NULL,
   `diskon_nominal` double NULL DEFAULT NULL,
   `subtotal` double NULL DEFAULT NULL,
   `total` double NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_penjualan_jasa_detail
 -- ----------------------------
 INSERT INTO `tb_penjualan_jasa_detail` VALUES (1, 1, 'POS/220519/00001', 3, 'PILOT STREET 14\" 90/100', 367000, NULL, NULL, NULL, 367000, NULL);
 INSERT INTO `tb_penjualan_jasa_detail` VALUES (2, 2, 'POS/220519/00002', 3, 'PILOT STREET 14\' 90/100', 36700, NULL, NULL, NULL, 36700, NULL);
-INSERT INTO `tb_penjualan_jasa_detail` VALUES (3, 1, 'POS/230519/00001', 1, 'EVAPORATOR CLEANING', 50000, 30, NULL, NULL, 50000, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (3, 1, 'POS/230519/00001', 1, 'EVAPORATOR CLEANING', 50000, '30', NULL, NULL, 50000, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (4, 2, NULL, 3, NULL, 50000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (5, 3, NULL, 1, NULL, 75000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (6, 4, NULL, 1, NULL, 75000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (8, 5, 'POSJS07081900005', 1, 'EVAPORATOR CLEANING', 50000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (7, 5, 'POSJS07081900005', 3, 'GLASS CLEANING', 50000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (9, 6, 'POSJS07081900006', 3, 'GLASS CLEANING', 75000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (10, 6, 'POSJS07081900006', 1, 'EVAPORATOR CLEANING', 75000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (11, 7, 'POSJS07081900007', 1, 'EVAPORATOR CLEANING', 50000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (12, 8, 'POSJS07081900008', 1, 'EVAPORATOR CLEANING', 50000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (13, 9, 'POSJS07081900009', 3, 'GLASS CLEANING', 75000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (16, 10, 'POSJS08081900010', 1, 'EVAPORATOR CLEANING', 50000, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_jasa_detail` VALUES (15, 11, 'POSJS08081900011', 3, 'GLASS CLEANING', 75000, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_penjualan_pos
@@ -11850,14 +12087,17 @@ CREATE TABLE `tb_penjualan_pos`  (
   `created_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `status_penjualan` int(3) NULL DEFAULT NULL,
+  `status_pembayaran` int(3) NULL DEFAULT NULL,
+  `kode_antrian` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_penjualan_pos
 -- ----------------------------
-INSERT INTO `tb_penjualan_pos` VALUES (1, 'POS/220519/00001', '2019-05-22 11:27:34', 'Andi', 367000, 0, 10000, 357000, '2019-05-22 11:27:34', NULL, NULL, 'Super Admin', NULL, NULL);
-INSERT INTO `tb_penjualan_pos` VALUES (2, 'POS/220519/00002', '2019-05-22 11:28:01', 'Ryan', 367000, 0, 10000, 357000, '2019-05-22 11:28:01', NULL, NULL, 'by Sistem POS', NULL, NULL);
+INSERT INTO `tb_penjualan_pos` VALUES (1, 'POS/060819/00001', '2019-08-06 14:14:28', 'Ryan', 682000, 0, 0, 682000, '2019-08-06 14:14:28', '2019-08-06 14:19:10', NULL, 'Super Admin', 'Super Admin', NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_pos` VALUES (2, 'POS06081900002', '2019-08-06 16:37:24', 'Deni', 315000, 1, 5, 299250, '2019-08-06 16:37:24', NULL, NULL, 'Super Admin', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_penjualan_pos_detail
@@ -11875,14 +12115,18 @@ CREATE TABLE `tb_penjualan_pos_detail`  (
   `diskon_nominal` double NULL DEFAULT NULL,
   `subtotal` double NULL DEFAULT NULL,
   `total` double NULL DEFAULT NULL,
+  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_penjualan_pos_detail
 -- ----------------------------
-INSERT INTO `tb_penjualan_pos_detail` VALUES (1, 1, 'POS/220519/00001', 3, 'PILOT STREET 14\" 90/100', 1, 367000, NULL, NULL, 367000, NULL);
-INSERT INTO `tb_penjualan_pos_detail` VALUES (2, 2, 'POS/220519/00002', 3, 'PILOT STREET 14\' 90/100', 1, 36700, NULL, NULL, 36700, NULL);
+INSERT INTO `tb_penjualan_pos_detail` VALUES (2, 1, 'POS/060819/00001', 3, 'PILOT STREET 14\" 90/100', 1, 367000, NULL, NULL, 367000, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_pos_detail` VALUES (1, 1, 'POS/060819/00001', 1, 'PILOT STREET 14\" 80/80', 1, 315000, NULL, NULL, 315000, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_penjualan_pos_detail` VALUES (3, 2, 'POS06081900002', 1, 'PILOT STREET 14\" 80/80', 1, 315000, NULL, NULL, 315000, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_produk
@@ -11912,29 +12156,29 @@ CREATE TABLE `tb_produk`  (
 -- ----------------------------
 -- Records of tb_produk
 -- ----------------------------
-INSERT INTO `tb_produk` VALUES (1, 'PRD/00001', 'PILOT STREET 14\" 80/80', 5, 8, 3, 1, 100, 315000, 1, NULL, '2019-05-20 14:35:14', '2019-05-20 16:49:28', NULL, NULL, NULL, NULL);
+INSERT INTO `tb_produk` VALUES (1, 'PRD/00001', 'PILOT STREET 14\" 80/80', 5, 8, 3, 1, 98, 315000, 1, NULL, '2019-05-20 14:35:14', '2019-05-20 16:49:28', NULL, NULL, NULL, NULL);
 INSERT INTO `tb_produk` VALUES (2, 'PRD/00002', 'PILOT STREET 14\" 80/90', 5, 8, 3, 1, 100, 350000, 1, NULL, '2019-05-20 14:44:16', '2019-05-20 15:02:05', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_produk` VALUES (3, 'PRD/00003', 'PILOT STREET 14\" 90/100', 5, 8, 3, 1, 98, 367000, 1, NULL, '2019-05-20 15:02:31', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_produk` VALUES (3, 'PRD/00003', 'PILOT STREET 14\" 90/100', 5, 8, 3, 1, 99, 367000, 1, NULL, '2019-05-20 15:02:31', NULL, NULL, 'Super Admin', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_produk_stok
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_produk_stok`;
 CREATE TABLE `tb_produk_stok`  (
-  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_produk` int(11) NULL DEFAULT NULL,
   `tanggal` datetime(0) NULL DEFAULT NULL,
   `stok_masuk` int(5) NULL DEFAULT NULL,
   `stok_keluar` int(5) NULL DEFAULT NULL,
-  `keterangan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `keterangan` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
-  `created_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `updated_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `deleted_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 6 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 24 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_produk_stok
@@ -11942,8 +12186,15 @@ CREATE TABLE `tb_produk_stok`  (
 INSERT INTO `tb_produk_stok` VALUES (1, 1, '2019-05-22 11:26:22', 100, 0, 'Tambahan dari gudang pusat', '2019-05-22 11:26:32', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_produk_stok` VALUES (2, 2, '2019-05-22 11:26:38', 100, 0, 'Tambahan dari gudang pusat', '2019-05-22 11:26:44', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_produk_stok` VALUES (3, 3, '2019-05-22 11:26:49', 100, 0, 'Tambahan dari gudang pusat', '2019-05-22 11:26:55', NULL, NULL, 'Super Admin', NULL, NULL);
-INSERT INTO `tb_produk_stok` VALUES (4, 3, '2019-05-22 11:27:34', 0, 1, 'Pengurangan stok dari penjualan POS/220519/00001', '2019-05-22 11:27:34', NULL, NULL, 'by Sistem', NULL, NULL);
-INSERT INTO `tb_produk_stok` VALUES (5, 3, '2019-05-22 11:28:01', 0, 1, 'Pengurangan stok dari penjualan POS/220519/00002', '2019-05-22 11:28:01', NULL, NULL, 'by Sistem POS', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (23, 1, '2019-08-06 16:37:24', 0, 1, 'Pengurangan stok dari penjualan POS06081900002', '2019-08-06 16:37:24', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (22, 1, '2019-08-06 14:19:10', 0, 1, 'Perubahan transaksi POS/060819/00001 oleh Super Admin', '2019-08-06 14:19:10', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (21, 3, '2019-08-06 14:19:10', 0, 1, 'Perubahan transaksi POS/060819/00001 oleh Super Admin', '2019-08-06 14:19:10', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (20, 3, '2019-08-06 14:19:10', 1, 0, 'Perubahan transaksi POS/060819/00001 oleh Super Admin', '2019-08-06 14:19:10', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (19, 3, '2019-08-06 14:15:48', 0, 1, 'Perubahan transaksi POS/060819/00001 oleh Super Admin', '2019-08-06 14:15:48', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (18, 3, '2019-08-06 14:15:48', 2, 0, 'Perubahan transaksi POS/060819/00001 oleh Super Admin', '2019-08-06 14:15:48', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (17, 3, '2019-08-06 14:14:59', 0, 2, 'Perubahan transaksi POS/060819/00001 oleh Super Admin', '2019-08-06 14:14:59', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (16, 3, '2019-08-06 14:14:59', 1, 0, 'Perubahan transaksi POS/060819/00001 oleh Super Admin', '2019-08-06 14:14:59', NULL, NULL, 'by Sistem', NULL, NULL);
+INSERT INTO `tb_produk_stok` VALUES (15, 3, '2019-08-06 14:14:28', 0, 1, 'Pengurangan stok dari penjualan POS/060819/00001', '2019-08-06 14:14:28', NULL, NULL, 'by Sistem', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_promosi
@@ -12035,12 +12286,12 @@ CREATE TABLE `tb_tipe`  (
   `updated_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `deleted_by` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_tipe
 -- ----------------------------
-INSERT INTO `tb_tipe` VALUES (1, 'TP/001', 'Satuan', '2019-05-20 14:06:58', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_tipe` VALUES (1, 'TP/001', 'Satuan Produk', '2019-05-20 14:06:58', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_tipe` VALUES (2, 'TP/002', 'Kategori Produk', '2019-05-20 14:07:15', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_tipe` VALUES (3, 'TP/003', 'Jenis Produk', '2019-05-20 14:07:20', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_tipe` VALUES (4, 'TP/004', 'Kategori Jasa', '2019-05-20 14:07:39', NULL, NULL, 'Super Admin', NULL, NULL);
@@ -12048,5 +12299,11 @@ INSERT INTO `tb_tipe` VALUES (5, 'TP/005', 'Jenis Jasa', '2019-05-20 14:07:49', 
 INSERT INTO `tb_tipe` VALUES (6, 'TP/006', 'Merek Produk', '2019-05-20 14:30:01', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_tipe` VALUES (7, 'TP/007', 'Merek Kendaraan', '2019-05-20 14:30:22', NULL, NULL, 'Super Admin', NULL, NULL);
 INSERT INTO `tb_tipe` VALUES (8, 'TP/008', 'Jenis Kendaraan', '2019-05-20 17:17:21', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_tipe` VALUES (9, 'TP/009', 'Jabatan Karyawan', '2019-08-01 13:38:33', NULL, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_tipe` VALUES (10, 'TP/010', 'Status Penjualan', '2019-08-07 14:00:50', '2019-08-08 10:45:07', NULL, 'Super Admin', 'Administrator', NULL);
+INSERT INTO `tb_tipe` VALUES (11, 'TP/011', 'Status Pembayaran', '2019-08-08 10:45:19', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_tipe` VALUES (12, 'TP/012', 'Metode Pembayaran', '2019-08-08 10:45:28', NULL, NULL, 'Administrator', NULL, NULL);
+INSERT INTO `tb_tipe` VALUES (13, 'TP/013', 'Merchant Pembayaran', '2019-08-08 11:16:12', '2019-08-08 11:16:52', NULL, 'Administrator', 'Administrator', NULL);
+INSERT INTO `tb_tipe` VALUES (14, 'TP/014', 'Tipe Diskon', '2019-08-08 11:41:43', NULL, NULL, 'Administrator', NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -615,19 +615,25 @@
 				$connector = new WindowsPrintConnector($printer_name);
 				$printer = new Printer($connector);
 				$printer->setJustification(Printer::JUSTIFY_CENTER);
-		 		$printer -> bitImage($logo);
+		 		// $printer -> bitImage($logo);
 				$printer -> text("\n");
 				$printer -> setTextSize(2, 2);
-				$printer -> text('REGULER');
+				$printer -> text('BOOKING');
 				$printer -> text("\n\n");
 
 				$printer->qrCode("POSJS07081900006",Printer::QR_ECLEVEL_L, 8);
-				$printer -> text("\n\n");
+				$printer -> text("\n");
 				$printer -> setTextSize(1,1);
-				$printer -> text("POSJS07081900006");
+				$printer -> text("--- POSJS07081900006 ---");
 				$printer -> text("\n");
 				$tanggal = date('d F Y', strtotime($pos->tanggal));
-				$printer -> text(new format("Tanggal", $tanggal));
+				$printer -> text($tanggal);
+				$printer -> text("\n");
+				$jam_pesan = date('H:i', strtotime($pos->tanggal));
+				$jam_masuk = date('H:i', strtotime($pos->tanggal_masuk));
+				$printer -> text(new format("Jam Pesan", $jam_pesan));
+				$printer -> text(new format("Jam Masuk", $jam_masuk));
+				$printer -> text(new format("NOPOL", "N 4759 GH"));				
 				$printer -> text(new format("Kendaraan", "DAIHATSU | AYLA"));				
 				$printer -> text("--------------------------------\n");
 
