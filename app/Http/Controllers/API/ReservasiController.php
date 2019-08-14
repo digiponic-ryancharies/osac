@@ -78,6 +78,7 @@ class ReservasiController extends Controller
 
         // get booked time
         $getServiceTime = DB::table('tb_penjualan_jasa')
+            ->where('id_cabang', $cabang)
             ->where('tanggal', '>', $tgl . " 02:00:00")
             ->where('tanggal', '<', $tgl . " 22:00:00")
             ->select('tanggal', 'total_slot')
@@ -110,17 +111,23 @@ class ReservasiController extends Controller
         while ($time < $close) {
             $time = date("H:i", strtotime($time) + $secs);
             if ($tgl > date("Y-m-d")) {
-                if (!in_array($time, $break)) {
-                    $slots[] = $time;
-                }
+//                if (!in_array($time, $break)) {
+                $slots[] = $time;
+//                }
             } else {
-                if (!in_array($time, $break) && $time > date("H:i")) {
+//                if (!in_array($time, $break) && $time > date("H:i")) {
+                if ($time > date("H:i")) {
                     $slots[] = $time;
                 }
             }
         }
 
-        return response()->json(['error' => false, 'msg' => 'Daftar Waktu Booking', 'data' => $slots], $this->successStatus);
+        $res = array_diff($slots, $break);
+        $result = [];
+        foreach ($res as $r) {
+            $result[] = $r;
+        }
+        return response()->json(['error' => false, 'msg' => 'Daftar Waktu Booking', 'data' => $result], $this->successStatus);
 
     }
 
@@ -275,11 +282,19 @@ class ReservasiController extends Controller
             ->where('id_penjualan_jasa', $data->id)
             ->get();
 
+        $checkin = date("Y-m-d H:i:s");
+        if ($data->tanggal_masuk == null) {
+            DB::table('tb_penjualan_jasa')
+                ->where('id', $data->id)
+                ->update([
+                    'tanggal_masuk' => $checkin
+                ]);
+        }
+
         $data->tanggal = $this->convertDate($data->tanggal, 'indo');
-        $data->tanggal_masuk = $this->convertDate($data->tanggal_masuk, 'indo');
+        $data->tanggal_masuk = ($data->tanggal_masuk == null ? $this->convertDate($checkin, 'indo') : $this->convertDate($data->tanggal_masuk, 'indo'));
         $data->detail_jasa = $detailBooking;
 
         return response()->json(['error' => false, 'msg' => 'Detail Booking', 'data' => $data], $this->successStatus);
-
     }
 }
