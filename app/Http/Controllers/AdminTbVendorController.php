@@ -5,14 +5,14 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminTbMerekKendaraanController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminTbVendorController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "nama";
 			$this->limit = "20";
-			$this->orderby = "id,asc";
+			$this->orderby = "kode,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -20,38 +20,51 @@
 			$this->button_add = true;
 			$this->button_edit = true;
 			$this->button_delete = true;
-			$this->button_detail = false;
-			$this->button_show = false;
+			$this->button_detail = true;
+			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tb_merek_kendaraan";
+			$this->table = "tb_vendor";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Gambar","name"=>"gambar","image"=>true];
-			$this->col[] = ["label"=>"Nama","name"=>"keterangan"];
+			$this->col[] = ["label"=>"Kode","name"=>"kode"];
+			$this->col[] = ["label"=>"Nama","name"=>"nama"];
+			$this->col[] = ["label"=>"Kota","name"=>"id_kota","join"=>"tb_kota,keterangan"];
+			$this->col[] = ["label"=>"Telepon","name"=>"telepon"];
+			$this->col[] = ["label"=>"Email","name"=>"email"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
-			$kode = DB::table('tb_merek_kendaraan')->max('id') + 1;
-			$kode = 'MRK/'.str_pad($kode,5,0,STR_PAD_LEFT);
+			$kode = DB::table('tb_vendor')->count('id') + 1;
+			$kode = 'V'.str_pad($kode,3,0,STR_PAD_LEFT);
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10','value'=>$kode];
-			$this->form[] = ['label'=>'Nama','name'=>'keterangan','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Silahkan ketikkan nama merek kendanaraan'];
-			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','validation'=>'image|max:500','width'=>'col-sm-10','help'=>'Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP | max 500KB'];
+			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
+			$this->form[] = ['label'=>'Nama','name'=>'nama','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Cth: Surya Jawa Eco'];
+			$this->form[] = ['label'=>'Telepon','name'=>'telepon','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','placeholder'=>'Cth: 08511111111'];
+			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'min:1|max:255|email|unique:tb_vendor','width'=>'col-sm-10','placeholder'=>'Mohon input alamat email dengan benar'];
+			$this->form[] = ['label'=>'Provinsi','name'=>'id_provinsi','type'=>'select','validation'=>'integer|min:0','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
+			$this->form[] = ['label'=>'Kota','name'=>'id_kota','type'=>'select','validation'=>'integer|min:0','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'id_provinsi'];
+			$this->form[] = ['label'=>'Kecamatan','name'=>'id_kecamatan','type'=>'select','validation'=>'integer|min:0','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'id_kota'];
+			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','validation'=>'string|min:5|max:5000','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
 			//$this->form[] = ["label"=>"Kode","name"=>"kode","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			//$this->form[] = ["label"=>"Nama","name"=>"nama","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"Anda hanya dapat memasukkan huruf saja"];
-			//$this->form[] = ["label"=>"Gambar","name"=>"gambar","type"=>"upload","required"=>TRUE,"validation"=>"required|image|max:3000","help"=>"Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP"];
-			//$this->form[] = ["label"=>"Created By","name"=>"created_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Updated By","name"=>"updated_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Deleted By","name"=>"deleted_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Telepon","name"=>"telepon","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Email","name"=>"email","type"=>"email","required"=>TRUE,"validation"=>"required|min:1|max:255|email|unique:tb_vendor","placeholder"=>"Mohon input alamat email dengan benar"];
+			//$this->form[] = ["label"=>"Alamat","name"=>"alamat","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
+			//$this->form[] = ["label"=>"Kode Provinsi","name"=>"kode_provinsi","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Kode Kota","name"=>"kode_kota","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Kode Kecamatan","name"=>"kode_kecamatan","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Created User","name"=>"created_user","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Updated User","name"=>"updated_user","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Deleted User","name"=>"deleted_user","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			# OLD END FORM
 
 			/* 
@@ -67,7 +80,7 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-			$this->sub_module[] = ['label'=>'','title'=>'Kendaraan','path'=>'tb_kendaraan','parent_columns'=>'kode,keterangan','foreign_key'=>'id_merek_kendaraan','button_color'=>'danger','button_icon'=>'fa fa-car'];
+
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -261,7 +274,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			$postdata['created_by'] = CRUDBooster::myName();
+
 	    }
 
 	    /* 
@@ -286,7 +299,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-			$postdata['updated_by'] = CRUDBooster::myName();
+
 	    }
 
 	    /* 
@@ -322,9 +335,7 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
-			DB::table('tb_produk')->where('id',$id)->update([
-				'deleted_by'	=> CRUDBooster::myName()
-			]);
+
 	    }
 
 

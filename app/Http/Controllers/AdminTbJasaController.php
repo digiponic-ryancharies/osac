@@ -12,7 +12,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id,asc";
+			$this->orderby = "id_jenis_jasa,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -31,8 +31,9 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];			
 			$this->col[] = ["label"=>"Jenis","name"=>"id_jenis_jasa",'join'=>'tb_general,keterangan'];
-			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
 			$this->col[] = ["label"=>"Gambar","name"=>"gambar","image"=>true];
+			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
+			$this->col[] = ["label"=>"Vendor","name"=>"id_vendor","join"=>"tb_vendor,nama"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 			
 			$kode = DB::table('tb_jasa')->max('id') + 1;
@@ -42,6 +43,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'','name'=>'kode','type'=>'hidden','width'=>'col-sm-10','value'=>$kode];
 			$this->form[] = ['label'=>'Jenis Jasa','name'=>'id_jenis_jasa','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 4'];
+			$this->form[] = ['label'=>'Vendor','name'=>'id_vendor','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_vendor,nama','value'=>1];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Deskripsi','name'=>'deskripsi','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','validation'=>'image|max:500','width'=>'col-sm-10','help'=>'Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP | MAX 500KB','encrypt'=>true];
@@ -71,8 +73,8 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-			$this->sub_module[] = ['label'=>'','path'=>'tb_durasi_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'info','button_icon'=>'fa fa-clock-o'];
-			$this->sub_module[] = ['label'=>'','path'=>'tb_harga_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'danger','button_icon'=>'fa fa-money'];
+			$this->sub_module[] = ['title'=>'Durasi','path'=>'tb_durasi_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'info','button_icon'=>'fa fa-clock-o'];
+			$this->sub_module[] = ['title'=>'Harga','path'=>'tb_harga_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'danger','button_icon'=>'fa fa-money'];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 

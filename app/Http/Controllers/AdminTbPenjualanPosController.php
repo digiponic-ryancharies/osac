@@ -34,19 +34,21 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
+			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal","callback"=>function($row){
+				return date('d-m-y | H:i',strtotime($row->tanggal));				
+			}];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
-			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
 			$this->col[] = ["label"=>"Nama Pelanggan","name"=>"nama_pelanggan"];
 			$this->col[] = ["label"=>"Total","name"=>"total"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
-			$kode = DB::table('tb_penjualan_pos')->max('id') + 1;
+			$kode = DB::table('tb_penjualan_pos')->whereDate('created_at',date('Y-m-d'))->count('id') + 1;
 			$kode = 'POS'.date('dmy').''.str_pad($kode,5,0,STR_PAD_LEFT);
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
-			$this->form[] = ['label'=>'Nama Pelanggan','name'=>'nama_pelanggan','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-10','placeholder'=>'Cth: Deni','help'=>'*Isi dengan nama pelanggan'];
+			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-4','readonly'=>'true','value'=>$kode];
+			$this->form[] = ['label'=>'Nama Pelanggan','name'=>'nama_pelanggan','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-4','placeholder'=>'Cth: Deni','help'=>'*Isi dengan nama pelanggan'];
 
 			$columns[] = ['label'=>'Produk','name'=>'id_produk','type'=>'datamodal','required'=>true,'datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga','datamodal_columns_alias'=>'Produk,Harga','datamodal_select_to'=>'harga:harga','datamodal_where'=>'status = 1','datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','readonly'=>true,'required'=>true];
@@ -55,10 +57,16 @@
 			// $columns[] = ['label'=>'Nominal Diskon','name'=>'diskon_nominal','type'=>'number'];
 			$columns[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'number','required'=>true,'formula'=>"[quantity] * [harga]","readonly"=>true];
 			$this->form[] = ['label'=>'Detail Penjualan','name'=>'penjualan_pos_detail','type'=>'child','columns'=>$columns,'table'=>'tb_penjualan_pos_detail','foreign_key'=>'id_penjualan_pos'];
-			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money','width'=>'col-sm-10','readonly'=>true,'value'=>0];
-			$this->form[] = ['label'=>'Diskon Tipe','name'=>'diskon_tipe','type'=>'radio','width'=>'col-sm-10','dataenum'=>'0|Nominal;1|Persen','value'=>0];
-			$this->form[] = ['label'=>'Nominal Diskon','name'=>'diskon_nominal','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-10','value'=>0];
-			$this->form[] = ['label'=>'Total','name'=>'total','type'=>'money','width'=>'col-sm-10','readonly'=>true,'value'=>0];
+			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money','width'=>'col-sm-4','readonly'=>true,'value'=>0];
+			$this->form[] = ['label'=>'Diskon Tipe','name'=>'diskon_tipe','type'=>'radio','width'=>'col-sm-4','dataenum'=>'0|Nominal;1|Persen','value'=>0,'inline'=> true];
+			$this->form[] = ['label'=>'Nominal Diskon','name'=>'diskon_nominal','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-4','value'=>0];
+			$this->form[] = ['label'=>'Total','name'=>'total','type'=>'money','width'=>'col-sm-4','readonly'=>true,'value'=>0];
+			$this->form[] = ['label'=>'Metode Pembayaran','name'=>'metode_pembayaran','validation'=>'','type'=>'radio','width'=>'col-sm-4','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 12','value'=>29,'inline'=> true];
+			$this->form[] = ['label'=>'Merchant','name'=>'id_merchant','type'=>'select2','width'=>'col-sm-4','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 13'];
+			$this->form[] = ['label'=>'No Kartu','name'=>'nomor_kartu','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Kode Trace','name'=>'kode_trace','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Bayar','name'=>'bayar','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-4'];
+			$this->form[] = ['label'=>'Kembalian','name'=>'kembalian','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-4','readonly'=>true];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -160,7 +168,19 @@
 	        | @label, @count, @icon, @color 
 	        |
 	        */
-	        $this->index_statistic = array();
+			$_omset = DB::table('tb_penjualan_pos')->whereDate('tanggal',date('Y-m-d'));
+			if(!CRUDBooster::isSuperadmin()) $_omset->where('id_cabang', CRUDBooster::myCabangId());			
+			$x = $_omset->sum('total');
+			$omset_h = number_format($x,0,',','.');
+			
+			$_omset = DB::table('tb_penjualan_pos')->whereMonth('tanggal',date('m'));
+			if(!CRUDBooster::isSuperadmin()) $_omset->where('id_cabang', CRUDBooster::myCabangId());			
+			$x = $_omset->sum('total');
+			$omset_b = number_format($x,0,',','.');
+			
+			$this->index_statistic = array();
+	        $this->index_statistic[] = ['label'=>'OMSET HARI INI','count'=>$omset_h,'icon'=>'fa fa-money','color'=>'success'];
+	        $this->index_statistic[] = ['label'=>'OMSET BULAN INI','count'=>$omset_b,'icon'=>'fa fa-money','color'=>'warning'];
 
 
 
@@ -173,27 +193,41 @@
 	        |
 	        */
 			$this->script_js = "
-			
+
+				function numberFormat(number){
+					return Number(number.replace(/[^0-9\,]+/g,''));
+				}
+
 				$(function(){
 
 					$('#detailpenjualanharga').val(0);
 					$('#detailpenjualanquantity').val(0);
 					$('#detailpenjualansubtotal').val(0);
+					var _stokPrd = 0;
 
 					setInterval(function() {
-
-						// var harga = $('#detilpenjualanharga').val();
+						var _id = $('#detailpenjualanid_produk .input-id').val();
+						var _url = '".CRUDBooster::apiPath('produk')."';
 						
-						// var diskon_produk = $('#detilpenjualandiskon').val();
-						// var subtotal_produk = $('#detilpenjualansubtotal').val();
-						// var grand_total_produk = 0;
-
-						// $('#detilpenjualangrand_total').val(grand_total_produk);
+						if(_id != null && _id != ''){
+							$.ajax({
+								method: 'GET',
+								url: _url,
+								data: {id: _id},
+								success: function(res){
+									console.log(res);
+									_stokPrd = res[0].stok;
+								},
+								error: function(err){
+									console.log(err);
+								}
+							});
+						}
 					
 						var subtotal = 0;
 						var total = 0;
 						$('#table-detailpenjualan tbody .subtotal').each(function() {
-							subtotal += parseInt($(this).text());
+							subtotal += numberFormat($(this).text());
 						})
 						$('#subtotal').val(subtotal);
 						
@@ -209,35 +243,33 @@
 						}
 						
 						$('#total').val(total);
+						$('.inputMoney').priceFormat({'prefix':'','thousandsSeparator':'.','centsLimit':'0','clearOnEmpty':false});
 
-						// var subtotal = 0;
-						// subtotal += total;
-						// $('#subtotal').val(subtotal); 
-						
-						// var pajak = $('#pajak').val();
-						// var diskon_tipe = $('input[name=diskon_tipe]:checked').val();
-						// var diskon_keseluruhan = $('#diskon').val();
-						// var subtotal = 	$('#subtotal').val();
-						// var grand_total_keseluruhan = 0;
+					}, 1000);	
 
-						// if(diskon_tipe =='Nominal'){
-						// 	grand_total_keseluruhan = subtotal - diskon_keseluruhan;
-						// }else{
-						// 	var diskon_keseluruhan_ = (diskon_keseluruhan/100) * subtotal;
-						// 	grand_total_keseluruhan = subtotal - diskon_keseluruhan_;
-							
-						// }	
-						// var pajak_ = (pajak/100) * subtotal;
-						// grand_total_keseluruhan_pajak = grand_total_keseluruhan + pajak_;		
-						// $('#grand_total').val(grand_total_keseluruhan_pajak);
-				
-						// var xx = ".CRUDBooster::getSetting('minimal_belanja').";
-						// if(grand_total_keseluruhan_pajak > xx){
-						// 	$('#ongkos_kirim').val('GRATIS');
-						// }else{
-						// 	$('#ongkos_kirim').val(temp);
-						// }
-					},500);	
+					$('input.input-id').change(function(){						
+						$('#detailpenjualanquantity').val(1).trigger('change');
+					});
+
+					$('#detailpenjualanquantity').on('keydown keyup', function(e){
+						if ($(this).val() > _stokPrd 
+							&& e.keyCode !== 46 // keycode for delete
+							&& e.keyCode !== 8 // keycode for backspace
+						   ) {
+						   e.preventDefault();
+						   $(this).val(_stokPrd);
+						}
+					});
+
+					$('#bayar').keyup(function(){
+						var bayar = numberFormat($(this).val());						
+						var total = numberFormat($('#total').val());						
+						var kembalian = parseInt(bayar) - parseInt(total);		
+						kembalian = (kembalian < 0) ? 0 : kembalian;
+						console.log(kembalian);				
+						$('#kembalian').val(kembalian);
+					});
+
 				});					
 				";
 
@@ -327,7 +359,10 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-	            
+			if(!CRUDBooster::isSuperadmin()){
+				$id_cabang = CRUDBooster::myCabangId();
+				$query->where('id_cabang', $id_cabang);
+			}
 	    }
 
 	    /*
@@ -497,6 +532,7 @@
 			$printer_name = CRUDBooster::getSetting('printer');
 
 			$pos = CRUDBooster::first('tb_penjualan_pos', $id);
+			$metode = CRUDBooster::first('tb_general', $pos->metode_pembayaran);
 			$posd = DB::table('tb_penjualan_pos_detail')->where('id_penjualan_pos', $pos->id)->get();
 
 			try {
@@ -520,7 +556,8 @@
 					$printer -> text(new item($value->quantity.' x '.number_format($value->harga,0,',','.'), $value->subtotal));
 				}
 				$printer -> feed();
-
+				$printer -> text("--------------------------------\n");
+				
 				$printer -> setJustification(Printer::JUSTIFY_CENTER);
 				$printer -> text(new item("Subtotal", $pos->subtotal));
 				if($pos->diskon_tipe === 0){
@@ -530,9 +567,11 @@
 				}
 				$printer -> text(new item("Diskon", $diskon));
 				$printer -> text(new item("Grand Total", $pos->total));
+				$printer -> text(new item($metode->keterangan, $pos->bayar));
+				$printer -> text(new item("Kembalian", $pos->kembalian));
 				$printer -> feed();
 
-				$printer -> text("Terima kasih\n\n");
+				$printer -> text("Terima kasih\n");
 				$printer -> text("Kepuasan anda \n merupakan prestasi kami\n");
 
 				$printer -> feed(3);			

@@ -49,13 +49,14 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'hidden','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>true,'value'=>$kode];			
+			$this->form[] = ['label'=>'Jenis','name'=>'id_jenis','type'=>'radio','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 3','value'=>5,'inline'=>true];
 			$this->form[] = ['label'=>'Nama Produk','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','placeholder'=>'Silahkan beri nama produk'];
-			$this->form[] = ['label'=>'Jenis','name'=>'id_jenis','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 3'];
-			$this->form[] = ['label'=>'Merek','name'=>'id_merek','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 6'];
-			$this->form[] = ['label'=>'Kategori','name'=>'id_kategori','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 2'];
-			$this->form[] = ['label'=>'Satuan','name'=>'id_satuan','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 1'];
+			// $this->form[] = ['label'=>'Jenis','name'=>'id_jenis','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 3'];
+			$this->form[] = ['label'=>'Merek','name'=>'id_merek','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 6'];
+			$this->form[] = ['label'=>'Kategori','name'=>'id_kategori','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 2'];
+			$this->form[] = ['label'=>'Satuan','name'=>'id_satuan','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 1'];
 			$this->form[] = ['label'=>'Harga','name'=>'harga','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','value'=>0];
-			$this->form[] = ['label'=>'Dijual','name'=>'status','type'=>'radio','validation'=>'required','width'=>'col-sm-10','dataenum'=>'1|Ya;0|Tidak','value'=>1];
+			$this->form[] = ['label'=>'Dijual','name'=>'status','type'=>'radio','width'=>'col-sm-10','dataenum'=>'1|Ya;0|Tidak','value'=>1,'inline'=>true];
 			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','validation'=>'image|max:500','encrypt'=>true,'width'=>'col-sm-10','help'=>'*maksimal ukuran file 500KB'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -281,8 +282,10 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
-			$postdata['stok'] = 0;
+			$postdata['stok'] = ($postdata['id_jenis_jasa'] == 37) ? 1000000 : 0;			
 			$postdata['created_by'] = CRUDBooster::myName();
+			$postdata['id_kategori'] = (empty($postdata['id_kategori'])) ? 38 : $postdata['id_kategori'];
+			$postdata['id_satuan'] = (empty($postdata['id_satuan'])) ? 39 : $postdata['id_satuan'];
 	    }
 
 	    /*
@@ -316,7 +319,8 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
-
+			$postdata['id_kategori'] = (empty($postdata['id_kategori'])) ? 38 : $postdata['id_kategori'];
+			$postdata['id_satuan'] = (empty($postdata['id_satuan'])) ? 39 : $postdata['id_satuan'];
 	    }
 
 	    /*
