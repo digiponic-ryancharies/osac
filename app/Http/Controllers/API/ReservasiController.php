@@ -131,13 +131,15 @@ class ReservasiController extends Controller
 
     }
 
-    public function reservasiPelanggan($idPelanggan)
+    public function reservasiPelanggan($idPelanggan, $status)
     {
         $booking = DB::table('tb_penjualan_jasa as pj')
             ->join('tb_cabang as cb', 'cb.id', '=', 'pj.id_cabang')
             ->join('tb_general as gn', 'gn.id', '=', 'pj.status_penjualan')
             ->where('id_pelanggan', $idPelanggan)
-            ->select('pj.id', 'cb.nama_cabang', 'pj.kode', 'pj.tanggal', 'pj.nama_pelanggan', 'pj.merek_kendaraan', 'pj.nama_kendaraan', 'pj.nomor_polisi', 'pj.total', 'gn.keterangan as status')
+            ->where('pj.status_pembayaran', $status)
+            ->select('pj.id', 'cb.nama_cabang', 'pj.kode', 'pj.tanggal', 'pj.tanggal_masuk', 'pj.nama_pelanggan', 'pj.merek_kendaraan', 'pj.nama_kendaraan', 'pj.nomor_polisi', 'pj.total', 'gn.keterangan as status')
+            ->orderBy('pj.tanggal', 'desc')
             ->get();
 
         $result = [];
@@ -148,6 +150,7 @@ class ReservasiController extends Controller
                 ->get();
 
             $data->tanggal = $this->convertDate($data->tanggal, 'indo');
+            $data->tanggal_masuk = $this->convertDate($data->tanggal_masuk, 'indo');
             $data->detail_jasa = $detailBooking;
             $result[] = $data;
         }
@@ -258,6 +261,7 @@ class ReservasiController extends Controller
                 'total'              => $total,
                 'total_slot'         => ceil($pengerjaan / $interval),
                 'status_penjualan'   => 28,
+                'status_pembayaran'  => 25,
                 'created_at'         => date("Y-m-d H:i:s"),
                 'created_by'         => 'api'
             ]
