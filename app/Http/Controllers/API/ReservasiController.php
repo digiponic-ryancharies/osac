@@ -89,7 +89,8 @@ class ReservasiController extends Controller
         $time2 = $getTime->interval_jasa;
         $secs = strtotime($time2) - strtotime("00:00");
         $close = $getTime->jam_tutup;
-        $break = ["12:00", "12:30", $close];
+//        $break = ["12:00", "12:30", $close];
+        $break = [$close];
 
         // add booked time to break
         foreach ($getServiceTime as $gs) {
