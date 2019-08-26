@@ -7,7 +7,8 @@
 
 	use Mike42\Escpos\Printer;
 	use Mike42\Escpos\EscposImage;
-	use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+	use Mike42\Escpos\CapabilityProfile;
+	use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;	
 
 	class AdminTbPenjualanPosController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -39,7 +40,7 @@
 			}];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
 			$this->col[] = ["label"=>"Nama Pelanggan","name"=>"nama_pelanggan"];
-			$this->col[] = ["label"=>"Total","name"=>"total"];
+			$this->col[] = ["label"=>"Total","name"=>"total",'callback_php'=>'number_format($row->total,0,",",".")'];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$kode = DB::table('tb_penjualan_pos')->whereDate('created_at',date('Y-m-d'))->count('id') + 1;
@@ -528,7 +529,11 @@
 	    //By the way, you can still create your own method in here... :) 
 		public function getPrintStruk($id = null)
 		{
-			$logo = EscposImage::load("logo_black.png", false);
+			$myip = Request::ip();
+			$cabang = CRUDBooster::myCabang();
+			$image = storage_path('app/'.$cabang->logo_struk);
+
+			$logo = EscposImage::load($image, false);
 			$printer_name = CRUDBooster::getSetting('printer');
 
 			$pos = CRUDBooster::first('tb_penjualan_pos', $id);
@@ -536,8 +541,9 @@
 			$posd = DB::table('tb_penjualan_pos_detail')->where('id_penjualan_pos', $pos->id)->get();
 
 			try {
-				$connector = new WindowsPrintConnector($printer_name);
-				$printer = new Printer($connector);
+				$profile = CapabilityProfile::load("simple");
+				$connector = new WindowsPrintConnector('smb://Guest@'.$myip.'/'.$printer_name);
+				$printer = new Printer($connector, $profile);
 				$printer->setJustification(Printer::JUSTIFY_CENTER);
 		 		$printer -> bitImage($logo);
 				$printer -> text("\n");

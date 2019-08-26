@@ -31,9 +31,9 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
+			$this->col[] = ["label"=>"Cabang","name"=>"id_cabang",'join'=>'tb_cabang,nama_cabang'];			
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
 			$this->col[] = ["label"=>"Jabatan","name"=>"jabatan",'join'=>'tb_general,keterangan'];		
-			// $this->col[] = ["label"=>"Cabang","name"=>"cabang_id",'join'=>'tb_general,keterangan'];			
 			$this->col[] = ["label"=>"Nama","name"=>"nama"];
 			$this->col[] = ["label"=>"Jenis Kelamin","name"=>"jenis_kelamin"];
 			$this->col[] = ["label"=>"Telepon","name"=>"telepon"];
@@ -53,8 +53,10 @@
 			$this->form[] = ['label'=>'Status Perkawinan','name'=>'status_perkawinan','type'=>'radio','validation'=>'required|min:1|max:255','width'=>'col-sm-10','dataenum'=>'Belum Kawin;Kawin;Duda;Janda;Lainnya','value'=>'Belum Kawin'];
 			// $this->form[] = ['label'=>'Cabang','name'=>'cabang_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 2'];
 			$this->form[] = ['label'=>'Telepon','name'=>'telepon','type'=>'text','validation'=>'required|max:15','width'=>'col-sm-10','value'=>'+62'];
+			$this->form[] = ['label'=>'Cabang','name'=>'id_cabang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_cabang,nama_cabang'];
 			$this->form[] = ['label'=>'Jabatan','name'=>'jabatan','type'=>'select2','validation'=>'min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 9'];
 			$this->form[] = ['label'=>'Gaji Pokok','name'=>'gaji_pokok','type'=>'number','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Beri Insentif','name'=>'insentif','type'=>'radio','width'=>'col-sm-10','dataenum'=>'0|Tidak;1|Ya','value'=>'0','inline'=>true,'help'=>'insentif penjualan jasa car wash'];
 			$this->form[] = ['label'=>'Provinsi','name'=>'id_provinsi','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
 			$this->form[] = ['label'=>'Kota','name'=>'id_kota','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'id_provinsi'];
 			$this->form[] = ['label'=>'Kecamatan','name'=>'id_kecamatan','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'id_kota'];
@@ -292,7 +294,10 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-
+			if(!CRUDBooster::isSuperadmin()){
+				$id_cabang = CRUDBooster::myCabangId();
+				$query->where('id_cabang', $id_cabang);
+			}
 	    }
 
 	    /*

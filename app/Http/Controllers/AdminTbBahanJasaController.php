@@ -1,18 +1,18 @@
 <?php namespace App\Http\Controllers;
 
 	use Session;
-	use Request;
+	use Illuminate\Http\Request;
 	use DB;
 	use CRUDBooster;
 
-	class AdminTbJasaController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminTbBahanJasaController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id_jenis_jasa,asc";
+			$this->orderby = "id,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -25,43 +25,54 @@
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tb_jasa";
+			$this->table = "tb_bahan_jasa";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
-			$this->col = [];			
-			$this->col[] = ["label"=>"Jenis","name"=>"id_jenis_jasa",'join'=>'tb_general,keterangan'];
-			$this->col[] = ["label"=>"Gambar","name"=>"gambar","image"=>true];
+			$this->col = [];
+			$this->col[] = ["label"=>"Kode","name"=>"kode"];
+			$this->col[] = ["label"=>"Barcode","name"=>"barcode"];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
-			$this->col[] = ["label"=>"Vendor","name"=>"id_vendor","join"=>"tb_vendor,nama"];
+			$this->col[] = ["label"=>"Jenis","name"=>"id_jenis","join"=>"tb_general,keterangan"];
+			$this->col[] = ["label"=>"Merek","name"=>"id_merek","join"=>"tb_general,keterangan"];
+			// $this->col[] = ["label"=>"Satuan","name"=>"id_satuan","join"=>"tb_general,keterangan"];
+			$this->col[] = ["label"=>"Stok","name"=>"stok"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
-			
-			$kode = DB::table('tb_jasa')->max('id') + 1;
-			$kode = 'JS'.str_pad($kode,5,0,STR_PAD_LEFT);
+
+			$kode = DB::table('tb_bahan_jasa')->max('id') + 1;
+			$kode = 'BHN'.str_pad($kode,5,0,STR_PAD_LEFT);
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'','name'=>'kode','type'=>'hidden','width'=>'col-sm-10','value'=>$kode];
-			// $this->form[] = ['label'=>'Jenis Jasa','name'=>'id_jenis_jasa','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 4'];
-			$this->form[] = ['label'=>'Jenis Jasa','name'=>'id_jenis_jasa','type'=>'radio','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 4','inline'=>true,'value'=>6];
-			$this->form[] = ['label'=>'Vendor','name'=>'id_vendor','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_vendor,nama','value'=>1];
-			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','placeholder'=>'Cth: Quick Wash Plus Waxing'];
-			$this->form[] = ['label'=>'Insentif','name'=>'insentif','type'=>'money','validation'=>'required|min:1|max:255','width'=>'col-sm-10','help'=>'Nominal insentif yang akan dibagikan ke kru / teknisi','placeholder'=>'Cth: 8.000'];
-			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','validation'=>'image|max:500','width'=>'col-sm-10','help'=>'Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP | MAX 500KB','encrypt'=>true];
-			$this->form[] = ['label'=>'Deskripsi','name'=>'deskripsi','type'=>'textarea','validation'=>'required|string|min:50|max:5000','width'=>'col-sm-10','placeholder'=>'Minimal deskripsi 50 kata'];
-			// $this->form[] = ['label'=>'Menggunakan Bahan','name'=>'is_komposisi','type'=>'radio','width'=>'col-sm-10','dataenum'=>'1|Ya;0|Tidak','value'=>0,'inline'=>true,'help'=>'Menu pengisian bahan akan muncul setelah data disimpan'];			
-			$columns[] = ['label'=>'Bahan','name'=>'id_bahan_jasa','type'=>'select','datatable'=>'tb_bahan_jasa,keterangan'];
-			$columns[] = ['label'=>'Qty','name'=>'quantity','type'=>'number'];									
-			$columns[] = ['label'=>'Satuan','name'=>'satuan','type'=>'text','readonly'=>true];																		
-			$this->form[] = ['label'=>'Penggunaan Bahan','name'=>'bahan_jasa','type'=>'child','columns'=>$columns,'table'=>'tb_jasa_bahan','foreign_key'=>'id_jasa'];
+			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','width'=>'col-sm-10','readonly'=>true,'value'=>$kode];
+			$this->form[] = ['label'=>'Barcode','name'=>'barcode','type'=>'text','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			// $this->form[] = ['label'=>'Jenis','name'=>'id_jenis','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 3'];
+			$this->form[] = ['label'=>'Satuan','name'=>'id_satuan','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 1'];			
+			$this->form[] = ['label'=>'Merek','name'=>'id_merek','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 6'];
+			$this->form[] = ['label'=>'Kategori','name'=>'id_kategori','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 15'];			
+			// $this->form[] = ['label'=>'Harga','name'=>'harga','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$columns[] = ['label'=>'Satuan','name'=>'id_satuan','type'=>'select','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 1'];
+			$columns[] = ['label'=>'Pengali','name'=>'pengali','type'=>'number'];
+			$this->form[] = ['label'=>'Satuan Bertingkat','name'=>'bahan_jasa_satuan','type'=>'child','columns'=>$columns,'table'=>'tb_bahan_jasa_satuan','foreign_key'=>'id_produk'];
+			// $this->form[] = ['label'=>'Satuan Pemakaian','name'=>'id_satuan','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 1'];
+			// $this->form[] = ['label'=>'Stok','name'=>'stok','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			// $this->form[] = ['label'=>'Status','name'=>'status','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			// $this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','validation'=>'required|image|max:3000','width'=>'col-sm-10','help'=>'Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
 			//$this->form[] = ["label"=>"Kode","name"=>"kode","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			//$this->form[] = ["label"=>"Keterangan","name"=>"keterangan","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Jenis","name"=>"id_jenis","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"jenis,id"];
+			//$this->form[] = ["label"=>"Merek","name"=>"id_merek","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"merek,id"];
+			//$this->form[] = ["label"=>"Kategori","name"=>"id_kategori","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"kategori,id"];
+			//$this->form[] = ["label"=>"Satuan","name"=>"id_satuan","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"satuan,id"];
+			//$this->form[] = ["label"=>"Stok","name"=>"stok","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Harga","name"=>"harga","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Status","name"=>"status","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
 			//$this->form[] = ["label"=>"Gambar","name"=>"gambar","type"=>"upload","required"=>TRUE,"validation"=>"required|image|max:3000","help"=>"Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP"];
-			//$this->form[] = ["label"=>"Deskripsi","name"=>"deskripsi","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
 			//$this->form[] = ["label"=>"Created By","name"=>"created_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			//$this->form[] = ["label"=>"Updated By","name"=>"updated_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			//$this->form[] = ["label"=>"Deleted By","name"=>"deleted_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
@@ -80,9 +91,7 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-			// $this->sub_module[] = ['title'=>'Bahan Baku','path'=>'tb_durasi_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'warning','button_icon'=>'fa fa-bars','showIf'=>'[is_komposisi] == 1'];
-			$this->sub_module[] = ['title'=>'Durasi','path'=>'tb_durasi_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'info','button_icon'=>'fa fa-clock-o'];
-			$this->sub_module[] = ['title'=>'Harga','path'=>'tb_harga_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'danger','button_icon'=>'fa fa-money'];
+			$this->sub_module[] = ['title'=>'Kartu Stok','path'=>'tb_bahan_jasa_stok','parent_columns'=>'kode,keterangan','foreign_key'=>'id_produk','button_color'=>'danger','button_icon'=>'fa fa-cubes'];
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -95,8 +104,7 @@
 	        | @showIf 	   = If condition when action show. Use field alias. e.g : [id] == 1
 	        | 
 	        */
-	        $this->addaction = array();
-
+	        $this->addaction = array();			
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -133,7 +141,7 @@
 	        | 
 	        */
 	        $this->index_button = array();
-
+			$this->index_button[] = ['label'=>'Opname Stok','url'=>CRUDBooster::mainpath("opname"),"icon"=>"fa fa-file-o"];
 
 
 	        /* 
@@ -166,25 +174,7 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-			$this->script_js = "
-				$(function(){
-					$('#penggunaanbahanid_bahan_jasa').change(function(){
-						var id = $(this).val();
-						$.ajax({
-							method: 'GET',
-							url: '".CRUDBooster::apipath('bahan/single')."',
-							data: {id: id},
-							success: function(res){
-								console.log(res);								
-								$('#penggunaanbahansatuan').val(res.satuan);
-							},
-							error: function(err){
-								console.log(err);
-							}
-						});
-					});
-				});
-			";
+	        $this->script_js = NULL;
 
 
             /*
@@ -294,7 +284,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			$postdata['created_by'] = CRUDBooster::myName();
+			// dd($postdata);
 	    }
 
 	    /* 
@@ -319,7 +309,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-			$postdata['updated_by'] = CRUDBooster::myName();
+
 	    }
 
 	    /* 
@@ -355,14 +345,36 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
-			DB::table('tb_jasa')->where('id',$id)->update([
-				'deleted_by'	=> CRUDBooster::myName()
-			]);
+
 	    }
 
 
 
 	    //By the way, you can still create your own method in here... :) 
+		public function getOpname()
+		{
+			$data = [];
+			$data['url'] = CRUDBooster::apiPath();
+			$data['page_title'] = 'Opname Stok Bahan Jasa';			
+			$this->cbView('opname.bahan', $data);
+		}
 
+		public function postOpname(Request $request)
+		{
+			$param = $request->all();	
+
+			DB::table('tb_bahan_jasa')->where('id', $param['id'])->update(['stok' => $param['stok_akhir']]);			
+			DB::table('tb_bahan_jasa_stok')->insert([
+				'id_produk'		=> $param['id'],
+				'tanggal'		=> date('Y-m-d H:i:s'),
+				'stok_masuk'	=> $param['stok_masuk'],
+				'stok_keluar'	=> $param['stok_keluar'],
+				'keterangan'	=> $param['keterangan'],
+				'created_at'	=> date('Y-m-d H:i:s'),
+				'created_by'	=> CRUDBooster::myName()
+			]);
+
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Stok ".$param['keterangan']." berhasil di simpan","primary");
+		}
 
 	}

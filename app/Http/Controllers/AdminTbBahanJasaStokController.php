@@ -5,63 +5,57 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminTbJasaController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminTbBahanJasaStokController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id_jenis_jasa,asc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
-			$this->button_table_action = true;
+			$this->button_table_action = false;
 			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
 			$this->button_add = true;
-			$this->button_edit = true;
-			$this->button_delete = true;
-			$this->button_detail = true;
+			$this->button_edit = false;
+			$this->button_delete = false;
+			$this->button_detail = false;
 			$this->button_show = false;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tb_jasa";
+			$this->table = "tb_bahan_jasa_stok";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
-			$this->col = [];			
-			$this->col[] = ["label"=>"Jenis","name"=>"id_jenis_jasa",'join'=>'tb_general,keterangan'];
-			$this->col[] = ["label"=>"Gambar","name"=>"gambar","image"=>true];
+			$this->col = [];
+			// $this->col[] = ["label"=>"Produk","name"=>"id_produk","join"=>"tb_bahan_jasa,keterangan"];
+			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
+			$this->col[] = ["label"=>"Stok Masuk","name"=>"stok_masuk"];
+			$this->col[] = ["label"=>"Stok Keluar","name"=>"stok_keluar"];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
-			$this->col[] = ["label"=>"Vendor","name"=>"id_vendor","join"=>"tb_vendor,nama"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
-			
-			$kode = DB::table('tb_jasa')->max('id') + 1;
-			$kode = 'JS'.str_pad($kode,5,0,STR_PAD_LEFT);
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'','name'=>'kode','type'=>'hidden','width'=>'col-sm-10','value'=>$kode];
-			// $this->form[] = ['label'=>'Jenis Jasa','name'=>'id_jenis_jasa','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 4'];
-			$this->form[] = ['label'=>'Jenis Jasa','name'=>'id_jenis_jasa','type'=>'radio','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'id_tipe = 4','inline'=>true,'value'=>6];
-			$this->form[] = ['label'=>'Vendor','name'=>'id_vendor','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_vendor,nama','value'=>1];
-			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','placeholder'=>'Cth: Quick Wash Plus Waxing'];
-			$this->form[] = ['label'=>'Insentif','name'=>'insentif','type'=>'money','validation'=>'required|min:1|max:255','width'=>'col-sm-10','help'=>'Nominal insentif yang akan dibagikan ke kru / teknisi','placeholder'=>'Cth: 8.000'];
-			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','validation'=>'image|max:500','width'=>'col-sm-10','help'=>'Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP | MAX 500KB','encrypt'=>true];
-			$this->form[] = ['label'=>'Deskripsi','name'=>'deskripsi','type'=>'textarea','validation'=>'required|string|min:50|max:5000','width'=>'col-sm-10','placeholder'=>'Minimal deskripsi 50 kata'];
-			// $this->form[] = ['label'=>'Menggunakan Bahan','name'=>'is_komposisi','type'=>'radio','width'=>'col-sm-10','dataenum'=>'1|Ya;0|Tidak','value'=>0,'inline'=>true,'help'=>'Menu pengisian bahan akan muncul setelah data disimpan'];			
-			$columns[] = ['label'=>'Bahan','name'=>'id_bahan_jasa','type'=>'select','datatable'=>'tb_bahan_jasa,keterangan'];
-			$columns[] = ['label'=>'Qty','name'=>'quantity','type'=>'number'];									
-			$columns[] = ['label'=>'Satuan','name'=>'satuan','type'=>'text','readonly'=>true];																		
-			$this->form[] = ['label'=>'Penggunaan Bahan','name'=>'bahan_jasa','type'=>'child','columns'=>$columns,'table'=>'tb_jasa_bahan','foreign_key'=>'id_jasa'];
+			$this->form[] = ['label'=>'Produk','name'=>'id_produk','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'produk,id'];
+			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Stok Masuk','name'=>'stok_masuk','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Stok Keluar','name'=>'stok_keluar','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Created By','name'=>'created_by','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Updated By','name'=>'updated_by','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Deleted By','name'=>'deleted_by','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Kode","name"=>"kode","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Produk","name"=>"id_produk","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"produk,id"];
+			//$this->form[] = ["label"=>"Tanggal","name"=>"tanggal","type"=>"datetime","required"=>TRUE,"validation"=>"required|date_format:Y-m-d H:i:s"];
+			//$this->form[] = ["label"=>"Stok Masuk","name"=>"stok_masuk","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Stok Keluar","name"=>"stok_keluar","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
 			//$this->form[] = ["label"=>"Keterangan","name"=>"keterangan","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Gambar","name"=>"gambar","type"=>"upload","required"=>TRUE,"validation"=>"required|image|max:3000","help"=>"Tipe file yang didukung: JPG, JPEG, PNG, GIF, BMP"];
-			//$this->form[] = ["label"=>"Deskripsi","name"=>"deskripsi","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
 			//$this->form[] = ["label"=>"Created By","name"=>"created_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			//$this->form[] = ["label"=>"Updated By","name"=>"updated_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			//$this->form[] = ["label"=>"Deleted By","name"=>"deleted_by","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
@@ -80,9 +74,7 @@
 	        | 
 	        */
 	        $this->sub_module = array();
-			// $this->sub_module[] = ['title'=>'Bahan Baku','path'=>'tb_durasi_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'warning','button_icon'=>'fa fa-bars','showIf'=>'[is_komposisi] == 1'];
-			$this->sub_module[] = ['title'=>'Durasi','path'=>'tb_durasi_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'info','button_icon'=>'fa fa-clock-o'];
-			$this->sub_module[] = ['title'=>'Harga','path'=>'tb_harga_jasa','parent_columns'=>'kode,keterangan','foreign_key'=>'id_jasa','button_color'=>'danger','button_icon'=>'fa fa-money'];
+
 
 	        /* 
 	        | ---------------------------------------------------------------------- 
@@ -166,25 +158,7 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-			$this->script_js = "
-				$(function(){
-					$('#penggunaanbahanid_bahan_jasa').change(function(){
-						var id = $(this).val();
-						$.ajax({
-							method: 'GET',
-							url: '".CRUDBooster::apipath('bahan/single')."',
-							data: {id: id},
-							success: function(res){
-								console.log(res);								
-								$('#penggunaanbahansatuan').val(res.satuan);
-							},
-							error: function(err){
-								console.log(err);
-							}
-						});
-					});
-				});
-			";
+	        $this->script_js = NULL;
 
 
             /*
@@ -294,7 +268,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			$postdata['created_by'] = CRUDBooster::myName();
+
 	    }
 
 	    /* 
@@ -319,7 +293,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
-			$postdata['updated_by'] = CRUDBooster::myName();
+
 	    }
 
 	    /* 
@@ -355,9 +329,7 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
-			DB::table('tb_jasa')->where('id',$id)->update([
-				'deleted_by'	=> CRUDBooster::myName()
-			]);
+
 	    }
 
 

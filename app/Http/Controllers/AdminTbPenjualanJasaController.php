@@ -8,6 +8,7 @@
 
 	use Mike42\Escpos\Printer;
 	use Mike42\Escpos\EscposImage;
+	use Mike42\Escpos\CapabilityProfile;
 	use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
 	class AdminTbPenjualanJasaController extends \crocodicstudio\crudbooster\controllers\CBController {
@@ -55,9 +56,7 @@
 			// $this->col[] = ["label"=>"Merek Kendaraan","name"=>"merek_kendaraan"];
 			$this->col[] = ["label"=>"Kendaraan","name"=>"nama_kendaraan"];
 			$this->col[] = ["label"=>"Pembayaran","name"=>"status_pembayaran","join"=>"tb_general,keterangan"];
-			$this->col[] = ["label"=>"Total","name"=>"total","callback"=>function($row){
-				return number_format($row->total,0,',','.');
-			}];
+			$this->col[] = ["label"=>"Total","name"=>"total",'callback_php'=>'number_format($row->total,0,",",".")'];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$kode = DB::table('tb_penjualan_jasa')->whereDate('created_at',date('Y-m-d'))->count('id') + 1;
@@ -200,12 +199,12 @@
 	        | @label, @count, @icon, @color 
 	        |
 	        */
-			$_omset = DB::table('tb_penjualan_jasa')->whereDate('tanggal',date('Y-m-d'));
+			$_omset = DB::table('tb_penjualan_jasa')->whereDate('tanggal',date('Y-m-d'))->where('status_pembayaran',26);;
 			if(!CRUDBooster::isSuperadmin()) $_omset->where('id_cabang', CRUDBooster::myCabangId());			
 			$x = $_omset->sum('total');
 			$omset_h = number_format($x,0,',','.');
 			
-			$_omset = DB::table('tb_penjualan_jasa')->whereMonth('tanggal',date('m'));
+			$_omset = DB::table('tb_penjualan_jasa')->whereMonth('tanggal',date('m'))->where('status_pembayaran',26);;
 			if(!CRUDBooster::isSuperadmin()) $_omset->where('id_cabang', CRUDBooster::myCabangId());			
 			$x = $_omset->sum('total');
 			$omset_b = number_format($x,0,',','.');
@@ -462,25 +461,25 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			$kendaraan = CRUDBooster::first('tb_kendaraan', $postdata['id_kendaraan']);
-			$merek = CRUDBooster::first('tb_merek_kendaraan', $kendaraan->id_merek_kendaraan);			
+			// $kendaraan = CRUDBooster::first('tb_kendaraan', $postdata['id_kendaraan']);
+			// $merek = CRUDBooster::first('tb_merek_kendaraan', $kendaraan->id_merek_kendaraan);			
 
-			// $postdata['status_pembayaran'] = 25;	// 25 | BELUM BAYAR; 26 | SUDAH BAYAR; TB GENERAL
-			$postdata['status_penjualan'] = 27;	// 27 | REGULER; 28 | BOOKING; TB GENERAL
-			$postdata['created_by'] = CRUDBooster::myName();
-			$postdata['id_cabang'] = CRUDBooster::myCabangId();
-			$postdata['nama_pelanggan'] = (empty($postdata['nama_pelanggan'])) ? 'Walk In Order' : $postdata['nama_pelanggan'];
-			$postdata['id_merek_kendaraan'] = $merek->id;
-			$postdata['merek_kendaraan'] = $merek->keterangan;
-			$postdata['nama_kendaraan'] = $kendaraan->keterangan;
+			// // $postdata['status_pembayaran'] = 25;	// 25 | BELUM BAYAR; 26 | SUDAH BAYAR; TB GENERAL
+			// $postdata['status_penjualan'] = 27;	// 27 | REGULER; 28 | BOOKING; TB GENERAL
+			// $postdata['created_by'] = CRUDBooster::myName();
+			// $postdata['id_cabang'] = CRUDBooster::myCabangId();
+			// $postdata['nama_pelanggan'] = (empty($postdata['nama_pelanggan'])) ? 'Walk In Order' : $postdata['nama_pelanggan'];
+			// $postdata['id_merek_kendaraan'] = $merek->id;
+			// $postdata['merek_kendaraan'] = $merek->keterangan;
+			// $postdata['nama_kendaraan'] = $kendaraan->keterangan;
 
-			if($postdata['metode_pembayaran'] == 30){
-				$postdata['status_pembayaran'] = 26;
-			}else{
-				$postdata['id_merchant'] = NULL;
-				$postdata['nomor_kartu'] = NULL;
-				$postdata['kode_trace'] = NULL;
-			}
+			// if($postdata['metode_pembayaran'] == 30){
+			// 	$postdata['status_pembayaran'] = 26;
+			// }else{
+			// 	$postdata['id_merchant'] = NULL;
+			// 	$postdata['nomor_kartu'] = NULL;
+			// 	$postdata['kode_trace'] = NULL;
+			// }
 
 	    }
 
@@ -492,22 +491,55 @@
 	    | 
 	    */
 	    public function hook_after_add($id) {        
-	        //Your code here
-			$jasa = CRUDBooster::first('tb_penjualan_jasa', $id);
-			$jasa_detail = DB::table('tb_penjualan_jasa_detail')
-								->where('id_penjualan_jasa', $id)
-								->get();
+			//Your code here
+			// $jb_stok = [];
+			// $jasa = CRUDBooster::first('tb_penjualan_jasa', $id);
+			// $jasa_detail = DB::table('tb_penjualan_jasa_detail')
+			// 					->where('id_penjualan_jasa', $id)
+			// 					->get();
 
-			foreach($jasa_detail as $jd) {
-				$js = CRUDBooster::first('tb_jasa',$jd->id_jasa);
-				
-				$array = array(
-					'kode_penjualan_jasa'	=> $jasa->kode,
-					'nama_jasa'				=> $js->keterangan
-				);
+			// foreach($jasa_detail as $jd) {
+			// 	$js = CRUDBooster::first('tb_jasa',$jd->id_jasa);				
+			// 	$array = array(
+			// 		'kode_penjualan_jasa'	=> $jasa->kode,
+			// 		'nama_jasa'				=> $js->keterangan
+			// 	);
+			// 	DB::table('tb_penjualan_jasa_detail')->where('id',$jd->id)->update($array);
 
-				DB::table('tb_penjualan_jasa_detail')->where('id',$jd->id)->update($array);
-			}			
+			// 	$jb = CRUDBooster::get('tb_jasa_bahan','id_jasa = '.$jd->id_jasa);
+			// 	foreach ($jb as $value) {
+			// 		$bahan = CRUDBooster::first('tb_bahan_jasa',$value->id_bahan_jasa);
+			// 		array_push($jb_stok, array(
+			// 			'id_produk'		=> $value->id_bahan_jasa,
+			// 			'tanggal'		=> date('Y-m-d H:i:s'),
+			// 			'stok_masuk'	=> 0,
+			// 			'stok_keluar'	=> $value->quantity,
+			// 			'keterangan'	=> 'Pengurangan stok dari penjualan '.$jasa->kode,
+			// 			'created_at'	=> date('Y-m-d H:i:s'),
+			// 			'created_by'	=> CRUDBooster::myName()
+			// 		));					
+			// 		DB::table('tb_bahan_jasa')->where('id', $value->id_bahan_jasa)->update(['stok' => $bahan->stok - $value->quantity]);
+			// 	}
+			// 	DB::table('tb_bahan_jasa_stok')->insert($jb_stok);
+			// }		
+			
+			$date = date('Y-m-d');
+			$time = date('H:i:s');
+			
+			$shift = DB::table('tb_jam_shift_kerja')->orderby('jam_masuk','ASC')->get();			
+
+			foreach ($shift as $value) {
+				if($time >= $value->jam_masuk && $time <= $value->jam_keluar){					
+					$karyawan = DB::table('tb_karyawan as k')
+									->join('tb_karyawan_shift as ks','ks.id_karyawan','=','k.id')
+									->select('k.id','ks.id_jam_shift_kerja as id_shift')
+									->where('k.insentif',1)
+									->get();
+					
+					break;
+				}
+			}
+			
 	    }
 
 	    /* 
@@ -597,10 +629,9 @@
 	    //By the way, you can still create your own method in here... :) 
 		public function getPrintStruk($id = null)
 		{
+			$myip = Request::ip();
 			$cabang = CRUDBooster::myCabang();
-			// dd($cabang);
 			$image = storage_path('app/'.$cabang->logo_struk);
-			// dd($logo_path);
 
 			$logo = EscposImage::load($image, false);
 			$printer_name = CRUDBooster::getSetting('printer');
@@ -610,7 +641,8 @@
 			$posd = DB::table('tb_penjualan_jasa_detail')->where('id_penjualan_jasa', $pos->id)->get();
 
 			try {
-				$connector = new WindowsPrintConnector($printer_name);
+				$profile = CapabilityProfile::load("simple");
+				$connector = new WindowsPrintConnector('smb://Guest@'.$myip.'/'.$printer_name);
 				$printer = new Printer($connector);
 				$printer->setJustification(Printer::JUSTIFY_CENTER);		 		
 		 		$printer -> bitImage($logo);
@@ -698,12 +730,12 @@
 		// 		foreach ($posd as $value) {
 		// 			$printer -> text(new format("1 x ", $value->nama_jasa));
 		// 		}
-		// 		foreach ($posd as $value) {
-		// 			$printer -> text(new format("1 x ", $value->nama_jasa));
-		// 		}
-		// 		foreach ($posd as $value) {
-		// 			$printer -> text(new format("1 x ", $value->nama_jasa));
-		// 		}
+		// 		// foreach ($posd as $value) {
+		// 		// 	$printer -> text(new format("1 x ", $value->nama_jasa));
+		// 		// }
+		// 		// foreach ($posd as $value) {
+		// 		// 	$printer -> text(new format("1 x ", $value->nama_jasa));
+		// 		// }
 		// 		$printer -> feed();
 
 		// 		// $printer -> setJustification(Printer::JUSTIFY_CENTER);

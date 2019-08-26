@@ -15,26 +15,46 @@
 			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = false;
-			$this->button_bulk_action = false;
+			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
-			$this->button_add = false;
-			$this->button_edit = false;
+			$this->button_add = true;
+			$this->button_edit = true;
 			$this->button_delete = false;
-			$this->button_detail = false;
+			$this->button_detail = true;
 			$this->button_show = true;
 			$this->button_filter = false;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tb_absensi";
+			$this->table = "tb_karyawan";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			// $this->col[] = ["label"=>"Kode Karyawan","name"=>"kode_karyawan"];
-			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
-			$this->col[] = ["label"=>"Jam Masuk","name"=>"jam_masuk"];
-			$this->col[] = ["label"=>"Jam Pulang","name"=>"jam_pulang"];
-			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
+			$this->col[] = ["label"=>"Tanggal",'callback'=>function($row){
+				return date('d-m-Y');
+			}];
+			$this->col[] = ["label"=>"Karyawan","name"=>"nama"];
+			$this->col[] = ["label"=>"Jam Masuk",'callback'=>function($row){
+				$date = date('Y-m-d');
+				$time = DB::table('tb_absensi')->whereDate('timestamp',$date)->where('id_karyawan',$row->id)->min('timestamp');
+				if(empty($time)){
+					return '-';
+				}else{
+					return date('H:i:s', strtotime($time));
+				}
+				
+			}];
+			$this->col[] = ["label"=>"Jam Keluar",'callback'=>function($row){
+				$date = date('Y-m-d');
+				$time1 = DB::table('tb_absensi')->whereDate('timestamp',$date)->where('id_karyawan',$row->id)->min('timestamp');
+				$time2 = DB::table('tb_absensi')->whereDate('timestamp',$date)->where('id_karyawan',$row->id)->max('timestamp');
+				
+				if($time2 > $time1){
+					return date('H:i:s', strtotime($time2));
+				}else{
+					return '-';
+				}
+			}];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$date = date('Y-m-d');
@@ -100,7 +120,7 @@
 	        |
 	        */
 	        $this->button_selected = array();
-
+			$this->button_selected[] = ['label'=>'Check Log','icon'=>'fa fa-clock-o','name'=>'check_log'];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -231,8 +251,20 @@
 	    |
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
-	        //Your code here
-
+			//Your code here
+			$data = array();
+			if($button_name == 'check_log'){
+				if(!empty($id_selected)){
+					foreach ($id_selected as $value) {
+						$data[] = array(
+							'id_karyawan'	=> $value,
+							'timestamp'		=> date('Y-m-d H:i:s'),
+						);
+					}			
+					DB::table('tb_absensi')->insert($data);
+					CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Berhasil check log masuk","success");
+				}			
+			}
 	    }
 
 
@@ -245,7 +277,10 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-
+			if(!CRUDBooster::isSuperadmin()){
+				$id_cabang = CRUDBooster::myCabangId();
+				$query->where('id_cabang', $id_cabang);
+			}
 	    }
 
 	    /*

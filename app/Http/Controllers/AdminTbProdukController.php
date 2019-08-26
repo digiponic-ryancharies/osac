@@ -1,9 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 	use Session;
-	use Request;
+	use Illuminate\Http\Request;
 	use DB;
 	use CRUDBooster;
+	use DNS1D;
+	use DNS2D;
 
 	class AdminTbProdukController extends \crocodicstudio\crudbooster\controllers\CBController {
 
@@ -36,7 +38,7 @@
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];			
 			$this->col[] = ["label"=>"Stok","name"=>"stok"];
 			$this->col[] = ["label"=>"Satuan","name"=>"id_satuan","join"=>"tb_general,keterangan"];
-			$this->col[] = ["label"=>"Harga","name"=>"harga",'callback_php'=>'number_format($row->harga)'];
+			$this->col[] = ["label"=>"Harga","name"=>"harga",'callback_php'=>'number_format($row->harga,0,",",".")'];
 			$this->col[] = ["label"=>"Status","name"=>"status",'callback'=>function($row){
 				$status = ($row->status == 1) ? 'DIJUAL' : 'TIDAK DIJUAL';
 				return $status; 
@@ -84,7 +86,7 @@
 	        */
 	        $this->sub_module = array();
 			// $this->sub_module[] = ['label'=>'','path'=>'tb_produk_detail','parent_columns'=>'kode,keterangan','foreign_key'=>'kode_produk','button_color'=>'info','button_icon'=>'fa fa-bars','showIf'=>'[jenis] == 22'];
-			$this->sub_module[] = ['label'=>'','path'=>'tb_produk_stok','parent_columns'=>'kode,keterangan','foreign_key'=>'id_produk','button_color'=>'danger','button_icon'=>'fa fa-cubes'];
+			$this->sub_module[] = ['title'=>'Kartu Stok','path'=>'tb_produk_stok','parent_columns'=>'kode,keterangan','foreign_key'=>'id_produk','button_color'=>'danger','button_icon'=>'fa fa-cubes'];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -114,7 +116,7 @@
 	        |
 	        */
 	        $this->button_selected = array();
-
+			$this->button_selected[] = ['label'=>'Print Barcode','icon'=>'fa fa-print','name'=>'print_barcode'];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -138,7 +140,7 @@
 	        |
 	        */
 	        $this->index_button = array();
-
+			$this->index_button[] = ['label'=>'Opname Stok','url'=>CRUDBooster::mainpath("opname"),"icon"=>"fa fa-file-o"];
 
 
 	        /*
@@ -218,7 +220,7 @@
 	        | $this->style_css = ".style{....}";
 	        |
 	        */
-	        $this->style_css = NULL;
+			$this->style_css = NULL;
 
 
 
@@ -246,7 +248,20 @@
 	    */
 	    public function actionButtonSelected($id_selected,$button_name) {
 	        //Your code here
-
+			if($button_name == 'print_barcode') {
+				$barcode = array();
+				foreach ($id_selected as $value) {
+					$produk = CRUDBooster::first('tb_produk',$value);					
+					$barcode[] = $produk->kode;
+					$text[] = $produk->keterangan;
+				}								
+				$data = [
+					'count'		=> sizeof($barcode),
+					'barcode'	=> $barcode,
+					'text'		=> $text
+				];
+				CRUDBooster::redirect('print_barcode',$data);
+			}
 	    }
 
 
@@ -364,6 +379,31 @@
 
 
 	    //By the way, you can still create your own method in here... :)
+		public function getOpname()
+		{
+			$data = [];
+			$data['url'] = CRUDBooster::apiPath();
+			$data['page_title'] = 'Opname Stok';
+			// $data['table'] = Datatables::of(DB::table('tb_insentif')->whereNull('deleted_at'))->make(true);
+			$this->cbView('opname.view', $data);
+		}
 
+		public function postOpname(Request $request)
+		{
+			$param = $request->all();	
+
+			DB::table('tb_produk')->where('id', $param['id'])->update(['stok' => $param['stok_akhir']]);			
+			DB::table('tb_produk_stok')->insert([
+				'id_produk'		=> $param['id'],
+				'tanggal'		=> date('Y-m-d H:i:s'),
+				'stok_masuk'	=> $param['stok_masuk'],
+				'stok_keluar'	=> $param['stok_keluar'],
+				'keterangan'	=> 'Penyesuaian stok | stok opname',
+				'created_at'	=> date('Y-m-d H:i:s'),
+				'created_by'	=> CRUDBooster::myName()
+			]);
+
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Stok ".$param['keterangan']." berhasil di simpan","primary");
+		}
 
 	}

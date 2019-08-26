@@ -15,10 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/print_barcode', function () {
+    $data = session()->get('message');        
+    return view('print_barcode', $data);
+});
+
 Route::group(['prefix' => 'api'], function () {
     
     Route::group(['prefix' => 'produk'], function () {
         Route::get('/', 'ApiProdukController@data');
+        Route::get('/search', 'ApiProdukController@search');
+    });
+
+    Route::group(['prefix' => 'bahan'], function () {
+        Route::get('/', 'ApiBahanController@data');
+        Route::get('/single', 'ApiBahanController@single');
+        Route::get('/search', 'ApiBahanController@search');
     });
 
     Route::group(['prefix' => 'general'], function () {
@@ -27,6 +39,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'jasa'], function () {
         Route::get('/', 'ApiJasaController@data');
+        Route::get('/perjeniskendaraan', 'ApiJasaController@dataPerJenisKendaraan');
         Route::get('/harga', 'ApiJasaController@harga');
         Route::get('/hargaperkendaraan', 'ApiJasaController@hargaPerKendaraan');
         Route::get('/durasi', 'ApiJasaController@durasi');

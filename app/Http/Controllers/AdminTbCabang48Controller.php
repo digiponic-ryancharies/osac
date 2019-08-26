@@ -13,7 +13,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id,desc";
+			$this->orderby = "nama_cabang,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -42,6 +42,9 @@
 			$this->form[] = ['label'=>'Nama Cabang','name'=>'nama_cabang','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'No Telp','name'=>'telepon','type'=>'text','validation'=>'required|min:1|max:16','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Jam Buka','name'=>'jam_buka','type'=>'time','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Jam Tutup','name'=>'jam_tutup','type'=>'time','validation'=>'required','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Interval Booking','name'=>'interval_jasa','type'=>'time','validation'=>'required','width'=>'col-sm-10','help'=>'Durasi interval waktu booking dalam menit'];
 			// $this->form[] = ['label'=>'Pin','name'=>'pin','type'=>'text','validation'=>'min:3|max:32','width'=>'col-sm-10','help'=>'Default "12345". Minimal 5 karakter. Tinggalkan jika anda tidak mengubahnya','value'=>'12345'];
 			// $this->form[] = ['label'=>'Peta','name'=>'latt','type'=>'googlemaps','validation'=>'min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Provinsi','name'=>'id_provinsi','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
@@ -275,6 +278,9 @@
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
 			$postdata['created_by'] = CRUDBooster::myName();
+			$postdata['jam_buka'] = date('H:i', strtotime($postdata['jam_buka']));
+			$postdata['jam_tutup'] = date('H:i', strtotime($postdata['jam_tutup']));
+			$postdata['interval_jasa'] = date('H:i', strtotime($postdata['interval_jasa']));
 			
 			$img = Image::make(storage_path('app/'.$postdata['logo']));
 			$img->greyscale();
@@ -315,6 +321,10 @@
 	    public function hook_before_edit(&$postdata,$id) {        
 	        //Your code here
 			$postdata['updated_by'] = CRUDBooster::myName();
+			$postdata['jam_buka'] = date('H:i', strtotime($postdata['jam_buka']));
+			$postdata['jam_tutup'] = date('H:i', strtotime($postdata['jam_tutup']));
+			$postdata['interval_jasa'] = date('H:i', strtotime($postdata['interval_jasa']));
+
 			$img = Image::make(storage_path('app/'.$postdata['logo']));
 			$img->greyscale();
 			$img->brightness(35);
