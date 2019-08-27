@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/print_barcode', function () {
+    $data = session()->get('message');
+    return view('print_barcode', $data);
+});
+
 Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'general'], function () {
