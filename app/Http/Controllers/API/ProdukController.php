@@ -54,16 +54,28 @@ class ProdukController extends Controller
         $path = url('/');
         //$param = $request->all();
 
-        $query = DB::table('tb_produk as pd')
-            ->join('tb_general as jn', 'jn.id', '=', 'pd.id_jenis')
-            ->join('tb_general as m', 'm.id', '=', 'pd.id_merek')
-            ->join('tb_general as kt', 'kt.id', '=', 'pd.id_kategori')
-            ->join('tb_general as st', 'st.id', '=', 'pd.id_satuan')
-            ->select('pd.id', 'pd.kode', 'pd.keterangan', 'pd.stok', 'pd.harga', 'pd.gambar', 'jn.keterangan as jenis', 'kt.keterangan as kategori', 'm.keterangan as merk', 'st.keterangan as satuan')
-            ->where('pd.status', 1)
-            ->where('pd.id_kategori', $catid)
-            ->whereNull('pd.deleted_at')
-            ->get();
+        if ($catid == 0){
+            $query = DB::table('tb_produk as pd')
+                ->join('tb_general as jn', 'jn.id', '=', 'pd.id_jenis')
+                ->join('tb_general as m', 'm.id', '=', 'pd.id_merek')
+                ->join('tb_general as kt', 'kt.id', '=', 'pd.id_kategori')
+                ->join('tb_general as st', 'st.id', '=', 'pd.id_satuan')
+                ->select('pd.id', 'pd.kode', 'pd.keterangan', 'pd.stok', 'pd.harga', 'pd.gambar', 'jn.keterangan as jenis', 'kt.keterangan as kategori', 'm.keterangan as merk', 'st.keterangan as satuan')
+                ->where('pd.status', 1)
+                ->whereNull('pd.deleted_at')
+                ->get();
+        } else {
+            $query = DB::table('tb_produk as pd')
+                ->join('tb_general as jn', 'jn.id', '=', 'pd.id_jenis')
+                ->join('tb_general as m', 'm.id', '=', 'pd.id_merek')
+                ->join('tb_general as kt', 'kt.id', '=', 'pd.id_kategori')
+                ->join('tb_general as st', 'st.id', '=', 'pd.id_satuan')
+                ->select('pd.id', 'pd.kode', 'pd.keterangan', 'pd.stok', 'pd.harga', 'pd.gambar', 'jn.keterangan as jenis', 'kt.keterangan as kategori', 'm.keterangan as merk', 'st.keterangan as satuan')
+                ->where('pd.status', 1)
+                ->where('pd.id_kategori', $catid)
+                ->whereNull('pd.deleted_at')
+                ->get();
+        }
 
         foreach ($query as $value) {
             if ($value->gambar == null) {
